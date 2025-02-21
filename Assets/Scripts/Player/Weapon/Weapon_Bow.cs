@@ -20,6 +20,7 @@ public class Weapon_Bow : MonoBehaviour
         playerController = GetComponentInParent<PlayerController>();
 
         UpdateEnemyList();
+        FindTarget();
     }
 
     void Update()
@@ -72,5 +73,10 @@ public class Weapon_Bow : MonoBehaviour
 
         // Z 회전값으로 타겟 바라보기
         transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    private void Attack()
+    {
+        Debug.Log("공격");
     }
 }
