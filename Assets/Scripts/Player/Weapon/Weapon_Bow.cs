@@ -17,14 +17,15 @@ public class Weapon_Bow : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
-        // 태그가 "Enemy" 인 오브젝트들을 찾아서 List로 변환
-        enemyList = FindObjectsOfType<GameObject>().Where(x => x.CompareTag("Enemy")).ToList();
         playerController = GetComponentInParent<PlayerController>();
+
+        UpdateEnemyList();
     }
 
     void Update()
     {
-        FindTarget();
+        if (playerController.isMove)
+            FindTarget();
 
         if (target != null)
             LookAtTarget();
@@ -38,6 +39,10 @@ public class Weapon_Bow : MonoBehaviour
             animator.SetBool("IsAttack", false);
     }
 
+    // 현재 활성화 된 적들 찾아오기                 태그가 "Enemy"인 적들을 찾아 리스트로 변환
+    public void UpdateEnemyList() => enemyList = FindObjectsOfType<GameObject>().Where(x => x.CompareTag("Enemy")).ToList();
+
+
     // 가장 가까운 적 찾기
     private void FindTarget()
     {
@@ -46,12 +51,12 @@ public class Weapon_Bow : MonoBehaviour
         foreach (GameObject obj in enemyList)
         {
             // 적과 플레이어의 거리 구하기
-            float cloneDistance = Vector3.Distance(obj.transform.position, transform.position);
+            float distance = Vector3.Distance(obj.transform.position, transform.position);
 
             // 가장 가까운 적 찾기
-            if (cloneDistance < targetDistance)
+            if (distance < targetDistance)
             {
-                targetDistance = cloneDistance;
+                targetDistance = distance;
                 target = obj;
             }
         }

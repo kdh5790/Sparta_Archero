@@ -32,10 +32,8 @@ public class PlayerController : MonoBehaviour
         Move();
 
         if (!isMove)
-        {
             stopTime += Time.deltaTime;
-            Debug.Log("공격 상태");
-        }
+
         else
             stopTime = 0;
     }
