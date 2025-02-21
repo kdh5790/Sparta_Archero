@@ -20,7 +20,9 @@ public class Weapon_Bow : MonoBehaviour
     void Update()
     {
         FindTarget();
-        LookAtTarget();
+
+        if (target != null)
+            LookAtTarget();
     }
 
     // 가장 가까운 적 찾기
