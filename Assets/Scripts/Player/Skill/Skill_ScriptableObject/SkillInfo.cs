@@ -24,7 +24,7 @@ public enum Skill
 [CreateAssetMenu(fileName = "SkillInfo", menuName = "Scriptable Object/SkillInfo", order = int.MaxValue)]
 public class SkillInfo : ScriptableObject
 {
-    public Skill skill;
+    public Skill SkillID;
     public string SkillName;
     public string SkillDescription;
     public bool IsReacquirable;

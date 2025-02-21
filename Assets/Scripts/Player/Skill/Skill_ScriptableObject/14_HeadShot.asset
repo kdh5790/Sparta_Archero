@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c50587a1026eb4c9c99493c8b10d87, type: 3}
   m_Name: 14_HeadShot
   m_EditorClassIdentifier: 
-  skill: 14
+  SkillID: 14
   SkillName: "\uD5E4\uB4DC\uC0F7"
   SkillDescription: "\uC7A1\uBAB9\uC744 \uACF5\uACA9 \uC2DC 12.5%\uC758 \uD655\uB960\uB85C
     \uC801\uC744 \uC989\uC0AC\uC2DC\uD0A8\uB2E4. \uC801 \uB2F9 \uD55C\uBC88\uC758

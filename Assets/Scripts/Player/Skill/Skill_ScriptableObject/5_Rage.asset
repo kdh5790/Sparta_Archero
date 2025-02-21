@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c50587a1026eb4c9c99493c8b10d87, type: 3}
   m_Name: 5_Rage
   m_EditorClassIdentifier: 
-  skill: 5
+  SkillID: 5
   SkillName: "\uBD84\uB178"
   SkillDescription: "\uC783\uC740 \uCCB4\uB825 1% \uB2F9 \uB370\uBBF8\uC9C0\uAC00
     1.2% \uC99D\uAC00\uD55C\uB2E4."

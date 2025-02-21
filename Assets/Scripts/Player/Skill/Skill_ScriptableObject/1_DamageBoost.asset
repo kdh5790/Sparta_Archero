@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c50587a1026eb4c9c99493c8b10d87, type: 3}
   m_Name: 1_DamageBoost
   m_EditorClassIdentifier: 
-  skill: 1
+  SkillID: 1
   SkillName: "\uACF5\uACA9 \uBD80\uC2A4\uD2B8"
   SkillDescription: "\uACF5\uACA9\uB825\uC774 30% \uC99D\uAC00\uD55C\uB2E4."
   IsReacquirable: 1

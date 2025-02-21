@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c50587a1026eb4c9c99493c8b10d87, type: 3}
   m_Name: 15_DodgeMastery
   m_EditorClassIdentifier: 
-  skill: 15
+  SkillID: 15
   SkillName: "\uD68C\uD53C \uB9C8\uC2A4\uD130"
   SkillDescription: "\uD68C\uD53C \uD655\uB960\uC774 20% \uB298\uC5B4\uB09C\uB2E4."
   IsReacquirable: 1

@@ -7,6 +7,18 @@ using UnityEngine;
 
 public class Weapon_Bow : MonoBehaviour
 {
+    private int damage = 30;
+    public int Damage { get { return damage; } set { damage = value; } }
+
+    private float attackSpeed = 1f;
+    public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
+
+    private int criticalDamage = 150;
+    public int CriticalDamage { get { return criticalDamage; } set { criticalDamage = value; } }
+
+    private int criticalChance = 0;
+    public int CriticalChance { get { return criticalChance; } set { criticalChance = value; } }
+
     public List<GameObject> enemyList = new List<GameObject>(); // 필드의 적들을 담을 리스트
     public GameObject target; // 공격해야 할 타겟
 
@@ -89,5 +101,11 @@ public class Weapon_Bow : MonoBehaviour
     {
         if (target != null)
             PlayerManager.instance.arrowManager.ShootArrow();
+    }
+
+    public void IncreasedAttackSpeed(float speed)
+    {
+        AttackSpeed += speed;
+        animator.speed = AttackSpeed;
     }
 }

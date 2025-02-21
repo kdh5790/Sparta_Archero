@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c50587a1026eb4c9c99493c8b10d87, type: 3}
   m_Name: 3_CriticalMaster
   m_EditorClassIdentifier: 
-  skill: 3
+  SkillID: 3
   SkillName: "\uD06C\uB9AC\uD2F0\uCEEC \uB9C8\uC2A4\uD130"
   SkillDescription: "\uD06C\uB9AC\uD2F0\uCEEC \uB370\uBBF8\uC9C0 40%, \uD06C\uB9AC\uD2F0\uCEEC
     \uD655\uB960 10%\uAC00 \uC99D\uAC00\uD55C\uB2E4."

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c50587a1026eb4c9c99493c8b10d87, type: 3}
   m_Name: 2_AttackSpeedBoost
   m_EditorClassIdentifier: 
-  skill: 2
+  SkillID: 2
   SkillName: "\uACF5\uACA9 \uC18D\uB3C4 \uBD80\uC2A4\uD2B8"
   SkillDescription: "\uACF5\uACA9 \uC18D\uB3C4\uAC00 25% \uC99D\uAC00\uD55C\uB2E4."
   IsReacquirable: 1

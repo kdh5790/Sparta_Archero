@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c50587a1026eb4c9c99493c8b10d87, type: 3}
   m_Name: 6_Invincibility
   m_EditorClassIdentifier: 
-  skill: 6
+  SkillID: 6
   SkillName: "\uBB34\uC801"
   SkillDescription: "10\uCD08\uB9C8\uB2E4 2\uCD08 \uAC04 \uBB34\uC801\uC0C1\uD0DC\uB85C
     \uB9CC\uB4E0\uB2E4."

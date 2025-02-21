@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c50587a1026eb4c9c99493c8b10d87, type: 3}
   m_Name: 13_BackArrowPlus
   m_EditorClassIdentifier: 
-  skill: 13
+  SkillID: 13
   SkillName: "\uD6C4\uBC29 \uD654\uC0B4+1"
   SkillDescription: "\uB4A4\uC5D0\uC11C \uBC1C\uC0AC\uB418\uB294 \uD654\uC0B4\uC744
     \uCD94\uAC00\uD55C\uB2E4."

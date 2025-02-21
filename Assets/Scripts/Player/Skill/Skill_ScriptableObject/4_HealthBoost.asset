@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c50587a1026eb4c9c99493c8b10d87, type: 3}
   m_Name: 4_HealthBoost
   m_EditorClassIdentifier: 
-  skill: 4
+  SkillID: 4
   SkillName: "HP \uBD80\uC2A4\uD2B8"
   SkillDescription: "\uCD5C\uB300 \uCCB4\uB825 20%\uB97C \uC99D\uAC00\uC2DC\uD0A4\uBA70
     \uC99D\uAC00\uD55C \uB9CC\uD07C \uCCB4\uB825 \uD68C\uBCF5"
