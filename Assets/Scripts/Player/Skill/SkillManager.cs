@@ -72,6 +72,14 @@ public class SkillManager : MonoBehaviour
                 PlayerManager.instance.arrowManager.AddShootDelegate(info.SkillID);
                 break;
 
+            case Skill.DiagonalArrowPlus:
+                PlayerManager.instance.arrowManager.AddShootDelegate(info.SkillID);
+                break;
+
+            case Skill.SideArrowPlus:
+                PlayerManager.instance.arrowManager.AddShootDelegate(info.SkillID);
+                break;
+
             default:
                 Debug.Log("아직 구현 X");
                 break;
