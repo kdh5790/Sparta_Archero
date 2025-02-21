@@ -14,15 +14,6 @@ public class Arrow_Bow : MonoBehaviour
         bow = FindObjectOfType<Weapon_Bow>();
     }
 
-    private void OnEnable()
-    {
-        if (bow.target != null)
-        {
-            target = bow.target;
-            LookAtTarget();
-        }
-    }
-
     private void Update()
     {
         MoveToTarget();
@@ -33,20 +24,7 @@ public class Arrow_Bow : MonoBehaviour
 
     private void MoveToTarget()
     {
-        if(target != null)
-            rigidBody.velocity = transform.up * 3f;
-    }
-
-    private void LookAtTarget()
-    {
-        // 바라보는 방향 구하기
-        Vector2 direction = target.transform.position - transform.position;
-
-        // 방향 각도 계산 후 라디안 값을 도 단위로 변환
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        // Z 회전값으로 타겟 바라보기
-        transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
+      rigidBody.velocity = transform.up * 4.5f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

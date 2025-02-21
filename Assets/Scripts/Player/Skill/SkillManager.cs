@@ -36,14 +36,14 @@ public class SkillManager : MonoBehaviour
 
         playerSkillList.Add(skill);
 
-        ApplySkill(skill.SkillID);
+        ApplySkill(skill);
 
         return skill;
     }
 
-    public void ApplySkill(Skill skill)
+    public void ApplySkill(SkillInfo info)
     {
-        switch(skill)
+        switch(info.SkillID)
         {
             case Skill.DamageBoost:
                 PlayerManager.instance.bow.Damage += (int)(PlayerManager.instance.bow.Damage * 0.3f);
@@ -66,6 +66,10 @@ public class SkillManager : MonoBehaviour
 
             case Skill.DodgeMastery:
                 PlayerManager.instance.stats.dodgeChance += 20;
+                break;
+
+            case Skill.BackArrowPlus:
+                PlayerManager.instance.arrowManager.AddShootDelegate(info.SkillID);
                 break;
 
             default:

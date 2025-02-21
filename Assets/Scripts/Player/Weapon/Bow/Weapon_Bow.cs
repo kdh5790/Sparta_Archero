@@ -100,7 +100,7 @@ public class Weapon_Bow : MonoBehaviour
     private void Attack()
     {
         if (target != null)
-            PlayerManager.instance.arrowManager.ShootArrow();
+            PlayerManager.instance.arrowManager.StartShootDelegate(target);
     }
 
     public void IncreasedAttackSpeed(float speed)
