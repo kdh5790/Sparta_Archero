@@ -5,8 +5,6 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 3f;
-
     private Rigidbody2D rigidBody;
     private Animator animator;
     private SpriteRenderer playerSprite;
@@ -14,20 +12,23 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveVelocity;
     private Vector2 moveDirection;
 
-    private bool isMove;
+    private float moveSpeed;
+    public bool isMove;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
+
+        moveSpeed = FindObjectOfType<PlayerStats>().Speed;
     }
 
     void FixedUpdate()
     {
         Move();
 
-        if(!isMove)
+        if (!isMove)
         {
             Debug.Log("공격 상태");
         }
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
 
     void FlipSprite(float directionX)
     {
-        playerSprite.flipX = directionX < 0 ? true : false;
+        if (directionX != 0)
+            playerSprite.flipX = directionX < 0;
     }
 }
