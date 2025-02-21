@@ -227,6 +227,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1819765980402543930, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
+      propertyPath: poolSize
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5500636531389104973, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -433,6 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
+  bow: {fileID: 0}
   arrowManager: {fileID: 0}
 --- !u!4 &974930796
 Transform:
@@ -477,6 +482,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c444f85a427ca4f4a89d0191861581c5, type: 2}
   - {fileID: 11400000, guid: 0284c3ad50c869f4a8eef584195a2249, type: 2}
   - {fileID: 11400000, guid: 0b3a3c293fef0ba458bbb6538bb402f2, type: 2}
+  playerSkillList: []
 --- !u!1 &1092572964
 GameObject:
   m_ObjectHideFlags: 0

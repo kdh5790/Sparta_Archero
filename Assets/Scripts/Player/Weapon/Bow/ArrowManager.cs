@@ -13,7 +13,7 @@ public class ArrowManager : MonoBehaviour
     private Queue<GameObject> arrowQueue = new Queue<GameObject>();
     private GameObject target;
 
-    public int poolSize = 50;
+    private int poolSize = 50;
 
     private void Start()
     {
@@ -50,53 +50,55 @@ public class ArrowManager : MonoBehaviour
             case Skill.SideArrowPlus:
                 shootDelegate += ShootSideArrow;
                 break;
+
+            case Skill.MultiShot:
+                shootDelegate += ShootMultiArrow;
+                break;
         }
+    }
+   
+
+    public void ShootArrow(float offset)
+    {
+        GameObject go = arrowQueue.Dequeue();
+
+        float angle = LookAtTargetForArrow();
+
+        go.SetActive(true);
+        go.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
     }
 
     private void ShootSingleArrow()
     {
-        GameObject go = arrowQueue.Dequeue();
-
-        float angle = LookAtTargetForArrow();
-
-        go.SetActive(true);
-        go.transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
+        ShootArrow(-90f);
     }
 
     private void ShootBackArrow()
     {
+        ShootArrow(90f);
+    }
+
+    private void ShootDiagonalArrow()
+    {
+        ShootArrow(-45f);
+        ShootArrow(-135f);
+    }
+
+    private void ShootSideArrow()
+    {
+        ShootArrow(0f);
+        ShootArrow(180f);
+    }
+
+    private void ShootMultiArrow()
+    {
         GameObject go = arrowQueue.Dequeue();
 
         float angle = LookAtTargetForArrow();
 
         go.SetActive(true);
-        go.transform.rotation = Quaternion.Euler(0, 0, angle + 90f);
-    }
-
-    private void ShootDiagonalArrow()
-    {
-        GameObject[] goArray = { arrowQueue.Dequeue(), arrowQueue.Dequeue() };
-
-        float angle = LookAtTargetForArrow();
-
-        goArray[0].SetActive(true);
-        goArray[0].transform.rotation = Quaternion.Euler(0, 0, angle - 45f);
-
-        goArray[1].SetActive(true);
-        goArray[1].transform.rotation = Quaternion.Euler(0, 0, angle - 135f);
-    }
-
-    private void ShootSideArrow()
-    {
-        GameObject[] goArray = { arrowQueue.Dequeue(), arrowQueue.Dequeue() };
-
-        float angle = LookAtTargetForArrow();
-
-        goArray[0].SetActive(true);
-        goArray[0].transform.rotation = Quaternion.Euler(0, 0, angle);
-
-        goArray[1].SetActive(true);
-        goArray[1].transform.rotation = Quaternion.Euler(0, 0, angle + 180f);
+        go.transform.position = new Vector2(go.transform.position.x, go.transform.position.y - 0.15f);
+        go.transform.rotation = Quaternion.Euler(0, 0, angle + -90f);
     }
 
     public void ReturnArrow(GameObject arrow)
