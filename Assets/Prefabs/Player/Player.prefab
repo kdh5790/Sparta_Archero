@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 3657003639478328738}
   - component: {fileID: 6794923255565672202}
   - component: {fileID: 2032215066364475772}
-  - component: {fileID: 1840192118045888088}
+  - component: {fileID: 4601780485347861917}
   m_Layer: 0
   m_Name: weapon_bow
   m_TagString: Untagged
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList: []
   target: {fileID: 0}
---- !u!95 &1840192118045888088
+--- !u!95 &4601780485347861917
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
