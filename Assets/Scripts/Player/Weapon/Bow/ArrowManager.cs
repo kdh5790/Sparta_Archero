@@ -11,7 +11,7 @@ public class ArrowManager : MonoBehaviour
 
     private void Start()
     {
-        GameObject go = new GameObject();
+        GameObject go;
 
         for (int i = 0; i < poolSize; i++)
         {
