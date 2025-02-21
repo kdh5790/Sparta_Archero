@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79c50587a1026eb4c9c99493c8b10d87, type: 3}
-  m_Name: 13.BackArrowPlus
+  m_Name: 12_SideArrowPlus
   m_EditorClassIdentifier: 
-  skill: 13
-  SkillName: "\uD6C4\uBC29 \uD654\uC0B4+1"
-  SkillDiscription: "\uB4F1 \uB4A4\uB85C \uBC1C\uC0AC\uB418\uB294 \uD654\uC0B4 \uCD94\uAC00"
+  skill: 12
+  SkillName: "\uCE21\uBA74 \uD654\uC0B4+1"
+  SkillDiscription: "\uC88C\uC6B0 90\uB3C4\uB85C \uBC1C\uC0AC\uD558\uB294 \uD654\uC0B4
+    \uCD94\uAC00"

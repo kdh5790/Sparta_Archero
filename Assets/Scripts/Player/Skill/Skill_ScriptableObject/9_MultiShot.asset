@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79c50587a1026eb4c9c99493c8b10d87, type: 3}
-  m_Name: 15.DodgeMastery
+  m_Name: 9_MultiShot
   m_EditorClassIdentifier: 
-  skill: 15
-  SkillName: "\uD68C\uD53C \uB9C8\uC2A4\uD130"
-  SkillDiscription: "\uD68C\uD53C \uD655\uB960\uC774 20% \uB298\uC5B4\uB09C\uB2E4."
+  skill: 9
+  SkillName: "\uBA40\uD2F0\uC0F7"
+  SkillDiscription: "\uBAA8\uB4E0 \uACF5\uACA9\uC744 \uD55C\uBC88 \uB354 \uBC1C\uC0AC"

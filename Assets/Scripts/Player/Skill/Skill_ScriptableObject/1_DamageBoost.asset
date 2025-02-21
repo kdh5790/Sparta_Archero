@@ -15,3 +15,4 @@ MonoBehaviour:
   skill: 1
   SkillName: "\uACF5\uACA9 \uBD80\uC2A4\uD2B8"
   SkillDiscription: "\uACF5\uACA9\uB825\uC774 30% \uC99D\uAC00\uD55C\uB2E4."
+  IsReacquirable: 1
