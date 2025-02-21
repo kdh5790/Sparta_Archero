@@ -10,11 +10,16 @@ public class Weapon_Bow : MonoBehaviour
     public List<GameObject> enemyList = new List<GameObject>(); // 필드의 적들을 담을 리스트
     public GameObject target; // 공격해야 할 타겟
 
+    private Animator animator;
+    private PlayerController playerController;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
+
         // 태그가 "Enemy" 인 오브젝트들을 찾아서 List로 변환
         enemyList = FindObjectsOfType<GameObject>().Where(x => x.CompareTag("Enemy")).ToList();
+        playerController = GetComponentInParent<PlayerController>();
     }
 
     void Update()
@@ -23,6 +28,12 @@ public class Weapon_Bow : MonoBehaviour
 
         if (target != null)
             LookAtTarget();
+
+        if (!playerController.isMove && target != null && playerController.stopTime > 0.4f)
+            animator.SetBool("IsAttack", true);
+
+        else if (playerController.isMove || target == null)
+            animator.SetBool("IsAttack", false);
     }
 
     // 가장 가까운 적 찾기

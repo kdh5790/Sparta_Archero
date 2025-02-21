@@ -13,7 +13,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveDirection;
 
     private float moveSpeed;
+
+    public float stopTime; // 플레이어가 멈춰있던 시간(공격 체크 용)
     public bool isMove;
+
 
     void Start()
     {
@@ -30,8 +33,11 @@ public class PlayerController : MonoBehaviour
 
         if (!isMove)
         {
+            stopTime += Time.deltaTime;
             Debug.Log("공격 상태");
         }
+        else
+            stopTime = 0;
     }
 
     void Move()
