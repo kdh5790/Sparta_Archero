@@ -25,11 +25,10 @@ public class Weapon_Bow : MonoBehaviour
 
     void Update()
     {
-        if (playerController.isMove || !target.activeSelf)
+        if (playerController.isMove || target == null)
             FindTarget();
 
-        if (target != null)
-            LookAtTarget();
+        LookAtTarget();
 
         // 플레이어가 멈춰있음 + 타겟이 있음 + 멈추고 일정시간이 지남
         if (!playerController.isMove && target != null && playerController.stopTime > 0.4f)
@@ -45,29 +44,37 @@ public class Weapon_Bow : MonoBehaviour
     // 가장 가까운 적 찾기
     private void FindTarget()
     {
-        if (target != null && !target.activeSelf)
+        if (target != null && !target.activeSelf || target == null)
             UpdateEnemyList();
 
-        float targetDistance = 100f;
 
-        foreach (GameObject obj in enemyList)
+        if (enemyList != null)
         {
-            // 적과 플레이어의 거리 구하기
-            float distance = Vector3.Distance(obj.transform.position, transform.position);
+            float targetDistance = 100f;
 
-            // 가장 가까운 적 찾기
-            if (distance < targetDistance)
+            foreach (GameObject obj in enemyList)
             {
-                targetDistance = distance;
-                target = obj;
+                // 적과 플레이어의 거리 구하기
+                float distance = Vector3.Distance(obj.transform.position, transform.position);
+
+                // 가장 가까운 적 찾기
+                if (distance < targetDistance)
+                {
+                    targetDistance = distance;
+                    target = obj;
+                }
             }
         }
-
+        else
+        {
+            target = null;
+        }
     }
 
     // 타겟 바라보기
     private void LookAtTarget()
     {
+        if (target == null) return;
         // 바라보는 방향 구하기
         Vector2 direction = target.transform.position - transform.position;
 
@@ -80,6 +87,7 @@ public class Weapon_Bow : MonoBehaviour
 
     private void Attack()
     {
-        Debug.Log("공격");
+        if (target != null)
+            PlayerManager.instance.arrowManager.ShootArrow();
     }
 }
