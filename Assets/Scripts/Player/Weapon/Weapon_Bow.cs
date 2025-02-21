@@ -25,7 +25,7 @@ public class Weapon_Bow : MonoBehaviour
 
     void Update()
     {
-        if (playerController.isMove)
+        if (playerController.isMove || !target.activeSelf)
             FindTarget();
 
         if (target != null)
@@ -38,13 +38,16 @@ public class Weapon_Bow : MonoBehaviour
             animator.SetBool("IsAttack", false);
     }
 
-    // 현재 활성화 된 적들 찾아오기                 태그가 "Enemy"인 적들을 찾아 리스트로 변환
-    public void UpdateEnemyList() => enemyList = FindObjectsOfType<GameObject>().Where(x => x.CompareTag("Enemy")).ToList();
+    // 현재 활성화 된 적들 찾아오기                 태그가 "Enemy"이고 활성화 된 적들을 찾아 리스트로 변환
+    public void UpdateEnemyList() => enemyList = FindObjectsOfType<GameObject>().Where(x => x.CompareTag("Enemy") && x.activeSelf).ToList();
 
 
     // 가장 가까운 적 찾기
     private void FindTarget()
     {
+        if (target != null && !target.activeSelf)
+            UpdateEnemyList();
+
         float targetDistance = 100f;
 
         foreach (GameObject obj in enemyList)
