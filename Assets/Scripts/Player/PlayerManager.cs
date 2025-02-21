@@ -12,10 +12,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-    }
 
-    private void Start()
-    {
         stats = FindObjectOfType<PlayerStats>();
         stats.InitPlayerStats();
     }
