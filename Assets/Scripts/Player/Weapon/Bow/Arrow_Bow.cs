@@ -26,6 +26,9 @@ public class Arrow_Bow : MonoBehaviour
     private void Update()
     {
         MoveToTarget();
+
+        if (Vector3.Distance(transform.parent.position, transform.position) > 12f)
+            GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
     }
 
     private void MoveToTarget()
@@ -56,4 +59,6 @@ public class Arrow_Bow : MonoBehaviour
             GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
         }
     }
+
+
 }
