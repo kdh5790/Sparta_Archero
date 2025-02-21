@@ -447,6 +447,7 @@ GameObject:
   m_Component:
   - component: {fileID: 974930796}
   - component: {fileID: 974930795}
+  - component: {fileID: 974930797}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -483,6 +484,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &974930797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974930794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50597ba7bb26f1846ad17979a537ad71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillInfos:
+  - {fileID: 11400000, guid: 0eb06e458ce16444884df51dbaed25d0, type: 2}
+  - {fileID: 11400000, guid: 886c8fa2f6549624e8055c777eed6aff, type: 2}
+  - {fileID: 11400000, guid: b43c55c464b60fd42953141c07cb2ad4, type: 2}
+  - {fileID: 11400000, guid: 34e062e161c7f3c429c73195e78e3d82, type: 2}
+  - {fileID: 11400000, guid: 0fe2ccf91b0c9be4ab18d6f04f921933, type: 2}
+  - {fileID: 11400000, guid: 0f0aa3b8293c3e348b55909734ac808e, type: 2}
+  - {fileID: 11400000, guid: b732e11fc0b300d4da596da21ba28906, type: 2}
+  - {fileID: 11400000, guid: b5d721a8ca1e63a428ea97adff301abb, type: 2}
+  - {fileID: 11400000, guid: c7fdb4aed86a6ff4e8df23613c71e71a, type: 2}
+  - {fileID: 11400000, guid: da2e38bc25e1b394c85843972eb8af95, type: 2}
+  - {fileID: 11400000, guid: 062262df1ccaf394c832813ba66b7382, type: 2}
+  - {fileID: 11400000, guid: dba07c18829aab34c998e86cca2d0909, type: 2}
+  - {fileID: 11400000, guid: c444f85a427ca4f4a89d0191861581c5, type: 2}
+  - {fileID: 11400000, guid: 0284c3ad50c869f4a8eef584195a2249, type: 2}
+  - {fileID: 11400000, guid: 0b3a3c293fef0ba458bbb6538bb402f2, type: 2}
 --- !u!1 &1092572964
 GameObject:
   m_ObjectHideFlags: 0

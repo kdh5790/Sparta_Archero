@@ -13,9 +13,6 @@ public class PlayerStats : MonoBehaviour
     private float maxExp;
     public float MaxExp { get { return maxExp; } set { maxExp = value; } }
 
-    private int attackPower;
-    public int AttackPower { get { return attackPower; } set { attackPower = value; } }
-
     private int currentHealth;
     public int CurrentHealth { get { return currentHealth; } set { currentHealth = value; } }
 
@@ -25,11 +22,11 @@ public class PlayerStats : MonoBehaviour
     private float speed;
     public float Speed { get { return speed; } set { speed = value; } }
 
-    private float attackSpeed;
-    public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
+    private int DodgeChance;
+    public int dodgeChance { get { return DodgeChance; } set { DodgeChance = value; } }
 
     public void InitPlayerStats()
     {
-        level = 1; currentExp = 0; maxExp = 100; attackPower = 30; currentHealth = 200; maxHealth = 200; speed = 3f; attackSpeed = 1f;
+        level = 1; currentExp = 0; maxExp = 100; currentHealth = 200; maxHealth = 200; speed = 3f;
     }
 }
