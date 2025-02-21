@@ -26,6 +26,6 @@ public class SkillInfo : ScriptableObject
 {
     public Skill skill;
     public string SkillName;
-    public string SkillDiscription;
+    public string SkillDescription;
     public bool IsReacquirable;
 }

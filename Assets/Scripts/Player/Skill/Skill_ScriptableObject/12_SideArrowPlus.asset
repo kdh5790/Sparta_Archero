@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill: 12
   SkillName: "\uCE21\uBA74 \uD654\uC0B4+1"
-  SkillDiscription: "\uC88C\uC6B0 90\uB3C4\uB85C \uBC1C\uC0AC\uD558\uB294 \uD654\uC0B4
-    \uCD94\uAC00"
+  SkillDescription: "\uC88C\uC6B0 90\uB3C4\uB85C \uBC1C\uC0AC\uD558\uB294 \uD654\uC0B4
+    \uCD94\uAC00\uD55C\uB2E4."
+  IsReacquirable: 0
