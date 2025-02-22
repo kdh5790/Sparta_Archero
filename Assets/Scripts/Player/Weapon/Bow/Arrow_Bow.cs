@@ -8,6 +8,7 @@ public class Arrow_Bow : MonoBehaviour
     private Weapon_Bow bow;
     public GameObject target;
 
+    private int damage;
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -24,16 +25,29 @@ public class Arrow_Bow : MonoBehaviour
 
     private void MoveToTarget()
     {
-      rigidBody.velocity = transform.up * 4.5f;
+        rigidBody.velocity = transform.up * 4.5f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.enabled) return;
 
-        if(collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy"))
         {
-            Debug.Log("利 面倒");
+            bool isCritical = bow.CalculateCriticalChance();
+
+            if (isCritical)
+            {
+                damage = (int)(Random.Range(bow.Damage * (bow.CriticalDamage - 0.1f), bow.Damage * (bow.CriticalDamage + 0.1f)));
+                Debug.Log($"利 面倒 | 农府萍拿 单固瘤 : {damage}");
+            }
+
+            else
+            {
+                damage = (int)(Random.Range(bow.Damage * 0.9f, bow.Damage * 1.1f));
+                Debug.Log($"利 面倒 | 单固瘤 : {damage}");
+            }
+
             GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
         }
     }

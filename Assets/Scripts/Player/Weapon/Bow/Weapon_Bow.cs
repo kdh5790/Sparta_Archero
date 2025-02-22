@@ -13,8 +13,8 @@ public class Weapon_Bow : MonoBehaviour
     private float attackSpeed = 1f;
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
 
-    private int criticalDamage = 150;
-    public int CriticalDamage { get { return criticalDamage; } set { criticalDamage = value; } }
+    private float criticalDamage = 1.5f;
+    public float CriticalDamage { get { return criticalDamage; } set { criticalDamage = value; } }
 
     private int criticalChance = 0;
     public int CriticalChance { get { return criticalChance; } set { criticalChance = value; } }
@@ -107,5 +107,12 @@ public class Weapon_Bow : MonoBehaviour
     {
         AttackSpeed += speed;
         animator.speed = AttackSpeed;
+    }
+
+    public bool CalculateCriticalChance()
+    {
+        int randNum = Random.Range(0, 100);
+
+        return randNum < criticalChance;
     }
 }

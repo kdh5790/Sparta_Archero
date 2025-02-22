@@ -13,7 +13,7 @@ public class ArrowManager : MonoBehaviour
     private Queue<GameObject> arrowQueue = new Queue<GameObject>();
     private GameObject target;
 
-    private int poolSize = 50;
+    private int poolSize = 100;
 
     private void Start()
     {

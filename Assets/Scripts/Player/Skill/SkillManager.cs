@@ -55,7 +55,7 @@ public class SkillManager : MonoBehaviour
 
             case Skill.CriticalMaster:
                 PlayerManager.instance.bow.CriticalChance += 10;
-                PlayerManager.instance.bow.CriticalDamage += 40;
+                PlayerManager.instance.bow.CriticalDamage += 0.4f;
                 PlayerManager.instance.bow.CriticalChance = Mathf.Min(100, PlayerManager.instance.bow.CriticalChance);
                 break;
 
