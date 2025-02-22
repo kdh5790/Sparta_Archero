@@ -231,6 +231,38 @@ PrefabInstance:
       propertyPath: poolSize
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 2502294953713009733, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2502294953713009733, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2502294953713009733, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2620505088149454547, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
+      propertyPath: m_Size.x
+      value: 0.2708353
+      objectReference: {fileID: 0}
+    - target: {fileID: 2620505088149454547, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
+      propertyPath: m_Size.y
+      value: 0.37150612
+      objectReference: {fileID: 0}
+    - target: {fileID: 2620505088149454547, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0152531415
+      objectReference: {fileID: 0}
+    - target: {fileID: 2620505088149454547, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.18575306
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302040963262233592, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5500636531389104973, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

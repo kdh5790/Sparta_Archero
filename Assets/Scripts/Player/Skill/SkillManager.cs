@@ -43,7 +43,7 @@ public class SkillManager : MonoBehaviour
 
     public void ApplySkill(SkillInfo info)
     {
-        switch(info.SkillID)
+        switch (info.SkillID)
         {
             case Skill.DamageBoost:
                 PlayerManager.instance.bow.Damage += (int)(PlayerManager.instance.bow.Damage * 0.3f);
@@ -68,6 +68,10 @@ public class SkillManager : MonoBehaviour
             case Skill.DodgeMastery:
                 PlayerManager.instance.stats.dodgeChance += 20;
                 PlayerManager.instance.stats.dodgeChance = Mathf.Min(100, PlayerManager.instance.stats.dodgeChance);
+                break;
+
+            case Skill.Invincibility:
+                StartCoroutine(PlayerManager.instance.stats.ApplyInvincibilitySkill());
                 break;
 
             case Skill.BackArrowPlus:
