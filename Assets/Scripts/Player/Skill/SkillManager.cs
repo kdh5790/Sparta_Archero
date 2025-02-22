@@ -56,6 +56,7 @@ public class SkillManager : MonoBehaviour
             case Skill.CriticalMaster:
                 PlayerManager.instance.bow.CriticalChance += 10;
                 PlayerManager.instance.bow.CriticalDamage += 40;
+                PlayerManager.instance.bow.CriticalChance = Mathf.Min(100, PlayerManager.instance.bow.CriticalChance);
                 break;
 
             case Skill.HealthBoost:
@@ -66,6 +67,7 @@ public class SkillManager : MonoBehaviour
 
             case Skill.DodgeMastery:
                 PlayerManager.instance.stats.dodgeChance += 20;
+                PlayerManager.instance.stats.dodgeChance = Mathf.Min(100, PlayerManager.instance.stats.dodgeChance);
                 break;
 
             case Skill.BackArrowPlus:
