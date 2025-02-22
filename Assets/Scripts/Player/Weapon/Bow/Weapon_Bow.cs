@@ -1,8 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Weapon_Bow : MonoBehaviour
@@ -19,8 +19,11 @@ public class Weapon_Bow : MonoBehaviour
     private int criticalChance = 0;
     public int CriticalChance { get { return criticalChance; } set { criticalChance = value; } }
 
-    private bool isPiercingShot;
+    private bool isPiercingShot = false;
     public bool IsPiercingShot { get { return isPiercingShot; } set { isPiercingShot = value; } }
+
+    private bool isRebound = false;
+    public bool IsRebound { get { return isRebound; } set { isRebound = value; } }
 
 
     public List<GameObject> enemyList = new List<GameObject>(); // 필드의 적들을 담을 리스트
@@ -58,10 +61,11 @@ public class Weapon_Bow : MonoBehaviour
 
 
     // 가장 가까운 적 찾기
-    private GameObject FindTarget()
+    public GameObject FindTarget(Transform _transform = null, GameObject _enemy = null)
     {
         if (target != null && !target.activeSelf || target == null)
             UpdateEnemyList();
+
 
         GameObject go = null;
 
@@ -71,8 +75,16 @@ public class Weapon_Bow : MonoBehaviour
 
             foreach (GameObject obj in enemyList)
             {
-                // 적과 플레이어의 거리 구하기
-                float distance = Vector3.Distance(obj.transform.position, transform.position);
+                if (_enemy != null && obj.name == _enemy.name)
+                    continue;
+
+                float distance = 0;
+
+                if (_transform == null)
+                    distance = Vector3.Distance(obj.transform.position, transform.position);
+
+                else
+                    distance = Vector3.Distance(obj.transform.position, _transform.position);
 
                 // 가장 가까운 적 찾기
                 if (distance < targetDistance)
@@ -118,7 +130,7 @@ public class Weapon_Bow : MonoBehaviour
 
     public bool CalculateCriticalChance()
     {
-        int randNum = Random.Range(0, 100);
+        int randNum = UnityEngine.Random.Range(0, 100);
 
         return randNum < criticalChance;
     }

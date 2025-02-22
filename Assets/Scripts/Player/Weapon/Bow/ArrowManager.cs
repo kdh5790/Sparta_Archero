@@ -111,7 +111,7 @@ public class ArrowManager : MonoBehaviour
         arrow.SetActive(false);
     }
 
-    private float LookAtTargetForArrow(GameObject _target = null)
+    public float LookAtTargetForArrow(GameObject _target = null, Transform _transform = null)
     {
         Vector2 direction;
 
@@ -120,7 +120,7 @@ public class ArrowManager : MonoBehaviour
             direction = target.transform.position - transform.position;
 
         else
-            direction = _target.transform.position - transform.position;
+            direction = _target.transform.position - _transform.position;
 
 
         // 방향 각도 계산 후 라디안 값을 도 단위로 변환

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Arrow_Bow : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Arrow_Bow : MonoBehaviour
     public GameObject target;
 
     private int damage;
+    private int bound = 0;
 
     private void Awake()
     {
@@ -24,6 +26,12 @@ public class Arrow_Bow : MonoBehaviour
             GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
     }
 
+    private void OnEnable()
+    {
+        bound = 0;
+        if (bow != null) target = bow.target;
+    }
+
     private void MoveToTarget()
     {
         rigidBody.velocity = transform.up * 4.5f;
@@ -31,8 +39,6 @@ public class Arrow_Bow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.enabled) return;
-
         if (collision.CompareTag("Enemy"))
         {
             bool isCritical = bow.CalculateCriticalChance();
@@ -49,10 +55,26 @@ public class Arrow_Bow : MonoBehaviour
                 Debug.Log($"적 충돌 | 데미지 : {damage}");
             }
 
+            if (bow.IsRebound && bound < 2)
+            {
+                target = bow.FindTarget(transform, target);
+                if (target != null)
+                {
+                    float angle = PlayerManager.instance.arrowManager.LookAtTargetForArrow(target, transform);
+                    transform.rotation = Quaternion.identity;
+                    transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
+
+                    bound++;
+
+                    return;
+                }
+            }
+
             if (!bow.IsPiercingShot)
+            {
                 GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
+                return;
+            }
         }
     }
-
-
 }

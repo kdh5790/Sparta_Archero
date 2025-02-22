@@ -66,12 +66,16 @@ public class SkillManager : MonoBehaviour
                 break;
 
             case Skill.DodgeMastery:
-                PlayerManager.instance.stats.dodgeChance += 20;
-                PlayerManager.instance.stats.dodgeChance = Mathf.Min(100, PlayerManager.instance.stats.dodgeChance);
+                PlayerManager.instance.stats.DodgeChance += 20;
+                PlayerManager.instance.stats.DodgeChance = Mathf.Min(100, PlayerManager.instance.stats.DodgeChance);
                 break;
 
             case Skill.Invincibility:
                 StartCoroutine(PlayerManager.instance.stats.ApplyInvincibilitySkill());
+                break;
+
+            case Skill.Rebound:
+                PlayerManager.instance.bow.IsRebound = true;
                 break;
 
             case Skill.PiercingShot:

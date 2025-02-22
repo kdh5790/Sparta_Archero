@@ -24,11 +24,11 @@ public class PlayerStats : MonoBehaviour
     private float speed;
     public float Speed { get { return speed; } set { speed = value; } }
 
-    private int DodgeChance;
-    public int dodgeChance { get { return DodgeChance; } set { DodgeChance = value; } }
+    private int dodgeChance;
+    public int DodgeChance { get { return dodgeChance; } set { dodgeChance = value; } }
 
-    private bool IsInvincivility;
-    public bool isInvincivility { get { return IsInvincivility; } set { IsInvincivility = value; } }
+    private bool isInvincivility;
+    public bool IsInvincivility { get { return isInvincivility; } set { isInvincivility = value; } }
 
     private SpriteRenderer sprite;
 
