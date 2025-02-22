@@ -9,6 +9,7 @@ public class Arrow_Bow : MonoBehaviour
     public GameObject target;
 
     private int damage;
+
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -48,7 +49,8 @@ public class Arrow_Bow : MonoBehaviour
                 Debug.Log($"적 충돌 | 데미지 : {damage}");
             }
 
-            GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
+            if (!bow.IsPiercingShot)
+                GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
         }
     }
 

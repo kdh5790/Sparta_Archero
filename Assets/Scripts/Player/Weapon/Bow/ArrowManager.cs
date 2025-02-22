@@ -56,7 +56,7 @@ public class ArrowManager : MonoBehaviour
                 break;
         }
     }
-   
+
 
     public void ShootArrow(float offset)
     {
@@ -111,10 +111,17 @@ public class ArrowManager : MonoBehaviour
         arrow.SetActive(false);
     }
 
-    private float LookAtTargetForArrow()
+    private float LookAtTargetForArrow(GameObject _target = null)
     {
+        Vector2 direction;
+
         // 바라보는 방향 구하기
-        Vector2 direction = target.transform.position - transform.position;
+        if (_target == null)
+            direction = target.transform.position - transform.position;
+
+        else
+            direction = _target.transform.position - transform.position;
+
 
         // 방향 각도 계산 후 라디안 값을 도 단위로 변환
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c50587a1026eb4c9c99493c8b10d87, type: 3}
   m_Name: 8_PiercingShot
   m_EditorClassIdentifier: 
-  skill: 8
+  SkillID: 8
   SkillName: "\uAD00\uD1B5\uC0F7"
   SkillDescription: "\uD654\uC0B4\uC774 \uC801\uC744 \uAD00\uD1B5\uD55C\uB2E4."
   IsReacquirable: 0

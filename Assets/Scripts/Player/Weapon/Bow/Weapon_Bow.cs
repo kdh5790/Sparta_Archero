@@ -19,6 +19,10 @@ public class Weapon_Bow : MonoBehaviour
     private int criticalChance = 0;
     public int CriticalChance { get { return criticalChance; } set { criticalChance = value; } }
 
+    private bool isPiercingShot;
+    public bool IsPiercingShot { get { return isPiercingShot; } set { isPiercingShot = value; } }
+
+
     public List<GameObject> enemyList = new List<GameObject>(); // 필드의 적들을 담을 리스트
     public GameObject target; // 공격해야 할 타겟
 
@@ -32,13 +36,13 @@ public class Weapon_Bow : MonoBehaviour
         playerController = GetComponentInParent<PlayerController>();
 
         UpdateEnemyList();
-        FindTarget();
+        target = FindTarget();
     }
 
     void Update()
     {
         if (playerController.isMove || target == null)
-            FindTarget();
+            target = FindTarget();
 
         LookAtTarget();
 
@@ -54,11 +58,12 @@ public class Weapon_Bow : MonoBehaviour
 
 
     // 가장 가까운 적 찾기
-    private void FindTarget()
+    private GameObject FindTarget()
     {
         if (target != null && !target.activeSelf || target == null)
             UpdateEnemyList();
 
+        GameObject go = null;
 
         if (enemyList != null)
         {
@@ -73,14 +78,16 @@ public class Weapon_Bow : MonoBehaviour
                 if (distance < targetDistance)
                 {
                     targetDistance = distance;
-                    target = obj;
+                    go = obj;
                 }
             }
         }
         else
         {
-            target = null;
+            return null;
         }
+
+        return go;
     }
 
     // 타겟 바라보기

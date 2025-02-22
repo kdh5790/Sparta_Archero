@@ -74,6 +74,10 @@ public class SkillManager : MonoBehaviour
                 StartCoroutine(PlayerManager.instance.stats.ApplyInvincibilitySkill());
                 break;
 
+            case Skill.PiercingShot:
+                PlayerManager.instance.bow.IsPiercingShot = true;
+                break;
+
             case Skill.BackArrowPlus:
                 PlayerManager.instance.arrowManager.AddShootDelegate(info.SkillID);
                 break;
