@@ -9,8 +9,8 @@ public class Arrow_Bow : MonoBehaviour
     private Weapon_Bow bow;
     public GameObject target;
 
-    private int damage;
-    private int bound = 0;
+    private int damage; // 데미지
+    private int bound = 0; // 반동 횟수
 
     private void Awake()
     {
@@ -32,6 +32,7 @@ public class Arrow_Bow : MonoBehaviour
         if (bow != null) target = bow.target;
     }
 
+    // 타겟 방향으로 이동
     private void MoveToTarget()
     {
         rigidBody.velocity = transform.up * 4.5f;
@@ -41,8 +42,10 @@ public class Arrow_Bow : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
+            // 크리티컬 여부 확인
             bool isCritical = bow.CalculateCriticalChance();
 
+            // 크리티컬 or 일반 데미지 주기
             if (isCritical)
             {
                 damage = (int)(Random.Range(bow.Damage * (bow.CriticalDamage - 0.1f), bow.Damage * (bow.CriticalDamage + 0.1f)));
@@ -55,13 +58,13 @@ public class Arrow_Bow : MonoBehaviour
                 Debug.Log($"적 충돌 | 데미지 : {damage}");
             }
 
+            // 반동 스킬 보유 + 현재 튕긴 횟수가 2보다 작다면 다음 타겟 찾아 이동시킴
             if (bow.IsRebound && bound < 2)
             {
                 target = bow.FindTarget(transform, target);
                 if (target != null)
                 {
                     float angle = PlayerManager.instance.arrowManager.LookAtTargetForArrow(target, transform);
-                    transform.rotation = Quaternion.identity;
                     transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
 
                     bound++;
@@ -70,6 +73,7 @@ public class Arrow_Bow : MonoBehaviour
                 }
             }
 
+            // 관통샷 스킬을 보유하지 않았다면 데미지를 입힌 후 화살 비활성화
             if (!bow.IsPiercingShot)
             {
                 GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);

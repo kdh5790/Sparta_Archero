@@ -31,16 +31,18 @@ public class SkillManager : MonoBehaviour
 
         SkillInfo skill = skillTable[randomNum];
 
+        // 재획득 불가능 스킬이라면 스킬테이블에서 삭제
         if (!skill.IsReacquirable)
             skillTable.RemoveAt(randomNum);
 
+        // 스킬 체크용 임시
         playerSkillList.Add(skill);
-
-        ApplySkill(skill);
+        ApplySkill(skill); 
 
         return skill;
     }
 
+    // 스킬 적용하기
     public void ApplySkill(SkillInfo info)
     {
         switch (info.SkillID)

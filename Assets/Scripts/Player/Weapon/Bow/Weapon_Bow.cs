@@ -75,18 +75,20 @@ public class Weapon_Bow : MonoBehaviour
 
             foreach (GameObject obj in enemyList)
             {
+                // 화살의 다음타겟을 찾을 경우 현재 자신(화살)의 타겟은 넘어가기
                 if (_enemy != null && obj.name == _enemy.name)
                     continue;
 
                 float distance = 0;
 
+                // 플레이어와 가장 가까운 적 찾기
                 if (_transform == null)
                     distance = Vector3.Distance(obj.transform.position, transform.position);
 
+                // 반동 스킬 보유 시 화살의 다음 타겟 찾기
                 else
                     distance = Vector3.Distance(obj.transform.position, _transform.position);
 
-                // 가장 가까운 적 찾기
                 if (distance < targetDistance)
                 {
                     targetDistance = distance;
@@ -116,18 +118,21 @@ public class Weapon_Bow : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
+    // 공격(애니메이션 이벤트로 호출)
     private void Attack()
     {
         if (target != null)
             PlayerManager.instance.arrowManager.StartShootDelegate(target);
     }
 
+    // 공격속도 증가
     public void IncreasedAttackSpeed(float speed)
     {
         AttackSpeed += speed;
         animator.speed = AttackSpeed;
     }
 
+    // 크리티컬 확인
     public bool CalculateCriticalChance()
     {
         int randNum = UnityEngine.Random.Range(0, 100);
