@@ -61,7 +61,7 @@ public class Arrow_Bow : MonoBehaviour
             // 반동 스킬 보유 + 현재 튕긴 횟수가 2보다 작다면 다음 타겟 찾아 이동시킴
             if (bow.IsRebound && bound < 2)
             {
-                target = bow.FindTarget(transform, target);
+                target = bow.FindTarget(transform, collision.gameObject);
                 if (target != null)
                 {
                     float angle = PlayerManager.instance.arrowManager.LookAtTargetForArrow(target, transform);
