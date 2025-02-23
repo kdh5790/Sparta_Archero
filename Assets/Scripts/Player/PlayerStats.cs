@@ -46,8 +46,24 @@ public class PlayerStats : MonoBehaviour
             return;
         }
 
+        if (Random.Range(0, 100) < 20)
+        {
+            Debug.Log("회피에 성공했습니다.");
+            return;
+        }
+
         currentHealth -= damage;
-        Mathf.Min(0, currentHealth);
+        currentHealth = Mathf.Min(0, currentHealth);
+
+        if(currentHealth <= 0)
+        {
+            PlayerDead();
+        }    
+    }
+
+    public void PlayerDead()
+    {
+        Debug.Log("플레이어 사망");
     }
 
     public IEnumerator ApplyInvincibilitySkill()
