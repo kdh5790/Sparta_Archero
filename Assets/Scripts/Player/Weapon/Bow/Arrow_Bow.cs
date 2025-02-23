@@ -12,6 +12,9 @@ public class Arrow_Bow : MonoBehaviour
     private int damage; // 데미지
     private int bound = 0; // 반동 횟수
 
+    private const float arrowSpeed = 12f; // 화살 속도
+    private const float maxDistance = 15f; // 플레이어와 화살의 최대 거리(최대 거리를 넘어가면 화살 비활성화)
+
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -22,7 +25,7 @@ public class Arrow_Bow : MonoBehaviour
     {
         MoveToTarget();
 
-        if (Vector3.Distance(transform.parent.position, transform.position) > 12f)
+        if (Vector3.Distance(transform.parent.position, transform.position) > maxDistance)
             GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
     }
 
@@ -35,7 +38,7 @@ public class Arrow_Bow : MonoBehaviour
     // 타겟 방향으로 이동
     private void MoveToTarget()
     {
-        rigidBody.velocity = transform.up * 4.5f;
+        rigidBody.velocity = transform.up * arrowSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
