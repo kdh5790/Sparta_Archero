@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveVelocity;
     private Vector2 moveDirection;
 
-    private float moveSpeed;
+    private float moveSpeed = 3f;
 
     public float stopTime; // 플레이어가 멈춰있던 시간(공격 체크 용)
     public bool isMove;
@@ -23,8 +23,6 @@ public class PlayerController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
-
-        moveSpeed = FindObjectOfType<PlayerStats>().Speed;
     }
 
     void FixedUpdate()

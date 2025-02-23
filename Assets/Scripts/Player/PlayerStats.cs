@@ -34,7 +34,7 @@ public class PlayerStats : MonoBehaviour
 
     public void InitPlayerStats()
     {
-        level = 1; currentExp = 0; maxExp = 100; currentHealth = 200; maxHealth = 200; speed = 3f;
+        level = 1; currentExp = 0; maxExp = 100; currentHealth = 600; maxHealth = 600; speed = 3f;
         sprite = GetComponentInChildren<SpriteRenderer>();
     }
 

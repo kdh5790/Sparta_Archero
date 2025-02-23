@@ -7,16 +7,16 @@ using UnityEngine;
 
 public class Weapon_Bow : MonoBehaviour
 {
-    private int damage = 30;
+    private int damage = 200;
     public int Damage { get { return damage; } set { damage = value; } }
 
     private float attackSpeed = 1f;
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
 
-    private float criticalDamage = 1.5f;
+    private float criticalDamage = 2f;
     public float CriticalDamage { get { return criticalDamage; } set { criticalDamage = value; } }
 
-    private int criticalChance = 0;
+    private int criticalChance = 10;
     public int CriticalChance { get { return criticalChance; } set { criticalChance = value; } }
 
     private bool isPiercingShot = false;
