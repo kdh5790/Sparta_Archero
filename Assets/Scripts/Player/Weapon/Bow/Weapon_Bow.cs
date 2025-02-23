@@ -25,6 +25,8 @@ public class Weapon_Bow : MonoBehaviour
     private bool isRebound = false;
     public bool IsRebound { get { return isRebound; } set { isRebound = value; } }
 
+    private bool isMultiShot = false;
+    public bool IsMultiShot { get { return isMultiShot; } set { isMultiShot = value; } }
 
     public List<GameObject> enemyList = new List<GameObject>(); // 필드의 적들을 담을 리스트
     public GameObject target; // 공격해야 할 타겟

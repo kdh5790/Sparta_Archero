@@ -37,7 +37,7 @@ public class SkillManager : MonoBehaviour
 
         // 스킬 체크용 임시
         playerSkillList.Add(skill);
-        ApplySkill(skill); 
+        ApplySkill(skill);
 
         return skill;
     }
@@ -84,6 +84,10 @@ public class SkillManager : MonoBehaviour
                 PlayerManager.instance.bow.IsPiercingShot = true;
                 break;
 
+            case Skill.FrontArrowPlus:
+                PlayerManager.instance.arrowManager.AddShootDelegate(info.SkillID);
+                break;
+
             case Skill.BackArrowPlus:
                 PlayerManager.instance.arrowManager.AddShootDelegate(info.SkillID);
                 break;
@@ -97,7 +101,7 @@ public class SkillManager : MonoBehaviour
                 break;
 
             case Skill.MultiShot:
-                PlayerManager.instance.arrowManager.AddShootDelegate(info.SkillID);
+                PlayerManager.instance.bow.IsMultiShot = true;
                 break;
 
             default:

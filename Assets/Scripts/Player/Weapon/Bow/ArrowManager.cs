@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public delegate void ShootArrowDelegate();
 
@@ -11,11 +12,14 @@ public class ArrowManager : MonoBehaviour
     [SerializeField] private GameObject arrowPrefab; // 화살 프리팹
     private Queue<GameObject> arrowQueue = new Queue<GameObject>(); // 생성한 화살들을 담아둘 큐
     private GameObject target;
+    private Weapon_Bow bow;
 
     private int poolSize = 100; // 오브젝트풀 사이즈(화살 생성 할 갯수)
 
     private void Start()
     {
+        bow = FindObjectOfType<Weapon_Bow>();
+
         GameObject go;
 
         // 화살 생성 후 비활성화, 큐에 넣어주기
@@ -34,7 +38,11 @@ public class ArrowManager : MonoBehaviour
     public void StartShootDelegate(GameObject _target)
     {
         target = _target;
-        shootDelegate();
+
+        if (bow.IsMultiShot)
+            StartCoroutine(ShootMultiShotCoroutine());
+        else
+            shootDelegate();
     }
 
     // 스킬에 따라 델리게이트 추가
@@ -42,6 +50,10 @@ public class ArrowManager : MonoBehaviour
     {
         switch (skill)
         {
+            case Skill.FrontArrowPlus:
+                shootDelegate += ShootFrontArrow;
+                break;
+
             case Skill.BackArrowPlus:
                 shootDelegate += ShootBackArrow;
                 break;
@@ -52,10 +64,6 @@ public class ArrowManager : MonoBehaviour
 
             case Skill.SideArrowPlus:
                 shootDelegate += ShootSideArrow;
-                break;
-
-            case Skill.MultiShot:
-                shootDelegate += ShootMultiArrow;
                 break;
         }
     }
@@ -96,17 +104,19 @@ public class ArrowManager : MonoBehaviour
         ShootArrow(0f);
         ShootArrow(180f);
     }
-    
-    // 멀티샷
-    private void ShootMultiArrow()
+
+    // 전방 화살
+    private void ShootFrontArrow()
     {
-        GameObject go = arrowQueue.Dequeue();
+        ShootArrow(-85f);
+    }
 
-        float angle = LookAtTargetForArrow();
+    private IEnumerator ShootMultiShotCoroutine()
+    {
+        shootDelegate();
 
-        go.SetActive(true);
-        go.transform.position = new Vector2(go.transform.position.x, go.transform.position.y - 0.15f);
-        go.transform.rotation = Quaternion.Euler(0, 0, angle + -90f);
+        yield return new WaitForSeconds(0.1f);
+        shootDelegate();
     }
 
     // 화살 회수
