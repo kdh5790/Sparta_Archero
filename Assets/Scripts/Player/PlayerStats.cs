@@ -38,6 +38,14 @@ public class PlayerStats : MonoBehaviour
         sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            StartCoroutine(ApplyInvincibilityAfterDamage());
+        }
+    }
+
     public void OnDamaged(int damage)
     {
         if (IsInvincivility)
@@ -55,10 +63,12 @@ public class PlayerStats : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Min(0, currentHealth);
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             PlayerDead();
-        }    
+        }
+
+        StartCoroutine(ApplyInvincibilityAfterDamage());
     }
 
     public void PlayerDead()
@@ -66,6 +76,27 @@ public class PlayerStats : MonoBehaviour
         Debug.Log("플레이어 사망");
     }
 
+    // 데미지를 입은 후 무적판정
+    public IEnumerator ApplyInvincibilityAfterDamage()
+    {
+        IsInvincivility = true;
+
+        int count = 3; // 깜빡일 횟수
+
+        for (int i = 0; i < count; i++)
+        {
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0.2f);
+            yield return new WaitForSeconds(0.1f);
+
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
+        IsInvincivility = false;
+    }
+
+    // 무적 스킬 보유 시 10초 마다 2초간 무적
     public IEnumerator ApplyInvincibilitySkill()
     {
         while (currentHealth > 0)
