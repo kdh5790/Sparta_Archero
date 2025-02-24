@@ -4,6 +4,7 @@ using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using System;
+using static UnityEditor.PlayerSettings;
 
 public enum UIState
 {
@@ -116,7 +117,7 @@ public class UIManager : MonoBehaviour
     {
         ChangeState(UIState.Game); //게임이 시작됐으니 게임 UI로 변경
         UpdatePlayerStage();  //어떤 스테이지를 눌렀는지 보여줄 것
-        SceneManager.LoadScene("UITestScene");
+        SceneManager.LoadScene("SampleScene");
         //스테이지가 추가 된다면 이부분을 수정할 것
     }
 
@@ -144,9 +145,9 @@ public class UIManager : MonoBehaviour
         gameUI.SetStageUI(stageState);
     }
 
-    public void UpdatePlayerHP() // 플레이어의 HP 확인용
+    public void UpdatePlayerHPPosition(Vector2 position) // 플레이어의 HP 확인용
     {
-
+        gameUI.SetPlayerHPUIPosition(position);
     }
 
     public void UpdatePlayerExp() //플레이어의 경험치 확인용
