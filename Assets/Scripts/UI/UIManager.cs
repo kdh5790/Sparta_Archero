@@ -37,16 +37,16 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void ChangeState(UIState state)
+    public void ChangeState(UIState state) //UI오브젝트를 on off 해주는 기능
     {
-        currentState = state;
-        titleUI?.SetActive(currentState);
+        currentState = state; //아래에서 해당하는 UI오브젝트를 찾아 on off 해줌
+        titleUI?.SetActive(currentState); 
         lobbyUI?.SetActive(currentState);
     }
 
     public void OnClickStart()
     {
-        ChangeState(UIState.Title);
+        ChangeState(UIState.Lobby); // Start 버튼을 누르면 로비로 이동
     }
 
     public void OnClickExit()
