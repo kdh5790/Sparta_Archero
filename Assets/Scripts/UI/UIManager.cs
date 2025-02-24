@@ -3,11 +3,13 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using System;
 
 public enum UIState
 {
     Title, //0
-    Lobby //1
+    Lobby, //1
+    Game //2
 }
 
 public enum StageState
@@ -26,8 +28,8 @@ public class UIManager : MonoBehaviour
     StageState stageState = StageState.Stage1;
 
     TitleUI titleUI = null;
-
     LobbyUI lobbyUI = null;
+    GameUI gameUI = null;   
 
     GameObject stage1 = null;
 
@@ -44,17 +46,21 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject); //씬변경시 파괴 x
+
+
         instance = this;
 
         titleUI = GetComponentInChildren<TitleUI>(true);
         titleUI?.Init(this);
         lobbyUI = GetComponentInChildren<LobbyUI>(true);
         lobbyUI?.Init(this);
+        gameUI = GetComponentInChildren<GameUI>(true);
+        gameUI?.Init(this);
 
         stage1 = transform.Find("LobbyUI").transform.Find("Stage1").gameObject; //stage1과 stage2 ui 오브젝트를 찾아줘서 할당
         stage2 = transform.Find("LobbyUI").transform.Find("Stage2").gameObject; //transform.Find로 찾아 들어가 주는 게 포인트
-
-
+ 
         ChangeState(UIState.Title);
     }
 
@@ -64,6 +70,7 @@ public class UIManager : MonoBehaviour
         currentState = state; //아래에서 해당하는 UI오브젝트를 찾아 on off 해줌
         titleUI?.SetActive(currentState); 
         lobbyUI?.SetActive(currentState);
+        gameUI?.SetActive(currentState);
     }
 
     public void ChangeStageState(StageState state) //아래에서 해당하는 stage를 찾아서 on off 해줌
@@ -107,6 +114,9 @@ public class UIManager : MonoBehaviour
 
     public void OnClickStageStart() // 스테이지 실행 버튼을 누렀을 시
     {
+        ChangeState(UIState.Game); //게임이 시작됐으니 게임 UI로 변경
+        gameUI.SetUI(stageState); //어떤 스테이지를 눌렀는지 보여줄 것
+        SceneManager.LoadScene("UITestScene");
         //스테이지가 추가 된다면 이부분을 수정할 것
         //SceneManager.LoadScene("Stage_5");
     }
