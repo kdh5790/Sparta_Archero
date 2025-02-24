@@ -15,7 +15,12 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+            Destroy(gameObject);
 
         arrowManager = FindObjectOfType<ArrowManager>();
         bow = FindObjectOfType<Weapon_Bow>();
