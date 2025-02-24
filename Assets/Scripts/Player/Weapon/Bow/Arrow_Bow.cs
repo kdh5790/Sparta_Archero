@@ -72,6 +72,10 @@ public class Arrow_Bow : MonoBehaviour
             if (isPiercing)
                 damage = (int)(damage * 0.67f);
 
+            // 멀티샷 스킬을 보유중이라면 최종 데미지 10% 감소
+            if(bow.IsMultiShot)
+                damage = (int)(damage * 0.9f);
+
             Debug.Log(isCritical ? $"적 충돌 | 크리티컬 데미지 : {damage}" : $"적 충돌 | 데미지 : {damage}");
 
             // 반동 스킬 보유 + 현재 튕긴 횟수가 2보다 작다면 다음 타겟 찾아 이동시킴

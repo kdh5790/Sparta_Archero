@@ -137,6 +137,7 @@ public class SkillManager : MonoBehaviour
 
             case Skill.MultiShot:
                 PlayerManager.instance.bow.IsMultiShot = true;
+                PlayerManager.instance.bow.IncreasedAttackSpeed(-0.15f);
                 break;
 
             default:
