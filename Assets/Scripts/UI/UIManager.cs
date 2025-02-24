@@ -115,10 +115,9 @@ public class UIManager : MonoBehaviour
     public void OnClickStageStart() // 스테이지 실행 버튼을 누렀을 시
     {
         ChangeState(UIState.Game); //게임이 시작됐으니 게임 UI로 변경
-        gameUI.SetUI(stageState); //어떤 스테이지를 눌렀는지 보여줄 것
+        UpdatePlayerStage();  //어떤 스테이지를 눌렀는지 보여줄 것
         SceneManager.LoadScene("UITestScene");
         //스테이지가 추가 된다면 이부분을 수정할 것
-        //SceneManager.LoadScene("Stage_5");
     }
 
     public void OnClickNextStage()
@@ -135,6 +134,24 @@ public class UIManager : MonoBehaviour
         {
             ChangeStageState(stageState - 1); //이전 스테이지로
         }
+    }
+
+
+    //Game 내부
+
+    public void UpdatePlayerStage() //플레이어가 몇 스테이지에서 활동하는 지 확인용
+    {
+        gameUI.SetUI(stageState);
+    }
+
+    public void UpdatePlayerHP() // 플레이어의 HP 확인용
+    {
+
+    }
+
+    public void UpdatePlayerExp() //플레이어의 경험치 확인용
+    {
+
     }
 
 }
