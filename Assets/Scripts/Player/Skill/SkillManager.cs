@@ -115,6 +115,10 @@ public class SkillManager : MonoBehaviour
                 PlayerManager.instance.bow.IsRebound = true;
                 break;
 
+            case Skill.Rage:
+                PlayerManager.instance.bow.IsRage = true;
+                break;
+
             case Skill.PiercingShot:
                 PlayerManager.instance.bow.IsPiercingShot = true;
                 break;

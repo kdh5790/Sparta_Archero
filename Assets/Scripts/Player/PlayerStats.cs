@@ -42,7 +42,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            StartCoroutine(ApplyInvincibilityAfterDamage());
+            OnDamaged(30);
         }
     }
 
@@ -61,7 +61,7 @@ public class PlayerStats : MonoBehaviour
         }
 
         currentHealth -= damage;
-        currentHealth = Mathf.Min(0, currentHealth);
+        currentHealth = Mathf.Max(0, currentHealth);
 
         if (currentHealth <= 0)
         {

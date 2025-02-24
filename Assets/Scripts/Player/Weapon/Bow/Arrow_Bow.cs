@@ -53,13 +53,16 @@ public class Arrow_Bow : MonoBehaviour
 
             // 크리티컬 or 일반 데미지 주기
             if (isCritical)
-                damage = (int)(Random.Range(bow.Damage * (bow.CriticalDamage - 0.1f), bow.Damage * (bow.CriticalDamage + 0.1f)));
+                damage = (int)(bow.Damage * bow.CriticalDamage);
 
             else
-                damage = (int)(Random.Range(bow.Damage * 0.9f, bow.Damage * 1.1f));
+                damage = bow.Damage;
+
+            if (bow.IsRage)
+                CalculateRageDamage();
 
             // 반동 횟수에 따라 데미지 감소(최대 2)
-            if(bound > 0)
+            if (bound > 0)
             {
                 for (int i = 0; i < bound; i++)
                 {
@@ -101,5 +104,17 @@ public class Arrow_Bow : MonoBehaviour
 
             isPiercing = true;
         }
+    }
+
+    // 분노 스킬 보유 시 데미지 계산
+    private void CalculateRageDamage()
+    {
+        float currentHP = PlayerManager.instance.stats.CurrentHealth;
+        float maxHP = PlayerManager.instance.stats.MaxHealth;
+
+        float percentage = (maxHP - currentHP) / maxHP * 100f;
+        percentage = 1f + (percentage * 0.012f);
+
+        damage = (int)(damage * percentage);
     }
 }
