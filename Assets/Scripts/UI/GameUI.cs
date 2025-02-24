@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameUI : BaseUI
 {
-    public TextMeshProUGUI testTxt;
+    public TextMeshProUGUI stageTxt;
     protected override UIState GetUIState()
     {
         return UIState.Game;
@@ -15,12 +15,12 @@ public class GameUI : BaseUI
     {
         base.Init(uiManager); //ui manager ½ÇÇà
 
-        testTxt = transform.Find("TestTxt").GetComponent<TextMeshProUGUI>();
+        stageTxt = transform.Find("StageTxt").GetComponent<TextMeshProUGUI>();
     }
 
-    public void SetUI(StageState state)
+    public void SetStageUI(StageState state)
     {
-        testTxt.text = $"{state}";
+        stageTxt.text = $"{state}";
     }
 
 }
