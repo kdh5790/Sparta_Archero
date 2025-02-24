@@ -144,6 +144,14 @@ public class SkillManager : MonoBehaviour
                 PlayerManager.instance.bow.IncreasedAttackSpeed(-0.15f);
                 break;
 
+            case Skill.AttackSpeedAurora:
+                StartCoroutine(PlayerManager.instance.bow.ApplyAttackSpeedAurora());
+                break;
+
+            case Skill.CriticalAurora:
+                StartCoroutine(PlayerManager.instance.bow.ApplyCriticalAurora());
+                break;
+
             default:
                 Debug.Log("아직 구현 X");
                 break;
