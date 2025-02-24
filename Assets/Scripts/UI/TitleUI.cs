@@ -22,6 +22,7 @@ public class TitleUI : BaseUI
 
         startBtn.onClick.AddListener(OnClickStartButton);
         exitBtn.onClick.AddListener(OnClickExitButton);
+
     }
 
 
