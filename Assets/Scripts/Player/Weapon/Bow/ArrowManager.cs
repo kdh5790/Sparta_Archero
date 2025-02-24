@@ -14,7 +14,7 @@ public class ArrowManager : MonoBehaviour
     private GameObject target;
     private Weapon_Bow bow;
 
-    private int poolSize = 100; // 오브젝트풀 사이즈(화살 생성 할 갯수)
+    private int poolSize = 100; // 오브젝트풀 사이즈(생성할 화살 갯수)
 
     private void Start()
     {
