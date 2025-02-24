@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 10435530}
   - component: {fileID: 10435529}
   m_Layer: 5
-  m_Name: PrevStageButton
+  m_Name: PrevDungeonButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -632,7 +632,7 @@ GameObject:
   m_Component:
   - component: {fileID: 312502892}
   m_Layer: 5
-  m_Name: Stage2
+  m_Name: Dungeon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -982,7 +982,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stage 1
+  m_text: Dungeon 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1566,7 +1566,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stage 2
+  m_text: Dungeon 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2401,7 +2401,7 @@ GameObject:
   - component: {fileID: 1689097848}
   - component: {fileID: 1689097847}
   m_Layer: 5
-  m_Name: NextStageButton
+  m_Name: NextDungeonButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2522,7 +2522,7 @@ GameObject:
   - component: {fileID: 1753417990}
   - component: {fileID: 1753417989}
   m_Layer: 5
-  m_Name: StageStartButton
+  m_Name: DungeonStartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2640,7 +2640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1829020239}
   m_Layer: 5
-  m_Name: Stage1
+  m_Name: Dungeon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2717,7 +2717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9074d3829f99b942b2085892b5ddd15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageTxt: {fileID: 0}
+  dungeonTxt: {fileID: 0}
   playerBar: {fileID: 0}
   hpFront: {fileID: 1138722674}
   expFront: {fileID: 309222306}
@@ -2964,7 +2964,7 @@ GameObject:
   - component: {fileID: 2083992815}
   - component: {fileID: 2083992814}
   m_Layer: 5
-  m_Name: StageTxt
+  m_Name: DungeonTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2986,8 +2986,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -270, y: 630}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -208, y: 630}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2083992814
 MonoBehaviour:
@@ -3009,7 +3009,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stage 0
+  m_text: Dungeon 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
