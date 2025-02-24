@@ -68,6 +68,10 @@ public class Arrow_Bow : MonoBehaviour
                 }
             }
 
+            // 이전에 적을 관통 했다면 데미지 감소
+            if (isPiercing)
+                damage = (int)(damage * 0.67f);
+
             Debug.Log(isCritical ? $"적 충돌 | 크리티컬 데미지 : {damage}" : $"적 충돌 | 데미지 : {damage}");
 
             // 반동 스킬 보유 + 현재 튕긴 횟수가 2보다 작다면 다음 타겟 찾아 이동시킴
@@ -91,6 +95,8 @@ public class Arrow_Bow : MonoBehaviour
                 GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
                 return;
             }
+
+            isPiercing = true;
         }
     }
 }

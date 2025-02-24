@@ -27,6 +27,7 @@ public class SkillManager : MonoBehaviour
         }
     }
 
+    // 랜덤한 스킬 3개를 리스트로 반환
     public List<SkillInfo> SkillGacha()
     {
         List<SkillInfo> rndSkillList = new List<SkillInfo>();
