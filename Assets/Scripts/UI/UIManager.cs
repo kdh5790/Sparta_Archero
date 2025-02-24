@@ -108,7 +108,7 @@ public class UIManager : MonoBehaviour
     public void OnClickStageStart() // 스테이지 실행 버튼을 누렀을 시
     {
         //스테이지가 추가 된다면 이부분을 수정할 것
-        SceneManager.LoadScene("MainScene");
+        //SceneManager.LoadScene("Stage_5");
     }
 
     public void OnClickNextStage()
