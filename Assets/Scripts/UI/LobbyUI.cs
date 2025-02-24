@@ -25,6 +25,7 @@ public class LobbyUI : BaseUI
         prevStageBtn.onClick.AddListener(OnClickPrevStageButton);
 
         base.Init(uiManager);
+
     }
 
     public void OnClickStageStartButton()
