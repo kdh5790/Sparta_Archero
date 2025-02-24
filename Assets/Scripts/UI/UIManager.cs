@@ -145,14 +145,19 @@ public class UIManager : MonoBehaviour
         gameUI.SetStageUI(stageState);
     }
 
-    public void UpdatePlayerHPPosition(Vector2 position) // 플레이어의 HP 확인용
+    public void UpdatePlayerUIPosition(Vector2 position) // 플레이어 Ui 추적 확인용
     {
-        gameUI.SetPlayerHPUIPosition(position);
+        gameUI.SetPlayerUIPosition(position);
+    }
+
+    public void UpdatePlayerHP(float maxHp, int currentHp) //플레이어의 HP 확인용
+    {
+        gameUI.SetPlayerHpUI(maxHp,currentHp);
     }
 
     public void UpdatePlayerExp() //플레이어의 경험치 확인용
     {
-
+        gameUI.SetPlayerExpUI();
     }
 
 }

@@ -6,7 +6,11 @@ using UnityEngine;
 public class GameUI : BaseUI
 {
     public TextMeshProUGUI stageTxt;
-    public GameObject hpBar;
+    public GameObject playerBar;
+
+    public RectTransform hpFront; //해당 변수는 유니티에서 할당해줌
+    public RectTransform expFront; //해당 변수는 유니티에서 할당해줌 스크립트 컴포넌트 참고
+
     protected override UIState GetUIState()
     {
         return UIState.Game;
@@ -17,7 +21,7 @@ public class GameUI : BaseUI
         base.Init(uiManager); //ui manager 실행
 
         stageTxt = transform.Find("StageTxt").GetComponent<TextMeshProUGUI>();
-        hpBar = transform.Find("PlayerBar").gameObject;
+        playerBar = transform.Find("PlayerBar").gameObject;
     }
 
     public void SetStageUI(StageState state)
@@ -25,9 +29,20 @@ public class GameUI : BaseUI
         stageTxt.text = $"{state}";
     }
 
-    public void SetPlayerHPUIPosition(Vector2 pos)
+    public void SetPlayerUIPosition(Vector2 pos)
     {
-        hpBar.transform.position = Camera.main.WorldToScreenPoint(pos + new Vector2(0, -0.7f));
+        playerBar.transform.position = Camera.main.WorldToScreenPoint(pos + new Vector2(0, -0.7f));
+    }
+
+    public void SetPlayerHpUI(float max, int current)
+    {
+        hpFront.localScale = new Vector3(current / max, 1.0f,1.0f);
+        //깎인 Hp만큼 반영
+    }
+
+    public void SetPlayerExpUI()
+    {
+
     }
 
 }
