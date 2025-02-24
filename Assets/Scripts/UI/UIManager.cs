@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
         lobbyUI?.Init(this);
 
         stage1 = transform.Find("LobbyUI").transform.Find("Stage1").gameObject; //stage1과 stage2 ui 오브젝트를 찾아줘서 할당
-        stage2 = transform.Find("LobbyUI").transform.Find("Stage2").gameObject;
+        stage2 = transform.Find("LobbyUI").transform.Find("Stage2").gameObject; //transform.Find로 찾아 들어가 주는 게 포인트
 
 
         ChangeState(UIState.Title);
