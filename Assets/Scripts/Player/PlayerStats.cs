@@ -38,14 +38,6 @@ public class PlayerStats : MonoBehaviour
         sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            OnDamaged(30);
-        }
-    }
-
     public void OnDamaged(int damage)
     {
         if (IsInvincivility)
