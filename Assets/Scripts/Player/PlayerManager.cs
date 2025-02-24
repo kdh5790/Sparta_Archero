@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
 
-    public PlayerStats stats;
-    public ArrowManager arrowManager;
+    PlayerStats stats;
 
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+            Destroy(gameObject);
 
-        arrowManager = FindObjectOfType<ArrowManager>();
         stats = FindObjectOfType<PlayerStats>();
         stats.InitPlayerStats();
     }
