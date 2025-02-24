@@ -17,7 +17,7 @@ public class GameUI : BaseUI
         base.Init(uiManager); //ui manager ½ÇÇà
 
         stageTxt = transform.Find("StageTxt").GetComponent<TextMeshProUGUI>();
-        hpBar = transform.Find("PlayerHpBar").gameObject;
+        hpBar = transform.Find("PlayerBar").gameObject;
     }
 
     public void SetStageUI(StageState state)
