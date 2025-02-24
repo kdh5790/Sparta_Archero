@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
+using UnityEngine.U2D;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -13,9 +15,6 @@ public class PlayerStats : MonoBehaviour
     private float maxExp;
     public float MaxExp { get { return maxExp; } set { maxExp = value; } }
 
-    private int attackPower;
-    public int AttackPower { get { return attackPower; } set { attackPower = value; } }
-
     private int currentHealth;
     public int CurrentHealth { get { return currentHealth; } set { currentHealth = value; } }
 
@@ -25,16 +24,19 @@ public class PlayerStats : MonoBehaviour
     private float speed;
     public float Speed { get { return speed; } set { speed = value; } }
 
-    private float attackSpeed;
-    public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
+    private int dodgeChance;
+    public int DodgeChance { get { return dodgeChance; } set { dodgeChance = value; } }
+
+    private bool isInvincivility;
+    public bool IsInvincivility { get { return isInvincivility; } set { isInvincivility = value; } }
+
+    private SpriteRenderer sprite;
 
     public void InitPlayerStats()
     {
-        level = 1; currentExp = 0; maxExp = 100; attackPower = 30; currentHealth = 200; maxHealth = 200; speed = 3f; attackSpeed = 1f;
+        level = 1; currentExp = 0; maxExp = 100; currentHealth = 600; maxHealth = 600; speed = 3f;
+        sprite = GetComponentInChildren<SpriteRenderer>();
     }
-<<<<<<< HEAD
-}
-=======
 
     private void Update()
     {
@@ -115,4 +117,3 @@ public class PlayerStats : MonoBehaviour
         }
     }
 }
->>>>>>> parent of 57a8298 ([ Chore ] 테스트 코드 삭제)
