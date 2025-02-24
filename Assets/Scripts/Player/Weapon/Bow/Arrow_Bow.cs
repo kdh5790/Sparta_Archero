@@ -11,6 +11,7 @@ public class Arrow_Bow : MonoBehaviour
 
     private int damage; // 데미지
     private int bound = 0; // 반동 횟수
+    private bool isPiercing = false; // 관통 스킬 보유 시 관통 확인용
 
     private const float arrowSpeed = 12f; // 화살 속도
     private const float maxDistance = 15f; // 플레이어와 화살의 최대 거리(최대 거리를 넘어가면 화살 비활성화)
@@ -25,6 +26,7 @@ public class Arrow_Bow : MonoBehaviour
     {
         MoveToTarget();
 
+        // 플레이어와 일정 거리 이상 멀어졌다면 화살 회수(일정거리는 맵 크기보다 크게 설정)
         if (Vector3.Distance(transform.parent.position, transform.position) > maxDistance)
             GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
     }
@@ -32,6 +34,8 @@ public class Arrow_Bow : MonoBehaviour
     private void OnEnable()
     {
         bound = 0;
+        isPiercing = false;
+
         if (bow != null) target = bow.target;
     }
 
@@ -50,16 +54,21 @@ public class Arrow_Bow : MonoBehaviour
 
             // 크리티컬 or 일반 데미지 주기
             if (isCritical)
-            {
                 damage = (int)(Random.Range(bow.Damage * (bow.CriticalDamage - 0.1f), bow.Damage * (bow.CriticalDamage + 0.1f)));
-                Debug.Log($"적 충돌 | 크리티컬 데미지 : {damage}");
-            }
 
             else
-            {
                 damage = (int)(Random.Range(bow.Damage * 0.9f, bow.Damage * 1.1f));
-                Debug.Log($"적 충돌 | 데미지 : {damage}");
+
+            // 반동 횟수에 따라 데미지 감소(최대 2)
+            if(bound > 0)
+            {
+                for (int i = 0; i < bound; i++)
+                {
+                    damage = (int)(damage * 0.7f);
+                }
             }
+
+            Debug.Log(isCritical ? $"적 충돌 | 크리티컬 데미지 : {damage}" : $"적 충돌 | 데미지 : {damage}");
 
             // 반동 스킬 보유 + 현재 튕긴 횟수가 2보다 작다면 다음 타겟 찾아 이동시킴
             if (bow.IsRebound && bound < 2)
