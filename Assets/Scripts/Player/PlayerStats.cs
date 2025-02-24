@@ -46,7 +46,7 @@ public class PlayerStats : MonoBehaviour
             return;
         }
 
-        if (Random.Range(0, 100) < 20)
+        if (Random.Range(0, 100) < DodgeChance)
         {
             Debug.Log("회피에 성공했습니다.");
             return;
