@@ -1,5 +1,7 @@
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.SceneManagement;
 
 public enum UIState
 {
@@ -7,9 +9,16 @@ public enum UIState
     Lobby
 }
 
+public enum StageState
+{
+    Stage1,
+    Stage2
+}
+
 public class UIManager : MonoBehaviour
 {
     UIState currentState = UIState.Title;
+    StageState stageState = StageState.Stage1;
 
     TitleUI titleUI = null;
 
@@ -33,6 +42,7 @@ public class UIManager : MonoBehaviour
         lobbyUI = GetComponentInChildren<LobbyUI>(true);
         lobbyUI?.Init(this);
 
+
         ChangeState(UIState.Title);
     }
 
@@ -43,6 +53,14 @@ public class UIManager : MonoBehaviour
         titleUI?.SetActive(currentState); 
         lobbyUI?.SetActive(currentState);
     }
+
+    public void ChangeStageState(StageState state) //아래에서 해당하는 stage를 찾아서 on off 해줌
+    {
+        stageState = state; //해당하는 stage를 찾아서 값을 넣어줌
+    }
+
+
+    //title 내부
 
     public void OnClickStart()
     {
@@ -57,4 +75,14 @@ public class UIManager : MonoBehaviour
         Application.Quit(); // 어플리케이션 종료
 #endif
     }
+
+
+
+    //lobby 내부
+
+    public void OnClickStageStart() // 스테이지 실행 버튼을 누렀을 시
+    {
+        SceneManager.LoadScene("MainScene");
+    }
+
 }
