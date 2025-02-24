@@ -17,10 +17,6 @@ public class PlayerController : MonoBehaviour
     public float stopTime; // 플레이어가 멈춰있던 시간(공격 체크 용)
     public bool isMove;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
 
     void Start()
     {
