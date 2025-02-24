@@ -9,7 +9,7 @@ public class SkillManager : MonoBehaviour
     public List<SkillInfo> skillTable;
     public List<SkillInfo> playerSkillList = new List<SkillInfo>();
 
-    private const int maxHP = 200;
+    private const int maxHP = 600;
 
     private void Awake()
     {
@@ -19,12 +19,46 @@ public class SkillManager : MonoBehaviour
 
     private void Update()
     {
+        // 테스트용
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SkillInfo randSkill = GetRandomSkill();
+            //SkillGacha();
         }
     }
 
+    public List<SkillInfo> SkillGacha()
+    {
+        List<SkillInfo> rndSkillList = new List<SkillInfo>();
+
+        SkillInfo rndSkill = new SkillInfo();
+
+        for (int i = 0; i < 3; i++)
+        {
+            rndSkill = skillTable[(Random.Range(0, skillTable.Count))];
+
+            if(!rndSkillList.Contains(rndSkill))
+            {
+                rndSkillList.Add(rndSkill);
+            }
+            else
+            {
+                do
+                {
+                    rndSkill = skillTable[(Random.Range(0, skillTable.Count))];
+                }
+                while (rndSkillList.Contains(rndSkill));
+
+                rndSkillList.Add(rndSkill);
+            }
+        }
+
+        Debug.Log($"{rndSkillList[0].SkillName}, {rndSkillList[1].SkillName}, {rndSkillList[2].SkillName},");
+
+        return rndSkillList;
+    }
+
+    // 테스트 용
     public SkillInfo GetRandomSkill()
     {
         int randomNum = Random.Range(0, skillTable.Count);
