@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5500636531389104973}
   - component: {fileID: 3302040963262233592}
   - component: {fileID: 2620505088149454547}
+  - component: {fileID: 6508645641267867557}
   - component: {fileID: 7746513367670101294}
   m_Layer: 0
   m_Name: Player
@@ -62,7 +63,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &2620505088149454547
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -108,6 +109,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
+--- !u!114 &6508645641267867557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592159432226802981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d87bf4c254eed4c90f6f0f14150409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7746513367670101294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +146,7 @@ GameObject:
   - component: {fileID: 3657003639478328738}
   - component: {fileID: 6794923255565672202}
   - component: {fileID: 2032215066364475772}
-  - component: {fileID: 2197081270930089140}
+  - component: {fileID: 637332603155824910}
   m_Layer: 0
   m_Name: weapon_bow
   m_TagString: Untagged
@@ -222,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList: []
   target: {fileID: 0}
---- !u!95 &2197081270930089140
+--- !u!95 &637332603155824910
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -379,5 +392,51 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3657003639478328738}
+  - {fileID: 1683741074637816514}
   m_Father: {fileID: 5500636531389104973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8549754010584374735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1683741074637816514}
+  - component: {fileID: 7457016298036767189}
+  m_Layer: 0
+  m_Name: ArrowPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1683741074637816514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8549754010584374735}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4815898142760915830}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7457016298036767189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8549754010584374735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813fc4bd55c39e140abf86fc4924a9f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowPrefab: {fileID: 6350668526848174605, guid: ea1d9417d68f05745af4c3ce63ce7944, type: 3}
