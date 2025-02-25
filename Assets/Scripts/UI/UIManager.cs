@@ -45,6 +45,10 @@ public class UIManager : MonoBehaviour
     {
         get
         {
+            if (null == instance)
+            {
+                return null;
+            }
             return instance;
         }
     }
@@ -56,7 +60,7 @@ public class UIManager : MonoBehaviour
         if (instance == null) 
         {
             instance = this; 
-            DontDestroyOnLoad(gameObject); 
+            DontDestroyOnLoad(this.gameObject); 
         }
         else
         {
@@ -64,8 +68,6 @@ public class UIManager : MonoBehaviour
                 Destroy(this.gameObject);
         }
 
-
-        instance = this;
 
         titleUI = GetComponentInChildren<TitleUI>(true);
         titleUI?.Init(this);
@@ -136,8 +138,8 @@ public class UIManager : MonoBehaviour
 
     public void OnClickDungeonStart() // 스테이지 실행 버튼을 누렀을 시
     {
-        ChangeState(UIState.Game); //게임이 시작됐으니 게임 UI로 변경
         UpdatePlayerDungeon();  //어떤 스테이지를 눌렀는지 보여줄 것
+        ChangeState(UIState.Game); //게임이 시작됐으니 게임 UI로 변경
         SceneManager.LoadScene("SampleScene");
         GameManager.Instance.GameStart();
         //스테이지가 추가 된다면 이부분을 수정할 것
