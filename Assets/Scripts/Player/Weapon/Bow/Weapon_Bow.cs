@@ -149,6 +149,28 @@ public class Weapon_Bow : MonoBehaviour
         return randNum < criticalChance;
     }
 
+    public void KnockBackEnemy(Transform enemy, Vector3 arrowPos)
+    {
+        StartCoroutine(ApplyKnockBackCoroutine(enemy, arrowPos));
+    }
+
+    public IEnumerator ApplyKnockBackCoroutine(Transform enemy, Vector3 arrowPos)
+    {
+        Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
+        enemyRb.bodyType = RigidbodyType2D.Dynamic;
+        enemyRb.gravityScale = 0;
+        Vector2 direction = (enemy.transform.position - arrowPos).normalized;
+
+        enemyRb.AddForce(direction * 0.1f, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(0.2f);
+
+        enemyRb.velocity = Vector2.zero;
+        enemyRb.angularVelocity = 0f;
+
+        enemyRb.bodyType = RigidbodyType2D.Kinematic;
+    }
+
     public IEnumerator ApplyAttackSpeedAurora()
     {
         skillCoroutineArr[0] = ApplyAttackSpeedAurora();
