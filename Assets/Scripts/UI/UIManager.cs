@@ -12,7 +12,10 @@ public enum UIState
     Lobby, //1
     Game, //2
     LevelUp, //3
-    GameOver //4
+    GameOver, //4
+    DungeonClear, //5
+    ChestReward, //6
+    BossReward //7
 }
 
 public enum DungeonState
@@ -35,6 +38,9 @@ public class UIManager : MonoBehaviour
     GameUI gameUI = null;   
     LevelUpUI levelUpUI = null;
     GameOverUI gameOverUI = null;
+    DungeonClearUI dungeonClearUI = null;
+    ChestRewardUI chestRewardUI = null;
+    BossRewardUI bossRewardUI = null;
 
     GameObject Dungeon1 = null;
 
@@ -79,6 +85,12 @@ public class UIManager : MonoBehaviour
         levelUpUI?.Init(this);
         gameOverUI = GetComponentInChildren<GameOverUI>(true);
         gameOverUI?.Init(this);
+        dungeonClearUI = GetComponentInChildren<DungeonClearUI>(true);
+        dungeonClearUI?.Init(this);
+        chestRewardUI = GetComponentInChildren<ChestRewardUI>(true);
+        chestRewardUI?.Init(this);
+        bossRewardUI = GetComponentInChildren<BossRewardUI>(true);
+        bossRewardUI?.Init(this);
 
         Dungeon1 = transform.Find("LobbyUI").transform.Find("Dungeon1").gameObject; //stage1과 stage2 ui 오브젝트를 찾아줘서 할당
         Dungeon2 = transform.Find("LobbyUI").transform.Find("Dungeon2").gameObject; //transform.Find로 찾아 들어가 주는 게 포인트
@@ -95,6 +107,9 @@ public class UIManager : MonoBehaviour
         gameUI?.SetActive(currentState);
         levelUpUI?.SetActive(currentState);
         gameOverUI?.SetActive(currentState);
+        dungeonClearUI?.SetActive(currentState);
+        chestRewardUI?.SetActive(currentState);
+        bossRewardUI?.SetActive(currentState);
     }
 
     public void ChangeDungeonState(DungeonState state) //아래에서 해당하는 stage를 찾아서 on off 해줌
