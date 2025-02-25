@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3568934090556777702}
   - component: {fileID: 1887542352178283481}
   - component: {fileID: 4769142888586819207}
-  m_Layer: 16
+  m_Layer: 3
   m_Name: MainSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: cd1ec771c6d867842a048e3dcff04270, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -106,7 +106,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &8493365626690269808
+--- !u!1 &5315610607622747881
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,22 +114,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7877386872650589931}
-  - component: {fileID: 6343861038786110467}
-  m_Layer: 16
-  m_Name: PlayerTrigger
+  - component: {fileID: 1006688313838452827}
+  - component: {fileID: 9148522127391962350}
+  - component: {fileID: 2883557723389139771}
+  m_Layer: 0
+  m_Name: ArrowDamageReceiver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7877386872650589931
+--- !u!4 &1006688313838452827
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8493365626690269808}
+  m_GameObject: {fileID: 5315610607622747881}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -138,13 +139,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2544545731519880293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &6343861038786110467
+--- !u!114 &9148522127391962350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5315610607622747881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 477f8859293843f4986bfddc07e5a284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &2883557723389139771
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8493365626690269808}
+  m_GameObject: {fileID: 5315610607622747881}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -194,7 +207,8 @@ GameObject:
   - component: {fileID: 2544545731519880293}
   - component: {fileID: 893276696970036259}
   - component: {fileID: 8263368868368077232}
-  m_Layer: 16
+  - component: {fileID: 7574624858059442332}
+  m_Layer: 3
   m_Name: Masked_Orc
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -215,7 +229,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3568934090556777702}
-  - {fileID: 7877386872650589931}
+  - {fileID: 1006688313838452827}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &893276696970036259
@@ -290,3 +304,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.53, y: 0.83}
   m_EdgeRadius: 0
+--- !u!114 &7574624858059442332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8543468412467932008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfdf0f9b98c99eb46b9b19875a108384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  target: {fileID: 0}
+  maxHealth: 800
+  enemyAnimator: {fileID: 0}
+  enemyStat: {fileID: 11400000, guid: 0656aa1f5e7d33e418d147e9b6be59e4, type: 2}
+  instanceHealth: 800
+  instanceAttack: 3
+  instanceDefense: 1
+  instanceSpeed: 0.6
+  instanceExp: 3

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 13_Big_Zombie
   m_EditorClassIdentifier: 
   enemyName: Big_Zombie
-  health: 50
+  health: 1100
   attack: 9
   defense: 2
   speed: 3

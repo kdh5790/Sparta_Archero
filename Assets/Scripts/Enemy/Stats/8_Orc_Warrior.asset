@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 8_Orc_Warrior
   m_EditorClassIdentifier: 
   enemyName: Orc_Warrior
-  health: 10
+  health: 860
   attack: 3
   defense: 1
-  speed: 2
+  speed: 1
   exp: 3
