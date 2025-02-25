@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1234736876232275783}
   - component: {fileID: 5170336672283290777}
   m_Layer: 0
-  m_Name: Collosion
+  m_Name: CollosionA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
