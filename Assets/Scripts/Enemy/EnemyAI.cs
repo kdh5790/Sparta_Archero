@@ -1,73 +1,51 @@
-// EnemyAI.cs
 using UnityEngine;
+using Utils;  // TargetingUtils가 있는 네임스페이스
 
 public abstract class EnemyAI : MonoBehaviour
 {
-    public Transform player;              // 플레이어 위치
-    public float moveSpeed = 3.0f;          // 이동 속도
-    public float chaseDistance = 10.0f;     // 추적 거리
-    public float attackDistance = 2.0f;     // 공격 거리
-    public float attackCooldown = 1.0f;     // 공격 쿨타임
+    [Header("Enemy Settings")]
+    public float speed = 3f;
+    public Transform target; // 타겟, 기본적으로 플레이어로 할당
 
-    protected float attackTimer = 0f;
+    protected bool isDead = false;
 
-    protected virtual void Start()
+    protected Rigidbody2D rigid;
+    protected SpriteRenderer spriter;
+
+    // Awake에서 컴포넌트 초기화 및 타겟 감지
+    protected virtual void Awake()
     {
-        // "Player" 태그가 붙은 오브젝트 찾기
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-            player = playerObj.transform;
+        rigid = GetComponent<Rigidbody2D>();
+        spriter = GetComponentInChildren<SpriteRenderer>();
 
-        // EnemyManager에 자신 등록 (씬에 EnemyManager가 있어야 함)
-        EnemyManager enemyManager = FindObjectOfType<EnemyManager>();
-        if (enemyManager != null)
-            enemyManager.RegisterEnemy(this);
-    }
-
-    protected virtual void Update()
-    {
-        if (player == null)
-            return;
-
-        float distance = Vector3.Distance(transform.position, player.position);
-        if (distance <= chaseDistance)
-            ChasePlayer(distance);
-    }
-
-    protected virtual void ChasePlayer(float distance)
-    {
-        transform.LookAt(player);
-        if (distance > attackDistance)
+        // target이 할당되어 있지 않으면 "Player" 태그를 가진 오브젝트를 찾아 할당
+        if (target == null)
         {
-            MoveTowardsPlayer();
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+                target = playerObj.transform;
         }
-        else
-        {
-            if (attackTimer <= 0f)
-            {
-                Attack();
-                attackTimer = attackCooldown;
-            }
-        }
-
-        if (attackTimer > 0f)
-            attackTimer -= Time.deltaTime;
     }
 
-    protected virtual void MoveTowardsPlayer()
+    // 물리 업데이트에서 이동 처리
+    protected virtual void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+        if (isDead || target == null) return;
+        MoveTowardsTarget();
     }
 
-    // 각 적마다 다르게 구현할 공격 방식
-    protected abstract void Attack();
-
-
-    private void OnDestroy()
+    // LateUpdate에서 스프라이트 좌우 반전 처리
+    protected virtual void LateUpdate()
     {
-        // 파괴될 때 EnemyManager에서 자신 제거
-        EnemyManager enemyManager = FindObjectOfType<EnemyManager>();
-        if (enemyManager != null)
-            enemyManager.UnregisterEnemy(this);
+        if (isDead || target == null) return;
+        spriter.flipX = target.position.x < transform.position.x;
+    }
+
+    // 타겟 방향으로 이동
+    public virtual void MoveTowardsTarget()
+    {
+        Vector3 direction = TargetingUtils.GetDirection(transform, target);
+        Vector3 movement = direction * speed * Time.fixedDeltaTime;
+        rigid.MovePosition(rigid.position + (Vector2)movement);
     }
 }
