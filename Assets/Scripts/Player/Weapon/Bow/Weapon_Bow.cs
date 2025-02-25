@@ -34,6 +34,8 @@ public class Weapon_Bow : MonoBehaviour
     public List<GameObject> enemyList = new List<GameObject>(); // 필드의 적들을 담을 리스트
     public GameObject target; // 공격해야 할 타겟
 
+    [SerializeField] private SpriteRenderer attakSpeedAuroraSprite;
+    [SerializeField] private SpriteRenderer criticalAuroraSprite;
     private Animator animator;
     private PlayerController playerController;
 
@@ -55,7 +57,7 @@ public class Weapon_Bow : MonoBehaviour
         LookAtTarget();
 
         // 플레이어가 멈춰있음 + 타겟이 있음 + 멈추고 일정시간이 지남
-        if (!playerController.isMove && target != null && playerController.stopTime > 0.2f)
+        if (!playerController.isMove && target != null && playerController.stopTime > 0.2f && !PlayerManager.instance.isDead)
             animator.SetBool("IsAttack", true);
         else
             animator.SetBool("IsAttack", false);
@@ -143,5 +145,38 @@ public class Weapon_Bow : MonoBehaviour
         int randNum = UnityEngine.Random.Range(0, 100);
 
         return randNum < criticalChance;
+    }
+
+    public IEnumerator ApplyAttackSpeedAurora()
+    {
+        while (PlayerManager.instance.stats.CurrentHealth > 0)
+        {
+            yield return new WaitForSeconds(9f);
+
+            attakSpeedAuroraSprite.gameObject.SetActive(true);
+            IncreasedAttackSpeed(0.625f);
+
+            yield return new WaitForSeconds(2f);
+
+            attakSpeedAuroraSprite.gameObject.SetActive(false);
+            IncreasedAttackSpeed(-0.625f);
+        }
+    }
+
+
+    public IEnumerator ApplyCriticalAurora()
+    {
+        while (PlayerManager.instance.stats.CurrentHealth > 0)
+        {
+            yield return new WaitForSeconds(9f);
+
+            criticalAuroraSprite.gameObject.SetActive(true);
+            criticalChance += 47;
+
+            yield return new WaitForSeconds(2f);
+
+            criticalAuroraSprite.gameObject.SetActive(false);
+            criticalChance -= 47;
+        }
     }
 }

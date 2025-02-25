@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class SkillManager : MonoBehaviour
@@ -22,8 +23,12 @@ public class SkillManager : MonoBehaviour
         // 테스트용
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SkillInfo randSkill = GetRandomSkill();
-            //SkillGacha();
+            List<SkillInfo> skills = SkillGacha();
+
+            foreach (SkillInfo skill in skills)
+            {
+                ApplySkill(skill);
+            }
         }
     }
 
@@ -57,24 +62,6 @@ public class SkillManager : MonoBehaviour
         Debug.Log($"{rndSkillList[0].SkillName}, {rndSkillList[1].SkillName}, {rndSkillList[2].SkillName},");
 
         return rndSkillList;
-    }
-
-    // 테스트 용
-    public SkillInfo GetRandomSkill()
-    {
-        int randomNum = Random.Range(0, skillTable.Count);
-
-        SkillInfo skill = skillTable[randomNum];
-
-        // 재획득 불가능 스킬이라면 스킬테이블에서 삭제
-        if (!skill.IsReacquirable)
-            skillTable.RemoveAt(randomNum);
-
-        // 스킬 체크용 임시
-        playerSkillList.Add(skill);
-        ApplySkill(skill);
-
-        return skill;
     }
 
     // 스킬 적용하기
@@ -144,9 +131,39 @@ public class SkillManager : MonoBehaviour
                 PlayerManager.instance.bow.IncreasedAttackSpeed(-0.15f);
                 break;
 
+            case Skill.AttackSpeedAurora:
+                StartCoroutine(PlayerManager.instance.bow.ApplyAttackSpeedAurora());
+                break;
+
+            case Skill.CriticalAurora:
+                StartCoroutine(PlayerManager.instance.bow.ApplyCriticalAurora());
+                break;
+
             default:
                 Debug.Log("아직 구현 X");
                 break;
         }
+
+        if (!info.IsReacquirable)
+            skillTable.Remove(info);
+
+        playerSkillList.Add(info);
     }
 }
+    //// 테스트 용
+    //public SkillInfo GetRandomSkill()
+    //{
+    //    int randomNum = Random.Range(0, skillTable.Count);
+
+    //    SkillInfo skill = skillTable[randomNum];
+
+    //    // 재획득 불가능 스킬이라면 스킬테이블에서 삭제
+    //    if (!skill.IsReacquirable)
+    //        skillTable.RemoveAt(randomNum);
+
+    //    // 스킬 체크용 임시
+    //    playerSkillList.Add(skill);
+    //    ApplySkill(skill);
+
+    //    return skill;
+    //}

@@ -229,11 +229,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5500636531389104973, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: 5500636531389104973, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.19
       objectReference: {fileID: 0}
     - target: {fileID: 5500636531389104973, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -478,6 +478,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dab226f4553afa2478bebcfc5da0451e, type: 2}
   - {fileID: 11400000, guid: 538a0835d5b3c604b8adb7777afc1436, type: 2}
   - {fileID: 11400000, guid: a9781acd6c997f5449f375235867a7d1, type: 2}
+  - {fileID: 11400000, guid: af9b1f9455b871348a751d4167a269c8, type: 2}
+  - {fileID: 11400000, guid: 1ddb684b4d64ace419f3f6c4e282396f, type: 2}
   playerSkillList: []
 --- !u!1 &1092572964
 GameObject:

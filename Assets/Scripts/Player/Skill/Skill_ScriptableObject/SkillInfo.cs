@@ -18,7 +18,9 @@ public enum Skill
     SideArrowPlus,          //O 12.측면 화살 +1 : 좌우 90도로 발사하는 화살 추가
     BackArrowPlus,          //O 13.후방 화살 +1 : 등 뒤로 화살을 추가
     HeadShot,               //X 14.헤드샷 : 잡몹을 공격 시 12.5%의 확률로 적을 즉사시킨다. 헤드샷이 발동할 기회는 한번뿐이므로, 처음 명중한 화살이 즉사가 아니라면 헤드샷 발동X
-    DodgeMastery            //O 15.회피 마스터 : 회피 확률이 20% 늘어난다.
+    DodgeMastery,           //O 15.회피 마스터 : 회피 확률이 20% 늘어난다.
+    AttackSpeedAurora,      //O 16.공격 속도 오로라 : 9초마다 2초동안 공격속도가 62.5% 증가한다.
+    CriticalAurora          //O 17.크리티컬 오로라 : 8초마다 2초 동안 크리티컬 확률이 47.5% 증가한다.
 }
 
 [CreateAssetMenu(fileName = "SkillInfo", menuName = "Scriptable Object/SkillInfo", order = int.MaxValue)]

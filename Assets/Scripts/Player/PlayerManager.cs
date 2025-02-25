@@ -12,6 +12,8 @@ public class PlayerManager : MonoBehaviour
     public Weapon_Bow bow;
     public ArrowManager arrowManager;
 
+    public bool isDead = false;
+
     private void Awake()
     {
         if (instance == null)
