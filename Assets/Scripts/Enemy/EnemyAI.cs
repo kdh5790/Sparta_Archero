@@ -1,73 +1,109 @@
-// EnemyAI.cs
 using UnityEngine;
+using Utils;  // TargetingUtils가 있는 네임스페이스
 
 public abstract class EnemyAI : MonoBehaviour
 {
-    public Transform player;              // 플레이어 위치
-    public float moveSpeed = 3.0f;          // 이동 속도
-    public float chaseDistance = 10.0f;     // 추적 거리
-    public float attackDistance = 2.0f;     // 공격 거리
-    public float attackCooldown = 1.0f;     // 공격 쿨타임
+    [Header("Enemy Settings")]
+    public float speed = 3f;
+    public Transform target; // 기본 타겟 (보통 플레이어)
 
-    protected float attackTimer = 0f;
+    [Header("Damage Settings")]
+    public float maxHealth = 100;
+    protected float currentHealth;
+    public Animator enemyAnimator; // Hit, Die 애니메이션 트리거용
+
+
+    
+    public float CurrentHealth => currentHealth;    // 체력 값 이거 가져가시면 됩니다!
+    public float MaxHealth => maxHealth;    // 체력 값 이거 가져가시면 됩니다!
+
+    protected bool isDead = false;
+    public bool IsDead { get { return isDead; } }
+
+    protected Rigidbody2D rigid;
+    protected SpriteRenderer spriter;
+
+    protected virtual void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        spriter = GetComponentInChildren<SpriteRenderer>();
+
+        if (target == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+                target = playerObj.transform;
+        }
+    }
 
     protected virtual void Start()
     {
-        // "Player" 태그가 붙은 오브젝트 찾기
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-            player = playerObj.transform;
-
-        // EnemyManager에 자신 등록 (씬에 EnemyManager가 있어야 함)
-        EnemyManager enemyManager = FindObjectOfType<EnemyManager>();
-        if (enemyManager != null)
-            enemyManager.RegisterEnemy(this);
+        currentHealth = maxHealth;
+        if (enemyAnimator == null)
+            enemyAnimator = GetComponentInChildren<Animator>();
     }
 
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
-        if (player == null)
-            return;
-
-        float distance = Vector3.Distance(transform.position, player.position);
-        if (distance <= chaseDistance)
-            ChasePlayer(distance);
+        if (isDead || target == null) return;
+        MoveTowardsTarget();
     }
 
-    protected virtual void ChasePlayer(float distance)
+    protected virtual void LateUpdate()
     {
-        transform.LookAt(player);
-        if (distance > attackDistance)
+        if (isDead || target == null) return;
+        spriter.flipX = target.position.x < transform.position.x;
+    }
+
+    public virtual void MoveTowardsTarget()
+    {
+        Vector3 direction = TargetingUtils.GetDirection(transform, target);
+        Vector3 movement = direction * speed * Time.fixedDeltaTime;
+        rigid.MovePosition(rigid.position + (Vector2)movement);
+    }
+
+    // 피격 시 호출되는 메서드
+    public virtual void TakeDamage(int damage)
+    {
+        if (isDead) return;
+
+        currentHealth -= damage;
+        Debug.Log($"{gameObject.name} took damage: {damage}. Remaining health: {currentHealth}");
+
+        // 빨간 플래시 애니메이션 재생 (피격 효과)
+        if (enemyAnimator != null)
         {
-            MoveTowardsPlayer();
+            enemyAnimator.SetTrigger("Hit");
         }
-        else
+
+        if (currentHealth <= 0)
         {
-            if (attackTimer <= 0f)
-            {
-                Attack();
-                attackTimer = attackCooldown;
-            }
+            Die();
+        }
+    }
+
+    // 사망 처리 메서드
+    protected virtual void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+
+        // 투명해지는 사망 애니메이션 재생
+        if (enemyAnimator != null)
+        {
+            enemyAnimator.SetTrigger("Die");
         }
 
-        if (attackTimer > 0f)
-            attackTimer -= Time.deltaTime;
-    }
+        // 추격 멈추기: FixedUpdate에서 isDead 체크로 처리됨
 
-    protected virtual void MoveTowardsPlayer()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-    }
+        // 추가 충돌에 의해 데미지가 더 들어가지 않도록 Collider 비활성화
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null)
+        {
+            col.enabled = false;
+        }
 
-    // 각 적마다 다르게 구현할 공격 방식
-    protected abstract void Attack();
-
-
-    private void OnDestroy()
-    {
-        // 파괴될 때 EnemyManager에서 자신 제거
-        EnemyManager enemyManager = FindObjectOfType<EnemyManager>();
-        if (enemyManager != null)
-            enemyManager.UnregisterEnemy(this);
+        // 사망 후 일정 시간 후 오브젝트 제거 (선택 사항)
+        Destroy(gameObject, 2f);
     }
 }
