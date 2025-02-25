@@ -87,6 +87,8 @@ public class SkillManager : MonoBehaviour
                 int incresedHealth = (int)(maxHP * 0.2);
                 PlayerManager.instance.stats.MaxHealth += incresedHealth;
                 PlayerManager.instance.stats.CurrentHealth += incresedHealth;
+                UIManager.Instance.UpdatePlayerHP(
+                    PlayerManager.instance.stats.MaxHealth, PlayerManager.instance.stats.CurrentHealth); //플레이어 ui 업데이트용
                 break;
 
             case Skill.DodgeMastery:
