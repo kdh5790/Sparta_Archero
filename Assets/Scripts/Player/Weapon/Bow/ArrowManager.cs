@@ -124,7 +124,7 @@ public class ArrowManager : MonoBehaviour
     {
         arrow.transform.localPosition = Vector3.zero;
         arrow.transform.localRotation = Quaternion.identity;
-        arrow.transform.localScale = Vector3.one;
+        arrow.transform.localScale = new Vector3(0.7f, 0.7f, 1f);
 
         arrowQueue.Enqueue(arrow);
         arrow.SetActive(false);

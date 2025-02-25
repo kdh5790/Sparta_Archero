@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class LobbyUI : BaseUI
 {
-    Button stageStartBtn;
-    Button nextStageBtn;
-    Button prevStageBtn;
+    Button dungeonStartBtn;
+    Button nextDungeonBtn;
+    Button prevDungeonBtn;
     protected override UIState GetUIState()
     {
         return UIState.Lobby;
@@ -15,32 +15,32 @@ public class LobbyUI : BaseUI
 
     public override void Init(UIManager uiManager)
     {
-        stageStartBtn = transform.Find("StageStartButton").GetComponent<Button>(); //스테이지 스타트 버튼 할당
-        stageStartBtn.onClick.AddListener(OnClickStageStartButton); //스테이지 스타트 버튼을 누른 경우
+        dungeonStartBtn = transform.Find("DungeonStartButton").GetComponent<Button>(); //스테이지 스타트 버튼 할당
+        dungeonStartBtn.onClick.AddListener(OnClickDungeonStartButton); //스테이지 스타트 버튼을 누른 경우
         
-        nextStageBtn = transform.Find("NextStageButton").GetComponent<Button>(); //다음 스테이지  버튼 할당
-        nextStageBtn.onClick.AddListener(OnClickNextStageButton);
+        nextDungeonBtn = transform.Find("NextDungeonButton").GetComponent<Button>(); //다음 스테이지  버튼 할당
+        nextDungeonBtn.onClick.AddListener(OnClickNextDungeonButton);
 
-        prevStageBtn = transform.Find("PrevStageButton").GetComponent<Button>(); //이전 스테이지 버튼 할당
-        prevStageBtn.onClick.AddListener(OnClickPrevStageButton);
+        prevDungeonBtn = transform.Find("PrevDungeonButton").GetComponent<Button>(); //이전 스테이지 버튼 할당
+        prevDungeonBtn.onClick.AddListener(OnClickPrevDungeonButton);
 
         base.Init(uiManager);
 
     }
 
-    public void OnClickStageStartButton()
+    public void OnClickDungeonStartButton()
     {
-        uiManager.OnClickStageStart();
+        uiManager.OnClickDungeonStart();
     }
 
-    public void OnClickNextStageButton()
+    public void OnClickNextDungeonButton()
     {
-        uiManager.OnClickNextStage();
+        uiManager.OnClickNextDungeon();
     }
 
-    public void OnClickPrevStageButton()
+    public void OnClickPrevDungeonButton()
     {
-        uiManager.OnClickPrevStage();
+        uiManager.OnClickPrevDungeon();
     }
 
 }

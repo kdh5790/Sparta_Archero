@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameUI : BaseUI
 {
-    public TextMeshProUGUI stageTxt;
+    public TextMeshProUGUI dungeonTxt;
     public GameObject playerBar;
 
     public RectTransform hpFront; //해당 변수는 유니티에서 할당해줌
@@ -20,18 +20,18 @@ public class GameUI : BaseUI
     {
         base.Init(uiManager); //ui manager 실행
 
-        stageTxt = transform.Find("StageTxt").GetComponent<TextMeshProUGUI>();
+        dungeonTxt = transform.Find("DungeonTxt").GetComponent<TextMeshProUGUI>();
         playerBar = transform.Find("PlayerBar").gameObject;
     }
 
-    public void SetStageUI(StageState state)
+    public void SetDungeonUI(DungeonState state)
     {
-        stageTxt.text = $"{state}";
+        dungeonTxt.text = $"{state}";
     }
 
     public void SetPlayerUIPosition(Vector2 pos)
     {
-        playerBar.transform.position = Camera.main.WorldToScreenPoint(pos + new Vector2(0, -0.7f));
+        playerBar.transform.position = Camera.main.WorldToScreenPoint(pos + new Vector2(0, -1f));
     }
 
     public void SetPlayerHpUI(float max, int current)
@@ -40,9 +40,9 @@ public class GameUI : BaseUI
         //깎인 Hp만큼 반영
     }
 
-    public void SetPlayerExpUI()
+    public void SetPlayerExpUI(float max, float current)
     {
-
+        expFront.localScale = new Vector3(current / max, 1.0f, 1.0f);
     }
 
 }
