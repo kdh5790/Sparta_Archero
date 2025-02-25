@@ -44,11 +44,6 @@ public class PlayerStats : MonoBehaviour
         {
             IncreaseExp(30);
         }
-
-        if (Input.GetKeyDown(KeyCode.P)) //ui 테스트용입니다.
-        {
-            TestLevelUp();
-        }
     }
 
     public void OnDamaged(int damage)
@@ -95,7 +90,7 @@ public class PlayerStats : MonoBehaviour
 
         level++;
 
-        // 스킬 획득 UI ON
+        UIManager.Instance.LevelUpUI();// 스킬 획득 UI ON
         Debug.Log($"레벨업! Lv.{level}, MaxExp:{maxExp}");
     }
 
@@ -146,9 +141,5 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void TestLevelUp() //ui테스트용입니다.
-    {
-        UIManager.Instance.LevelUpUI();
-    }
 
 }
