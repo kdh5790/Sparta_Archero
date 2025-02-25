@@ -7,7 +7,7 @@ public class Arrow_Bow : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Weapon_Bow bow;
     public GameObject target;
-    public int DamageValue { get { return damage; } }
+    public int DamageValue { get { return damage; } }   //enemy쪽에서 데미지 값 참조하려고 넣었습니다
 
     private int damage; // 데미지
     private int bound = 0; // 반동 횟수
