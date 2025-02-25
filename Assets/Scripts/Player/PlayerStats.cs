@@ -117,6 +117,8 @@ public class PlayerStats : MonoBehaviour
             StopCoroutine(invincibilityCoroutine);
 
         PlayerManager.instance.bow.StopBowSkillCoroutine();
+
+        UIManager.Instance.GameOverUI(); //Game Over UI 호출
     }
 
     // 데미지를 입은 후 무적판정
