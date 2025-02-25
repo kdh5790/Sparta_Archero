@@ -57,8 +57,10 @@ public class PlayerStats : MonoBehaviour
     {
         if (!PlayerManager.instance.isDead)
         {
-            UIManager.Instance.UpdatePlayerHP(maxHealth, currentHealth); //플레이어 ui 업데이트용
-            UIManager.Instance.UpdatePlayerExp(maxExp, currentExp); //플레이어 ui 업데이트용
+            if (UIManager.Instance != null) // <-- 충돌나서 임시로 null 해뒀어요.
+                UIManager.Instance.UpdatePlayerHP(maxHealth, currentHealth); //플레이어 ui 업데이트용
+            if (UIManager.Instance != null) // <-- 충돌나서 임시로 null 해뒀어요.
+                UIManager.Instance.UpdatePlayerExp(maxExp, currentExp); //플레이어 ui 업데이트용
         }
     }
 

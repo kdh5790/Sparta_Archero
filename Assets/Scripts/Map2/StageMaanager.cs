@@ -22,6 +22,6 @@ public class StageMaanager : MonoBehaviour
 
     bool AreAllMonstersDead()
     {
-        return GameObject.FindGameObjectsWithTag("Monster").Length == 0;
+        return GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
     }
 }
