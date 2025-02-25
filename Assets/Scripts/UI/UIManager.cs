@@ -160,9 +160,9 @@ public class UIManager : MonoBehaviour
         gameUI.SetPlayerHpUI(maxHp,currentHp);
     }
 
-    public void UpdatePlayerExp() //플레이어의 경험치 확인용
+    public void UpdatePlayerExp(float maxExp, float currentExp) //플레이어의 경험치 확인용
     {
-        gameUI.SetPlayerExpUI();
+        gameUI.SetPlayerExpUI(maxExp,currentExp);
     }
 
     //LevelUp내부

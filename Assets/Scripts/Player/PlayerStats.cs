@@ -37,6 +37,9 @@ public class PlayerStats : MonoBehaviour
     {
         level = 1; currentExp = 0; maxExp = 100; currentHealth = 600; maxHealth = 600; speed = 3f;
         sprite = GetComponentInChildren<SpriteRenderer>();
+
+        UIManager.Instance.UpdatePlayerHP(maxHealth, currentHealth); //플레이어 ui 업데이트용
+        UIManager.Instance.UpdatePlayerExp(maxExp, currentExp); //플레이어 ui 업데이트용
     }
 
     private void Update()
@@ -45,6 +48,7 @@ public class PlayerStats : MonoBehaviour
         {
             OnDamaged(300);
         }
+
     }
 
     public void OnDamaged(int damage)
@@ -78,6 +82,8 @@ public class PlayerStats : MonoBehaviour
     {
         currentExp += exp;
 
+        UIManager.Instance.UpdatePlayerExp(maxExp, currentExp); //플레이어 ui 업데이트용
+
         if (currentExp >= maxExp)
         {
             LevelUp();
@@ -91,6 +97,7 @@ public class PlayerStats : MonoBehaviour
 
         level++;
 
+        UIManager.Instance.UpdatePlayerExp(maxExp, currentExp); //플레이어 ui 업데이트용
         UIManager.Instance.LevelUpUI();// 스킬 획득 UI ON
         Debug.Log($"레벨업! Lv.{level}, MaxExp:{maxExp}");
     }

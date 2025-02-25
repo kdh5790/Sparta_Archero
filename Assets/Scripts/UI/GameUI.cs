@@ -31,7 +31,7 @@ public class GameUI : BaseUI
 
     public void SetPlayerUIPosition(Vector2 pos)
     {
-        playerBar.transform.position = Camera.main.WorldToScreenPoint(pos + new Vector2(0, -0.7f));
+        playerBar.transform.position = Camera.main.WorldToScreenPoint(pos + new Vector2(0, -1f));
     }
 
     public void SetPlayerHpUI(float max, int current)
@@ -40,9 +40,9 @@ public class GameUI : BaseUI
         //깎인 Hp만큼 반영
     }
 
-    public void SetPlayerExpUI()
+    public void SetPlayerExpUI(float max, float current)
     {
-
+        expFront.localScale = new Vector3(current / max, 1.0f, 1.0f);
     }
 
 }
