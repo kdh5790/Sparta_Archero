@@ -42,7 +42,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            OnDamaged(30);
+            IncreaseExp(30);
         }
     }
 
@@ -71,6 +71,27 @@ public class PlayerStats : MonoBehaviour
         UIManager.Instance.UpdatePlayerHP(maxHealth,currentHealth); //플레이어 ui 업데이트용
 
         StartCoroutine(ApplyInvincibilityAfterDamage());
+    }
+
+    public void IncreaseExp(int exp)
+    {
+        currentExp += exp;
+
+        if(currentExp >= maxExp)
+        {
+            LevelUp();
+        }
+    }
+
+    private void LevelUp()
+    {
+        currentExp -= maxExp;
+        maxExp *= 1.2f;
+
+        level++;
+
+        // 스킬 획득 UI ON
+        Debug.Log($"레벨업! Lv.{level}, MaxExp:{maxExp}");
     }
 
     public void PlayerDead()
