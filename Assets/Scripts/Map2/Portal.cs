@@ -5,15 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    public string[] stageScenes; // 이동할 스테이지 씬 목록
+    private string[] stageOrder = {
+        "Stage_5-1", "Stage_5-2", "Stage_5-3", "Stage_5-4",
+        "Stage_6-Box", "Stage_7-1", "Stage_7-2", "Stage_7-3", "Stage_7-4",
+        "Stage_8-Boss2"
+    };
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // 플레이어가 충돌했고, 포탈 오브젝트와 충돌한 경우만 씬 이동
-        if (other.CompareTag("Player") && gameObject.CompareTag("Portal"))
+        if (other.CompareTag("Player"))
         {
-            string randomStage = stageScenes[Random.Range(0, stageScenes.Length)];
-            SceneManager.LoadScene(randomStage);
+            string currentScene = SceneManager.GetActiveScene().name;
+            int index = System.Array.IndexOf(stageOrder, currentScene);
+
+            if (index != -1 && index < stageOrder.Length - 1)
+            {
+                SceneManager.LoadScene(stageOrder[index + 1]); // 다음 스테이지 로드
+            }
         }
     }
 }
