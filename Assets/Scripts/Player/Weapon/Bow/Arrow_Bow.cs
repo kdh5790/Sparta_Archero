@@ -86,6 +86,8 @@ public class Arrow_Bow : MonoBehaviour
                 target = bow.FindTarget(transform, collision.gameObject);
                 if (target != null)
                 {
+                    bow.KnockBackEnemy(collision.transform, transform.position);
+
                     float angle = PlayerManager.instance.arrowManager.LookAtTargetForArrow(target, transform);
                     transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
 
@@ -98,6 +100,7 @@ public class Arrow_Bow : MonoBehaviour
             // 관통샷 스킬을 보유하지 않았다면 데미지를 입힌 후 화살 비활성화
             if (!bow.IsPiercingShot)
             {
+                bow.KnockBackEnemy(collision.transform, transform.position);
                 GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
                 return;
             }
@@ -117,4 +120,6 @@ public class Arrow_Bow : MonoBehaviour
 
         damage = (int)(damage * percentage);
     }
+
+
 }
