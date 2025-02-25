@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (PlayerManager.instance.isDead) return;
+
         Move();
 
         if (!isMove)

@@ -57,7 +57,7 @@ public class Weapon_Bow : MonoBehaviour
         LookAtTarget();
 
         // 플레이어가 멈춰있음 + 타겟이 있음 + 멈추고 일정시간이 지남
-        if (!playerController.isMove && target != null && playerController.stopTime > 0.2f)
+        if (!playerController.isMove && target != null && playerController.stopTime > 0.2f && !PlayerManager.instance.isDead)
             animator.SetBool("IsAttack", true);
         else
             animator.SetBool("IsAttack", false);

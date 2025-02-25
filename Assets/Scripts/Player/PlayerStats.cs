@@ -76,6 +76,7 @@ public class PlayerStats : MonoBehaviour
     public void PlayerDead()
     {
         Debug.Log("플레이어 사망");
+        PlayerManager.instance.isDead = true;
     }
 
     // 데미지를 입은 후 무적판정
