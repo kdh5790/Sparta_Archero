@@ -10,7 +10,8 @@ public enum UIState
 {
     Title, //0
     Lobby, //1
-    Game //2
+    Game, //2
+    LevelUp //3
 }
 
 public enum DungeonState
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
     TitleUI titleUI = null;
     LobbyUI lobbyUI = null;
     GameUI gameUI = null;   
+    LevelUpUI levelUpUI = null;
 
     GameObject Dungeon1 = null;
 
@@ -58,6 +60,8 @@ public class UIManager : MonoBehaviour
         lobbyUI?.Init(this);
         gameUI = GetComponentInChildren<GameUI>(true);
         gameUI?.Init(this);
+        levelUpUI = GetComponentInChildren<LevelUpUI>(true);
+        levelUpUI?.Init(this);
 
         Dungeon1 = transform.Find("LobbyUI").transform.Find("Dungeon1").gameObject; //stage1과 stage2 ui 오브젝트를 찾아줘서 할당
         Dungeon2 = transform.Find("LobbyUI").transform.Find("Dungeon2").gameObject; //transform.Find로 찾아 들어가 주는 게 포인트
@@ -72,9 +76,10 @@ public class UIManager : MonoBehaviour
         titleUI?.SetActive(currentState); 
         lobbyUI?.SetActive(currentState);
         gameUI?.SetActive(currentState);
+        levelUpUI?.SetActive(currentState);
     }
 
-    public void ChangeStageState(DungeonState state) //아래에서 해당하는 stage를 찾아서 on off 해줌
+    public void ChangeDungeonState(DungeonState state) //아래에서 해당하는 stage를 찾아서 on off 해줌
     {
         dungeonState = state; //해당하는 stage를 찾아서 값을 넣어줌
 
@@ -125,7 +130,7 @@ public class UIManager : MonoBehaviour
     {
         if(dungeonState < DungeonState.Max - 1) //현재스테이지가 최대 스테이지 개수보다 적은 경우에만
         {
-            ChangeStageState(dungeonState + 1); //다음 스테이지로
+            ChangeDungeonState(dungeonState + 1); //다음 스테이지로
         }    
     }
 
@@ -133,7 +138,7 @@ public class UIManager : MonoBehaviour
     {
         if (dungeonState > DungeonState.Min + 1) //현재스테이지가 최소 스태이지보다 큰 경우에만
         {
-            ChangeStageState(dungeonState - 1); //이전 스테이지로
+            ChangeDungeonState(dungeonState - 1); //이전 스테이지로
         }
     }
 
@@ -158,6 +163,20 @@ public class UIManager : MonoBehaviour
     public void UpdatePlayerExp() //플레이어의 경험치 확인용
     {
         gameUI.SetPlayerExpUI();
+    }
+
+    //LevelUp내부
+
+    public void LevelUpUI() //레벨업 테스트용
+    {
+        levelUpUI.SkillSelectOn(); //스킬 선택창에 랜덤 스킬 삽입용
+        ChangeState(UIState.LevelUp); //레벨업 ui 활성화
+    }
+
+    public void OnClickSkillSelected()
+    {
+        Debug.Log("스킬선택완료");
+        ChangeState(UIState.Game); //레벨업시 스킬 얻는 과정을 거친 후 다시 인게임 ui on
     }
 
 }

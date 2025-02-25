@@ -44,6 +44,11 @@ public class PlayerStats : MonoBehaviour
         {
             OnDamaged(30);
         }
+
+        if (Input.GetKeyDown(KeyCode.P)) //ui 테스트용입니다.
+        {
+            TestLevelUp();
+        }
     }
 
     public void OnDamaged(int damage)
@@ -118,4 +123,10 @@ public class PlayerStats : MonoBehaviour
             sprite.color = Color.white;
         }
     }
+
+    public void TestLevelUp() //ui테스트용입니다.
+    {
+        UIManager.Instance.LevelUpUI();
+    }
+
 }
