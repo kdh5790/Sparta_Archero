@@ -40,6 +40,8 @@ public class LevelUpUI : BaseUI
 
     public void SkillSelectOn() //스킬 선택창에 랜덤 스킬 배분
     {
+        Time.timeScale = 0;
+
         skillInfos = SkillManager.instance.SkillGacha();
 
         skill1NameTxt.text = $"{skillInfos[0].SkillName}";
@@ -57,6 +59,7 @@ public class LevelUpUI : BaseUI
     {
         SkillManager.instance.ApplySkill(skillInfos[0]); //스킬 적용
 
+        Time.timeScale = 1;
         uiManager.OnClickSkillSelected();
     }
 
@@ -64,6 +67,7 @@ public class LevelUpUI : BaseUI
     {
         SkillManager.instance.ApplySkill(skillInfos[1]); //스킬 적용
 
+        Time.timeScale = 1;
         uiManager.OnClickSkillSelected();
     }
 
@@ -71,6 +75,7 @@ public class LevelUpUI : BaseUI
     {
         SkillManager.instance.ApplySkill(skillInfos[2]); //스킬 적용
 
+        Time.timeScale = 1;
         uiManager.OnClickSkillSelected();
     }
 

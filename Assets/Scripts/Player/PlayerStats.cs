@@ -49,6 +49,11 @@ public class PlayerStats : MonoBehaviour
             OnDamaged(300);
         }
 
+        if (Input.GetKeyDown(KeyCode.P)) //ui 테스트용입니다
+        {
+            IncreaseExp(30);
+        }
+
     }
 
     public void OnDamaged(int damage)
