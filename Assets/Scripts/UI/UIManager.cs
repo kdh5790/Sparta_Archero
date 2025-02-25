@@ -10,15 +10,16 @@ public enum UIState
 {
     Title, //0
     Lobby, //1
-    Game //2
+    Game, //2
+    LevelUp //3
 }
 
-public enum StageState
+public enum DungeonState
 {
     Min = -1, 
 
-    Stage1, //0
-    Stage2, //1
+    Dungeon1, //0
+    Dungeon2, //1
 
     Max //enum StageState의 개수
 }
@@ -26,15 +27,16 @@ public enum StageState
 public class UIManager : MonoBehaviour
 {
     UIState currentState = UIState.Title;
-    StageState stageState = StageState.Stage1;
+    DungeonState dungeonState = DungeonState.Dungeon1;
 
     TitleUI titleUI = null;
     LobbyUI lobbyUI = null;
     GameUI gameUI = null;   
+    LevelUpUI levelUpUI = null;
 
-    GameObject stage1 = null;
+    GameObject Dungeon1 = null;
 
-    GameObject stage2 = null;
+    GameObject Dungeon2 = null;
 
     static UIManager instance;
     public static UIManager Instance
@@ -58,9 +60,11 @@ public class UIManager : MonoBehaviour
         lobbyUI?.Init(this);
         gameUI = GetComponentInChildren<GameUI>(true);
         gameUI?.Init(this);
+        levelUpUI = GetComponentInChildren<LevelUpUI>(true);
+        levelUpUI?.Init(this);
 
-        stage1 = transform.Find("LobbyUI").transform.Find("Stage1").gameObject; //stage1과 stage2 ui 오브젝트를 찾아줘서 할당
-        stage2 = transform.Find("LobbyUI").transform.Find("Stage2").gameObject; //transform.Find로 찾아 들어가 주는 게 포인트
+        Dungeon1 = transform.Find("LobbyUI").transform.Find("Dungeon1").gameObject; //stage1과 stage2 ui 오브젝트를 찾아줘서 할당
+        Dungeon2 = transform.Find("LobbyUI").transform.Find("Dungeon2").gameObject; //transform.Find로 찾아 들어가 주는 게 포인트
  
         ChangeState(UIState.Title);
     }
@@ -72,22 +76,23 @@ public class UIManager : MonoBehaviour
         titleUI?.SetActive(currentState); 
         lobbyUI?.SetActive(currentState);
         gameUI?.SetActive(currentState);
+        levelUpUI?.SetActive(currentState);
     }
 
-    public void ChangeStageState(StageState state) //아래에서 해당하는 stage를 찾아서 on off 해줌
+    public void ChangeDungeonState(DungeonState state) //아래에서 해당하는 stage를 찾아서 on off 해줌
     {
-        stageState = state; //해당하는 stage를 찾아서 값을 넣어줌
+        dungeonState = state; //해당하는 stage를 찾아서 값을 넣어줌
 
 
-        switch(stageState)
+        switch(dungeonState)
         {
-            case StageState.Stage1: //현재 스테이지가 스테이지1인 경우
-                stage1.SetActive(true);
-                stage2.SetActive(false);
+            case DungeonState.Dungeon1: //현재 스테이지가 스테이지1인 경우
+                Dungeon1.SetActive(true);
+                Dungeon2.SetActive(false);
                 break;
-            case StageState.Stage2: //현재 스테이지가 스테이지2인 
-                stage1.SetActive(false);
-                stage2.SetActive(true);
+            case DungeonState.Dungeon2: //현재 스테이지가 스테이지2인 
+                Dungeon1.SetActive(false);
+                Dungeon2.SetActive(true);
                 break;
         }
     }
@@ -113,36 +118,36 @@ public class UIManager : MonoBehaviour
 
     //lobby 내부
 
-    public void OnClickStageStart() // 스테이지 실행 버튼을 누렀을 시
+    public void OnClickDungeonStart() // 스테이지 실행 버튼을 누렀을 시
     {
         ChangeState(UIState.Game); //게임이 시작됐으니 게임 UI로 변경
-        UpdatePlayerStage();  //어떤 스테이지를 눌렀는지 보여줄 것
+        UpdatePlayerDungeon();  //어떤 스테이지를 눌렀는지 보여줄 것
         SceneManager.LoadScene("SampleScene");
         //스테이지가 추가 된다면 이부분을 수정할 것
     }
 
-    public void OnClickNextStage()
+    public void OnClickNextDungeon()
     {
-        if(stageState < StageState.Max - 1) //현재스테이지가 최대 스테이지 개수보다 적은 경우에만
+        if(dungeonState < DungeonState.Max - 1) //현재스테이지가 최대 스테이지 개수보다 적은 경우에만
         {
-            ChangeStageState(stageState + 1); //다음 스테이지로
+            ChangeDungeonState(dungeonState + 1); //다음 스테이지로
         }    
     }
 
-    public void OnClickPrevStage()
+    public void OnClickPrevDungeon()
     {
-        if (stageState > StageState.Min + 1) //현재스테이지가 최소 스태이지보다 큰 경우에만
+        if (dungeonState > DungeonState.Min + 1) //현재스테이지가 최소 스태이지보다 큰 경우에만
         {
-            ChangeStageState(stageState - 1); //이전 스테이지로
+            ChangeDungeonState(dungeonState - 1); //이전 스테이지로
         }
     }
 
 
     //Game 내부
 
-    public void UpdatePlayerStage() //플레이어가 몇 스테이지에서 활동하는 지 확인용
+    public void UpdatePlayerDungeon() //플레이어가 몇 스테이지에서 활동하는 지 확인용
     {
-        gameUI.SetStageUI(stageState);
+        gameUI.SetDungeonUI(dungeonState);
     }
 
     public void UpdatePlayerUIPosition(Vector2 position) // 플레이어 Ui 추적 확인용
@@ -155,9 +160,23 @@ public class UIManager : MonoBehaviour
         gameUI.SetPlayerHpUI(maxHp,currentHp);
     }
 
-    public void UpdatePlayerExp() //플레이어의 경험치 확인용
+    public void UpdatePlayerExp(float maxExp, float currentExp) //플레이어의 경험치 확인용
     {
-        gameUI.SetPlayerExpUI();
+        gameUI.SetPlayerExpUI(maxExp,currentExp);
+    }
+
+    //LevelUp내부
+
+    public void LevelUpUI() //레벨업 테스트용
+    {
+        levelUpUI.SkillSelectOn(); //스킬 선택창에 랜덤 스킬 삽입용
+        ChangeState(UIState.LevelUp); //레벨업 ui 활성화
+    }
+
+    public void OnClickSkillSelected()
+    {
+        Debug.Log("스킬선택완료");
+        ChangeState(UIState.Game); //레벨업시 스킬 얻는 과정을 거친 후 다시 인게임 ui on
     }
 
 }
