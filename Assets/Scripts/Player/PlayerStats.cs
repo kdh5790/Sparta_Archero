@@ -31,6 +31,7 @@ public class PlayerStats : MonoBehaviour
     public bool IsInvincivility { get { return isInvincivility; } set { isInvincivility = value; } }
 
     private SpriteRenderer sprite;
+    private IEnumerator invincibilityCoroutine;
 
     public void InitPlayerStats()
     {
@@ -42,7 +43,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            IncreaseExp(30);
+            OnDamaged(300);
         }
     }
 
@@ -62,13 +63,13 @@ public class PlayerStats : MonoBehaviour
 
         currentHealth -= damage;
         currentHealth = Mathf.Max(0, currentHealth);
+        UIManager.Instance.UpdatePlayerHP(maxHealth, currentHealth); //플레이어 ui 업데이트용
 
         if (currentHealth <= 0)
         {
             PlayerDead();
+            return;
         }
-
-        UIManager.Instance.UpdatePlayerHP(maxHealth,currentHealth); //플레이어 ui 업데이트용
 
         StartCoroutine(ApplyInvincibilityAfterDamage());
     }
@@ -77,7 +78,7 @@ public class PlayerStats : MonoBehaviour
     {
         currentExp += exp;
 
-        if(currentExp >= maxExp)
+        if (currentExp >= maxExp)
         {
             LevelUp();
         }
@@ -98,11 +99,20 @@ public class PlayerStats : MonoBehaviour
     {
         Debug.Log("플레이어 사망");
         PlayerManager.instance.isDead = true;
+        StartCoroutine(PlayerSpriteColorChange());
+        GetComponent<PlayerController>().animator.speed = 0;
+
+        if (invincibilityCoroutine != null)
+            StopCoroutine(invincibilityCoroutine);
+
+        PlayerManager.instance.bow.StopBowSkillCoroutine();
     }
 
     // 데미지를 입은 후 무적판정
     public IEnumerator ApplyInvincibilityAfterDamage()
     {
+        invincibilityCoroutine = ApplyInvincibilityAfterDamage();
+
         IsInvincivility = true;
 
         int count = 3; // 깜빡일 횟수
@@ -125,8 +135,6 @@ public class PlayerStats : MonoBehaviour
     {
         while (currentHealth > 0)
         {
-            IsInvincivility = false;
-
             yield return new WaitForSeconds(10f);
 
             Debug.Log("무적 적용");
@@ -141,5 +149,23 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public IEnumerator PlayerSpriteColorChange()
+    {
+        Debug.Log("asdsa");
 
+        float duration = 1f; // 색상 변경에 걸리는 시간
+        float time = 0f;
+        Color startColor = sprite.color;
+        Color targetColor = Color.black;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+            sprite.color = Color.Lerp(startColor, targetColor, t);
+            yield return null;
+        }
+
+        sprite.color = targetColor;
+    }
 }

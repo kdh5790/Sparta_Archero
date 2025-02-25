@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
-    private Animator animator;
+    public Animator animator;
     private SpriteRenderer playerSprite;
 
     private Vector2 moveVelocity;
