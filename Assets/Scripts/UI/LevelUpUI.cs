@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LevelUpUI : BaseUI
 {
-    List<SkillInfo> skillInfos; //랜덤 스킬 선택용
+    List<SkillInfo> skillInfos; //랜덤 스킬 선택용 리스트
 
     Button skill1Btn = null;
     public TextMeshProUGUI skill1NameTxt;
