@@ -55,8 +55,11 @@ public class PlayerStats : MonoBehaviour
 
     private void FixedUpdate()
     {
-        UIManager.Instance.UpdatePlayerHP(maxHealth, currentHealth); //플레이어 ui 업데이트용
-        UIManager.Instance.UpdatePlayerExp(maxExp, currentExp); //플레이어 ui 업데이트용
+        if (!PlayerManager.instance.isDead)
+        {
+            UIManager.Instance.UpdatePlayerHP(maxHealth, currentHealth); //플레이어 ui 업데이트용
+            UIManager.Instance.UpdatePlayerExp(maxExp, currentExp); //플레이어 ui 업데이트용
+        }
     }
 
     public void OnDamaged(int damage)
@@ -117,6 +120,8 @@ public class PlayerStats : MonoBehaviour
             StopCoroutine(invincibilityCoroutine);
 
         PlayerManager.instance.bow.StopBowSkillCoroutine();
+
+        UIManager.Instance.GameOverUI(); //Game Over UI 호출
     }
 
     // 데미지를 입은 후 무적판정

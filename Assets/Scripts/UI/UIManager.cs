@@ -11,7 +11,8 @@ public enum UIState
     Title, //0
     Lobby, //1
     Game, //2
-    LevelUp //3
+    LevelUp, //3
+    GameOver //4
 }
 
 public enum DungeonState
@@ -33,6 +34,7 @@ public class UIManager : MonoBehaviour
     LobbyUI lobbyUI = null;
     GameUI gameUI = null;   
     LevelUpUI levelUpUI = null;
+    GameOverUI gameOverUI = null;
 
     GameObject Dungeon1 = null;
 
@@ -43,16 +45,29 @@ public class UIManager : MonoBehaviour
     {
         get
         {
+            if (null == instance)
+            {
+                return null;
+            }
             return instance;
         }
     }
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject); //씬변경시 파괴 x
 
 
-        instance = this;
+        if (instance == null) 
+        {
+            instance = this; 
+            DontDestroyOnLoad(this.gameObject); 
+        }
+        else
+        {
+            if (instance != this) 
+                Destroy(this.gameObject);
+        }
+
 
         titleUI = GetComponentInChildren<TitleUI>(true);
         titleUI?.Init(this);
@@ -62,6 +77,8 @@ public class UIManager : MonoBehaviour
         gameUI?.Init(this);
         levelUpUI = GetComponentInChildren<LevelUpUI>(true);
         levelUpUI?.Init(this);
+        gameOverUI = GetComponentInChildren<GameOverUI>(true);
+        gameOverUI?.Init(this);
 
         Dungeon1 = transform.Find("LobbyUI").transform.Find("Dungeon1").gameObject; //stage1과 stage2 ui 오브젝트를 찾아줘서 할당
         Dungeon2 = transform.Find("LobbyUI").transform.Find("Dungeon2").gameObject; //transform.Find로 찾아 들어가 주는 게 포인트
@@ -77,6 +94,7 @@ public class UIManager : MonoBehaviour
         lobbyUI?.SetActive(currentState);
         gameUI?.SetActive(currentState);
         levelUpUI?.SetActive(currentState);
+        gameOverUI?.SetActive(currentState);
     }
 
     public void ChangeDungeonState(DungeonState state) //아래에서 해당하는 stage를 찾아서 on off 해줌
@@ -120,9 +138,10 @@ public class UIManager : MonoBehaviour
 
     public void OnClickDungeonStart() // 스테이지 실행 버튼을 누렀을 시
     {
-        ChangeState(UIState.Game); //게임이 시작됐으니 게임 UI로 변경
         UpdatePlayerDungeon();  //어떤 스테이지를 눌렀는지 보여줄 것
+        ChangeState(UIState.Game); //게임이 시작됐으니 게임 UI로 변경
         SceneManager.LoadScene("SampleScene");
+        GameManager.Instance.GameStart();
         //스테이지가 추가 된다면 이부분을 수정할 것
     }
 
@@ -177,6 +196,22 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("스킬선택완료");
         ChangeState(UIState.Game); //레벨업시 스킬 얻는 과정을 거친 후 다시 인게임 ui on
+    }
+
+    //GameOver내부
+
+    public void GameOverUI() //게임 오버시 게임오버 UI 호출
+    {
+        ChangeState(UIState.GameOver);
+    }
+
+    public void OnClickBackButton() //BackButton을 누르면 로비로 복귀
+    {
+        Destroy(GameManager.Instance.player);
+        Destroy(GameManager.Instance.playerManager);
+
+        SceneManager.LoadScene("UIScene"); 
+        ChangeState(UIState.Lobby);
     }
 
 }

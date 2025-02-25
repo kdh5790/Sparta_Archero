@@ -27,6 +27,10 @@ public class GameUI : BaseUI
     public void SetDungeonUI(DungeonState state)
     {
         dungeonTxt.text = $"{state}";
+
+        playerBar = transform.Find("PlayerBar").gameObject;
+        hpFront = transform.Find("PlayerBar").transform.Find("Hp").transform.Find("Front").GetComponent<RectTransform>();
+        expFront = transform.Find("PlayerBar").transform.Find("Exp").transform.Find("Front").GetComponent<RectTransform>();
     }
 
     public void SetPlayerUIPosition(Vector2 pos)
@@ -36,13 +40,19 @@ public class GameUI : BaseUI
 
     public void SetPlayerHpUI(float max, int current)
     {
-        hpFront.localScale = new Vector3(current / max, 1.0f,1.0f);
-        //깎인 Hp만큼 반영
+        if (hpFront != null)
+        {
+            hpFront.localScale = new Vector3(current / max, 1.0f, 1.0f);
+            //깎인 Hp만큼 반영
+        }
     }
 
     public void SetPlayerExpUI(float max, float current)
     {
-        expFront.localScale = new Vector3(current / max, 1.0f, 1.0f);
+        if (expFront != null)
+        {
+            expFront.localScale = new Vector3(current / max, 1.0f, 1.0f);
+        }
     }
 
 }
