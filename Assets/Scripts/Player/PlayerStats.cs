@@ -42,7 +42,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            IncreaseExp(30);
+            OnDamaged(300);
         }
     }
 
@@ -98,6 +98,7 @@ public class PlayerStats : MonoBehaviour
     {
         Debug.Log("플레이어 사망");
         PlayerManager.instance.isDead = true;
+        GetComponent<PlayerController>().animator.SetTrigger("IsDead");
     }
 
     // 데미지를 입은 후 무적판정
