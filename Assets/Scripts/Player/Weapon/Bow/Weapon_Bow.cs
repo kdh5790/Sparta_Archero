@@ -31,6 +31,9 @@ public class Weapon_Bow : MonoBehaviour
     private bool isRage = false;
     public bool IsRage { get { return isRage; } set { isRage = value; } }
 
+
+    private const float KnockBackPower = 1f;
+
     public List<GameObject> enemyList = new List<GameObject>(); // 필드의 적들을 담을 리스트
     public GameObject target; // 공격해야 할 타겟
 
@@ -161,7 +164,7 @@ public class Weapon_Bow : MonoBehaviour
         enemyRb.gravityScale = 0;
         Vector2 direction = (enemy.transform.position - arrowPos).normalized;
 
-        enemyRb.AddForce(direction * 0.1f, ForceMode2D.Impulse);
+        enemyRb.AddForce(direction * KnockBackPower, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(0.2f);
 

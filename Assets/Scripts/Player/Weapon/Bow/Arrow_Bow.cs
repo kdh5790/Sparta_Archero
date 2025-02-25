@@ -81,6 +81,11 @@ public class Arrow_Bow : MonoBehaviour
 
             Debug.Log(isCritical ? $"적 충돌 | 크리티컬 데미지 : {damage}" : $"적 충돌 | 데미지 : {damage}");
 
+            BasicEnemyAI enemy = collision.GetComponent<BasicEnemyAI>();
+
+            if (enemy != null)
+                enemy.TakeDamage(damage);
+
             // 반동 스킬 보유 + 현재 튕긴 횟수가 2보다 작다면 다음 타겟 찾아 이동시킴
             if (bow.IsRebound && bound < 2)
             {
