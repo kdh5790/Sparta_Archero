@@ -39,6 +39,8 @@ public class Weapon_Bow : MonoBehaviour
     private Animator animator;
     private PlayerController playerController;
 
+    private IEnumerator[] skillCoroutineArr = new IEnumerator[2];
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -149,6 +151,8 @@ public class Weapon_Bow : MonoBehaviour
 
     public IEnumerator ApplyAttackSpeedAurora()
     {
+        skillCoroutineArr[0] = ApplyAttackSpeedAurora();
+
         while (PlayerManager.instance.stats.CurrentHealth > 0)
         {
             yield return new WaitForSeconds(9f);
@@ -163,9 +167,10 @@ public class Weapon_Bow : MonoBehaviour
         }
     }
 
-
     public IEnumerator ApplyCriticalAurora()
     {
+        skillCoroutineArr[1] = ApplyCriticalAurora();
+
         while (PlayerManager.instance.stats.CurrentHealth > 0)
         {
             yield return new WaitForSeconds(9f);
@@ -177,6 +182,16 @@ public class Weapon_Bow : MonoBehaviour
 
             criticalAuroraSprite.gameObject.SetActive(false);
             criticalChance -= 47;
+        }
+    }
+
+    // 스킬 코루틴 중단(사망 시 호출)
+    public void StopBowSkillCoroutine()
+    {
+        foreach (var skillCoroutine in skillCoroutineArr)
+        {
+            if(skillCoroutine != null)
+                StopCoroutine(skillCoroutine);
         }
     }
 }
