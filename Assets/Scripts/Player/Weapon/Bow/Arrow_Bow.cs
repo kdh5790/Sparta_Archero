@@ -81,7 +81,7 @@ public class Arrow_Bow : MonoBehaviour
 
             Debug.Log(isCritical ? $"利 面倒 | 农府萍拿 单固瘤 : {damage}" : $"利 面倒 | 单固瘤 : {damage}");
 
-            EnemyAI enemy = collision.GetComponent<EnemyAI>();
+            BasicEnemyAI enemy = collision.GetComponent<BasicEnemyAI>();
 
             if (enemy != null)
                 enemy.TakeDamage(damage);
