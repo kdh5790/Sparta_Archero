@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2620505088149454547}
   - component: {fileID: 6508645641267867557}
   - component: {fileID: 7746513367670101294}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 6794923255565672202}
   - component: {fileID: 2032215066364475772}
   - component: {fileID: 637332603155824910}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: weapon_bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3270447031228325280}
   - component: {fileID: 2731885452102592786}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: AttackSpeedAurora
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 164621112700324997}
   - component: {fileID: 2502294953713009733}
   - component: {fileID: 7713939704617529034}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -461,7 +461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4443226420609613297}
   - component: {fileID: 3404259181681864859}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CriticalAurora
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -544,7 +544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4815898142760915830}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1683741074637816514}
   - component: {fileID: 7457016298036767189}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ArrowPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,7 +6,7 @@ public class Arrow_Bow : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
     private Weapon_Bow bow;
-    public GameObject target;
+    public BasicEnemyAI target;
     public int DamageValue { get { return damage; } }   //enemy쪽에서 데미지 값 참조하려고 넣었습니다
 
     private int damage; // 데미지
@@ -94,7 +94,7 @@ public class Arrow_Bow : MonoBehaviour
                 {
                     bow.KnockBackEnemy(collision.transform, transform.position);
 
-                    float angle = PlayerManager.instance.arrowManager.LookAtTargetForArrow(target, transform);
+                    float angle = PlayerManager.instance.arrowManager.LookAtTargetForArrow(target.gameObject, transform);
                     transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
 
                     bound++;
