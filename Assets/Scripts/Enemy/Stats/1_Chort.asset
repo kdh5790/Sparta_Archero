@@ -17,4 +17,4 @@ MonoBehaviour:
   attack: 3
   defense: 1
   speed: 0.4
-  exp: 10000
+  exp: 80

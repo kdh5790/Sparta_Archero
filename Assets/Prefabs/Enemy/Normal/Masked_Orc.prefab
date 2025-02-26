@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 253
   m_Sprite: {fileID: 7482667652216324306, guid: 3a5c7eaac71efde409c19f8ef72fe714, type: 3}
   m_Color: {r: 1, g: 0.1462264, b: 0.1462264, a: 1}
   m_FlipX: 0
@@ -164,7 +164,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 252
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -296,7 +296,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 255
   m_Sprite: {fileID: 21300000, guid: cd1ec771c6d867842a048e3dcff04270, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -543,11 +543,11 @@ MonoBehaviour:
   speed: 3
   target: {fileID: 0}
   maxHealth: 800
-  exp: 50
+  exp: 90
   enemyAnimator: {fileID: 0}
   enemyStat: {fileID: 11400000, guid: 0656aa1f5e7d33e418d147e9b6be59e4, type: 2}
   instanceHealth: 800
   instanceAttack: 3
   instanceDefense: 1
   instanceSpeed: 0.7
-  instanceExp: 50
+  instanceExp: 90
