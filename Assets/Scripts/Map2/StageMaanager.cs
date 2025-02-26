@@ -14,13 +14,13 @@ public class StageMaanager : MonoBehaviour
 
     void Update()
     {
-        if (AreAllMonstersDead())
+        if (AreAllEnemysDead())
         {
             portal.SetActive(false); // 몬스터가 다 죽으면 포탈 활성화 test 끝나면 true로 바꾸기
         }
     }
 
-    bool AreAllMonstersDead()
+    bool AreAllEnemysDead()
     {
         return GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
     }
