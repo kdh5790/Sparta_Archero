@@ -208,6 +208,11 @@ public class UIManager : MonoBehaviour
 
     //Game 내부
 
+    public void UpdateClearTime(float time)
+    {
+        gameUI.UpdateClearTimeText(time);
+    }
+
     public void UpdatePlayerDungeon() //플레이어가 몇 스테이지에서 활동하는 지 확인용
     {
         gameUI.SetDungeonUI(dungeonState);

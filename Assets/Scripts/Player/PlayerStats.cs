@@ -30,6 +30,9 @@ public class PlayerStats : MonoBehaviour
     private bool isInvincivility; // 무적 판정 여부
     public bool IsInvincivility { get { return isInvincivility; } set { isInvincivility = value; } }
 
+    private float clearTime; //클리어 시간
+    public float ClearTime { get { return clearTime; } set { clearTime = value; } }
+
     private SpriteRenderer sprite;
     private IEnumerator invincibilityCoroutine;
 
@@ -38,6 +41,8 @@ public class PlayerStats : MonoBehaviour
     {
         level = 1; currentExp = 0; maxExp = 100; currentHealth = 600; maxHealth = 600; speed = 3f;
         sprite = GetComponentInChildren<SpriteRenderer>();
+
+        clearTime = 0.0f;
     }
 
     private void Update()
@@ -56,8 +61,13 @@ public class PlayerStats : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         if (!PlayerManager.instance.isDead)
         {
+            clearTime += Time.deltaTime;
+
+            if (UIManager.Instance != null)
+                UIManager.Instance.UpdateClearTime(clearTime);
             if (UIManager.Instance != null) // <-- 충돌나서 임시로 null 해뒀어요.
                 UIManager.Instance.UpdatePlayerHP(maxHealth, currentHealth); //플레이어 ui 업데이트용
             if (UIManager.Instance != null) // <-- 충돌나서 임시로 null 해뒀어요.
