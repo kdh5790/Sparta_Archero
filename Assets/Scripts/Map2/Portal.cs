@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class Portal : MonoBehaviour
 {
     private string[] stageOrder = {
-        "Stage_1-1", "Stage_1-2", "Stage_1-3", "Stage_1-4",
-        "Stage_2-Box","Stage_3-1", "Stage_3-2", "Stage_3-3", "Stage_3-4",
-        "Stage_4-Boss1", 
-        "Stage_5-1", "Stage_5-2", "Stage_5-3", "Stage_5-4",
-        "Stage_6-Box", "Stage_7-1", "Stage_7-2", "Stage_7-3", "Stage_7-4",
-        "Stage_8-Boss2"
+        "Stage_1", "Stage_2", "Stage_3", "Stage_4",
+        "Stage_5","Stage_6", "Stage_7", "Stage_8", "Stage_9",
+        "Stage_Boss", 
+        "Stage_11", "Stage_12", "Stage_13", "Stage_14",
+        "Stage_15", "Stage_16", "Stage_17", "Stage_18", "Stage_19",
+        "Stage_Last Boss"
     };
 
     private void OnTriggerEnter2D(Collider2D other)
