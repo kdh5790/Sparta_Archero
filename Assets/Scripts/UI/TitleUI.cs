@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TitleUI : BaseUI
 {
     Button startBtn;
+    Button optionBtn;
     Button exitBtn;
 
     protected override UIState GetUIState()
@@ -19,9 +20,11 @@ public class TitleUI : BaseUI
 
         startBtn = transform.Find("StartButton").GetComponent<Button>();
         exitBtn = transform.Find("ExitButton").GetComponent<Button>();
+        optionBtn = transform.Find("OptionButton").GetComponent<Button>();
 
         startBtn.onClick.AddListener(OnClickStartButton);
         exitBtn.onClick.AddListener(OnClickExitButton);
+        optionBtn.onClick.AddListener(OnClickOptionButton);
 
     }
 
@@ -34,5 +37,10 @@ public class TitleUI : BaseUI
     public void OnClickExitButton()
     {
         uiManager.OnClickExit();
+    }
+
+    public void OnClickOptionButton()
+    {
+        Debug.Log("¹Ì±¸Çö");
     }
 }
