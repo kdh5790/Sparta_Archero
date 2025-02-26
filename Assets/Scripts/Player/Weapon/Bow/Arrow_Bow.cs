@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,14 +7,14 @@ public class Arrow_Bow : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Weapon_Bow bow;
     public BasicEnemyAI target;
-    public int DamageValue { get { return damage; } }   //enemyÂÊ¿¡¼­ µ¥¹ÌÁö °ª ÂüÁ¶ÇÏ·Á°í ³Ö¾ú½À´Ï´Ù
+    public int DamageValue { get { return damage; } }   //enemyìª½ì—ì„œ ë°ë¯¸ì§€ ê°’ ì°¸ì¡°í•˜ë ¤ê³  ë„£ì—ˆìŠµë‹ˆë‹¤
 
-    private int damage; // µ¥¹ÌÁö
-    private int bound = 0; // ¹İµ¿ È½¼ö
-    private bool isPiercing = false; // °üÅë ½ºÅ³ º¸À¯ ½Ã °üÅë È®ÀÎ¿ë
+    private int damage; // ë°ë¯¸ì§€
+    private int bound = 0; // ë°˜ë™ íšŸìˆ˜
+    private bool isPiercing = false; // ê´€í†µ ìŠ¤í‚¬ ë³´ìœ  ì‹œ ê´€í†µ í™•ì¸ìš©
 
-    private const float arrowSpeed = 12f; // È­»ì ¼Óµµ
-    private const float maxDistance = 15f; // ÇÃ·¹ÀÌ¾î¿Í È­»ìÀÇ ÃÖ´ë °Å¸®(ÃÖ´ë °Å¸®¸¦ ³Ñ¾î°¡¸é È­»ì ºñÈ°¼ºÈ­)
+    private const float arrowSpeed = 12f; // í™”ì‚´ ì†ë„
+    private const float maxDistance = 15f; // í”Œë ˆì´ì–´ì™€ í™”ì‚´ì˜ ìµœëŒ€ ê±°ë¦¬(ìµœëŒ€ ê±°ë¦¬ë¥¼ ë„˜ì–´ê°€ë©´ í™”ì‚´ ë¹„í™œì„±í™”)
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class Arrow_Bow : MonoBehaviour
     {
         MoveToTarget();
 
-        // ÇÃ·¹ÀÌ¾î¿Í ÀÏÁ¤ °Å¸® ÀÌ»ó ¸Ö¾îÁ³´Ù¸é È­»ì È¸¼ö(ÀÏÁ¤°Å¸®´Â ¸Ê Å©±âº¸´Ù Å©°Ô ¼³Á¤)
+        // í”Œë ˆì´ì–´ì™€ ì¼ì • ê±°ë¦¬ ì´ìƒ ë©€ì–´ì¡Œë‹¤ë©´ í™”ì‚´ íšŒìˆ˜(ì¼ì •ê±°ë¦¬ëŠ” ë§µ í¬ê¸°ë³´ë‹¤ í¬ê²Œ ì„¤ì •)
         if (Vector3.Distance(transform.parent.position, transform.position) > maxDistance)
             GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
     }
@@ -39,7 +39,7 @@ public class Arrow_Bow : MonoBehaviour
         if (bow != null) target = bow.target;
     }
 
-    // Å¸°Ù ¹æÇâÀ¸·Î ÀÌµ¿
+    // íƒ€ê²Ÿ ë°©í–¥ìœ¼ë¡œ ì´ë™
     private void MoveToTarget()
     {
         rigidBody.velocity = transform.up * arrowSpeed;
@@ -49,20 +49,37 @@ public class Arrow_Bow : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            // Å©¸®Æ¼ÄÃ ¿©ºÎ È®ÀÎ
+            BasicEnemyAI enemy = collision.GetComponent<BasicEnemyAI>();
+
+            // í—¤ë“œìƒ· ì—¬ë¶€ í™•ì¸
+            if (enemy != null && bow.IsHeadShot && !enemy.IsHeadShot)
+            {
+                if (Random.Range(0, 100) < 12)
+                {
+                    enemy.TakeDamage((int)enemy.maxHealth);
+                    Debug.Log("í—¤ë“œìƒ· O");
+                }
+                else
+                    Debug.Log("í—¤ë“œìƒ· X");
+
+                enemy.IsHeadShot = true;
+            }
+
+            // í¬ë¦¬í‹°ì»¬ ì—¬ë¶€ í™•ì¸
             bool isCritical = bow.CalculateCriticalChance();
 
-            // Å©¸®Æ¼ÄÃ or ÀÏ¹İ µ¥¹ÌÁö ÁÖ±â
+            // í¬ë¦¬í‹°ì»¬ or ì¼ë°˜ ë°ë¯¸ì§€ ì£¼ê¸°
             if (isCritical)
                 damage = (int)(bow.Damage * bow.CriticalDamage);
 
             else
                 damage = bow.Damage;
 
+            // ë¶„ë…¸ ìŠ¤í‚¬ ë³´ìœ  ì‹œ ë°ë¯¸ì§€ ê³„ì‚°
             if (bow.IsRage)
                 CalculateRageDamage();
 
-            // ¹İµ¿ È½¼ö¿¡ µû¶ó µ¥¹ÌÁö °¨¼Ò(ÃÖ´ë 2)
+            // ë°˜ë™ íšŸìˆ˜ì— ë”°ë¼ ë°ë¯¸ì§€ ê°ì†Œ(ìµœëŒ€ 2)
             if (bound > 0)
             {
                 for (int i = 0; i < bound; i++)
@@ -71,22 +88,21 @@ public class Arrow_Bow : MonoBehaviour
                 }
             }
 
-            // ÀÌÀü¿¡ ÀûÀ» °üÅë Çß´Ù¸é µ¥¹ÌÁö °¨¼Ò
+            // ì´ì „ì— ì ì„ ê´€í†µ í–ˆë‹¤ë©´ ë°ë¯¸ì§€ ê°ì†Œ
             if (isPiercing)
                 damage = (int)(damage * 0.67f);
 
-            // ¸ÖÆ¼¼¦ ½ºÅ³À» º¸À¯ÁßÀÌ¶ó¸é ÃÖÁ¾ µ¥¹ÌÁö 10% °¨¼Ò
+            // ë©€í‹°ìƒ· ìŠ¤í‚¬ì„ ë³´ìœ ì¤‘ì´ë¼ë©´ ìµœì¢… ë°ë¯¸ì§€ 10% ê°ì†Œ
             if (bow.IsMultiShot)
                 damage = (int)(damage * 0.9f);
 
-            Debug.Log(isCritical ? $"Àû Ãæµ¹ | Å©¸®Æ¼ÄÃ µ¥¹ÌÁö : {damage}" : $"Àû Ãæµ¹ | µ¥¹ÌÁö : {damage}");
+            Debug.Log(isCritical ? $"ì  ì¶©ëŒ | í¬ë¦¬í‹°ì»¬ ë°ë¯¸ì§€ : {damage}" : $"ì  ì¶©ëŒ | ë°ë¯¸ì§€ : {damage}");
 
-            BasicEnemyAI enemy = collision.GetComponent<BasicEnemyAI>();
-
+            // ì ì—ê²Œ ë°ë¯¸ì§€ ì£¼ê¸°
             if (enemy != null)
                 enemy.TakeDamage(damage);
 
-            // ¹İµ¿ ½ºÅ³ º¸À¯ + ÇöÀç Æ¨±ä È½¼ö°¡ 2º¸´Ù ÀÛ´Ù¸é ´ÙÀ½ Å¸°Ù Ã£¾Æ ÀÌµ¿½ÃÅ´
+            // ë°˜ë™ ìŠ¤í‚¬ ë³´ìœ  + í˜„ì¬ íŠ•ê¸´ íšŸìˆ˜ê°€ 2ë³´ë‹¤ ì‘ë‹¤ë©´ ë‹¤ìŒ íƒ€ê²Ÿ ì°¾ì•„ ì´ë™ì‹œí‚´
             if (bow.IsRebound && bound < 2)
             {
                 target = bow.FindTarget(transform, collision.gameObject);
@@ -103,7 +119,7 @@ public class Arrow_Bow : MonoBehaviour
                 }
             }
 
-            // °üÅë¼¦ ½ºÅ³À» º¸À¯ÇÏÁö ¾Ê¾Ò´Ù¸é µ¥¹ÌÁö¸¦ ÀÔÈù ÈÄ È­»ì ºñÈ°¼ºÈ­
+            // ê´€í†µìƒ· ìŠ¤í‚¬ì„ ë³´ìœ í•˜ì§€ ì•Šì•˜ë‹¤ë©´ ì  ë„‰ë°± í›„ í™”ì‚´ ë¹„í™œì„±í™”
             if (!bow.IsPiercingShot)
             {
                 bow.KnockBackEnemy(collision.transform, transform.position);
@@ -113,9 +129,14 @@ public class Arrow_Bow : MonoBehaviour
 
             isPiercing = true;
         }
+        // ë²½ê³¼ ì¶©ëŒ í–ˆì„ ì‹œ í™”ì‚´ íšŒìˆ˜
+        else if (collision.name.Contains("Wall") || collision.name.Contains("BackCollision"))
+        {
+            GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
+        }
     }
 
-    // ºĞ³ë ½ºÅ³ º¸À¯ ½Ã µ¥¹ÌÁö °è»ê
+    // ë¶„ë…¸ ìŠ¤í‚¬ ë³´ìœ  ì‹œ ë°ë¯¸ì§€ ê³„ì‚°
     private void CalculateRageDamage()
     {
         float currentHP = PlayerManager.instance.stats.CurrentHealth;
@@ -126,6 +147,4 @@ public class Arrow_Bow : MonoBehaviour
 
         damage = (int)(damage * percentage);
     }
-
-
 }
