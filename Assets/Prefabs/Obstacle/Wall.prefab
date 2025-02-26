@@ -275,7 +275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 487133847330858022}
   - component: {fileID: 2637001344125620814}
-  - component: {fileID: 6316765693094411945}
+  - component: {fileID: 40634569523471667}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -337,8 +337,8 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!19719996 &6316765693094411945
-TilemapCollider2D:
+--- !u!60 &40634569523471667
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -370,6 +370,24 @@ TilemapCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.6964658, y: 0.028538913}
+      - {x: 1.7221336, y: -0.73479754}
+      - {x: 0.45742652, y: -0.7049534}
+      - {x: -0.7131913, y: -0.73009384}
+      - {x: -0.7235981, y: 0.00404799}
+      - {x: -0.9510564, y: 0.017927378}
+      - {x: -0.9620432, y: -2.0357518}
+      - {x: 1.9808573, y: -2.0149598}
+      - {x: 2.011454, y: 0.05951178}
   m_UseDelaunayMesh: 0
