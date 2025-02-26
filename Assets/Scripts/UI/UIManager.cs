@@ -52,6 +52,8 @@ public class UIManager : MonoBehaviour
     static UIManager instance;
 
     private IEnumerator coroutine;
+
+    public bool isComplete = false; // 스킬 선택 완료 확인용
     public static UIManager Instance
     {
         get
@@ -222,12 +224,14 @@ public class UIManager : MonoBehaviour
 
     public void LevelUpUI() //레벨업 기능 구현
     {
+        isComplete = false;
         coroutine = WaitAndPrint(0.5f); //반환값 IEnumerator를 저장해둔다.
         StartCoroutine(coroutine); //0.5초가 지난후 레벨업 시작
     }
 
     public void OnClickSkillSelected()
     {
+        isComplete = true;
         Debug.Log("스킬선택완료");
         ChangeState(UIState.Game); //레벨업시 스킬 얻는 과정을 거친 후 다시 인게임 ui on
     }

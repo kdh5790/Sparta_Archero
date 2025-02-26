@@ -99,20 +99,27 @@ public class PlayerStats : MonoBehaviour
 
         if (currentExp >= maxExp)
         {
-            LevelUp();
+            StartCoroutine(LevelUpCoroutine());
         }
     }
 
-    // 레벨업
-    private void LevelUp()
+    private IEnumerator LevelUpCoroutine()
     {
-        currentExp -= maxExp;
-        maxExp *= 1.2f;
+        int levelUps = 0;
+        while (currentExp >= maxExp)
+        {
+            currentExp -= maxExp;
+            maxExp *= 1.2f;
+            level++;
+            levelUps++;
+            Debug.Log($"레벨업! Lv.{level}, MaxExp:{maxExp}");
+        }
 
-        level++;
-
-        UIManager.Instance.LevelUpUI();// 스킬 획득 UI ON
-        Debug.Log($"레벨업! Lv.{level}, MaxExp:{maxExp}");
+        for (int i = 0; i < levelUps; i++)
+        {
+            UIManager.Instance.LevelUpUI();
+            yield return new WaitUntil(() => UIManager.Instance.isComplete);
+        }
     }
 
     // 플레이어 사망 시 호출
