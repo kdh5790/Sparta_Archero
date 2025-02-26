@@ -342,4 +342,27 @@ public class UIManager : MonoBehaviour
         ChangeState(prevState);
     }
 
+    //BossReward 내부
+    public void GetBossReward()
+    {
+        isComplete = false;
+        coroutine = BossRewardDelay(0.8f);
+        StartCoroutine(coroutine);
+    }
+    public void OnClickBossSelected()
+    {
+        isComplete = true;
+        ChangeState(UIState.Game);
+        Debug.Log("스킬선택완료");
+    }
+    private IEnumerator BossRewardDelay(float waitTime)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(waitTime); //waitTime 만큼 딜레이후 다음 코드가 실행된다.
+            ChangeState(UIState.BossReward);
+            bossRewardUI.SkillSelectOn();
+            break;
+        }
+    }
 }

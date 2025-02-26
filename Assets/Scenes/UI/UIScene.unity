@@ -942,6 +942,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2505a77ac84cd43920872e9ca88276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skill1NameTxt: {fileID: 632277817}
+  skill1DescriptionTxt: {fileID: 1641491074}
+  skill2NameTxt: {fileID: 1046080045}
+  skill2DescriptionTxt: {fileID: 1974874462}
+  skill3NameTxt: {fileID: 636820606}
+  skill3DescriptionTxt: {fileID: 606986530}
 --- !u!1 &179781879
 GameObject:
   m_ObjectHideFlags: 0

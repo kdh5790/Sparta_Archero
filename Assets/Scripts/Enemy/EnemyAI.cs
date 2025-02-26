@@ -28,6 +28,9 @@ public abstract class EnemyAI : MonoBehaviour
 
     private bool isDealingDamage = false;  // 현재 데미지를 주고 있는지 확인
 
+    public bool isBoss; //유니티나 매서드에서 할당
+    public bool isFinalBoss; //유니티나 매서드에서 할당
+
     protected virtual void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -117,6 +120,16 @@ public abstract class EnemyAI : MonoBehaviour
         }
 
         GiveExpToPlayer();
+
+        if(isBoss) //만약 해당 몬스터가 보스 몬스터라면
+        {
+            UIManager.Instance.GetBossReward(); //보스 보상을 주세요
+        }
+
+        if(isFinalBoss) //만약 해당 몬스터가 던전 마지막 몬스터라면
+        {
+            //클리어 화면을 보여주세요
+        }
 
         Destroy(gameObject, 2f);
     }

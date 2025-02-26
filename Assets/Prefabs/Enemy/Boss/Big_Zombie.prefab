@@ -439,6 +439,8 @@ MonoBehaviour:
   maxHealth: 1100
   exp: 150
   enemyAnimator: {fileID: 0}
+  isBoss: 1
+  isFinalBoss: 0
   enemyStat: {fileID: 11400000, guid: 05ce6be38216c2841a87e27441d70718, type: 2}
   instanceHealth: 1100
   instanceAttack: 9

@@ -477,6 +477,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6497150477120774211, guid: 0598440c6a4256646bf918310ad83dc5, type: 3}
+      propertyPath: isBoss
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497150477120774211, guid: 0598440c6a4256646bf918310ad83dc5, type: 3}
+      propertyPath: isFinalBoss
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8543468412467932008, guid: 0598440c6a4256646bf918310ad83dc5, type: 3}
       propertyPath: m_Name
       value: Big_Zombie
