@@ -18,7 +18,8 @@ public enum UIState
     ChestReward, //6
     BossReward, //7
     Pause, //8
-    Setting //9
+    Setting, //9
+    ColorChange //10
 }
 
 public enum DungeonState
@@ -47,6 +48,7 @@ public class UIManager : MonoBehaviour
     BossRewardUI bossRewardUI = null;
     PauseUI pauseUI = null;
     SettingUI settingUI = null;
+    ChangeColorUI changeColorUI = null;
 
     GameObject Dungeon1 = null;
 
@@ -105,6 +107,8 @@ public class UIManager : MonoBehaviour
         pauseUI?.Init(this);
         settingUI = GetComponentInChildren<SettingUI>(true);
         settingUI?.Init(this);
+        changeColorUI = GetComponentInChildren<ChangeColorUI>(true);
+        changeColorUI?.Init(this);
 
         Dungeon1 = transform.Find("LobbyUI").transform.Find("Dungeon1").gameObject; //stage1과 stage2 ui 오브젝트를 찾아줘서 할당
         Dungeon2 = transform.Find("LobbyUI").transform.Find("Dungeon2").gameObject; //transform.Find로 찾아 들어가 주는 게 포인트
@@ -126,6 +130,7 @@ public class UIManager : MonoBehaviour
         bossRewardUI?.SetActive(currentState);
         pauseUI?.SetActive(currentState);
         settingUI?.SetActive(currentState);
+        changeColorUI.SetActive(currentState);
     }
 
     public void ChangeDungeonState(DungeonState state) //아래에서 해당하는 stage를 찾아서 on off 해줌
@@ -191,7 +196,15 @@ public class UIManager : MonoBehaviour
             ChangeDungeonState(dungeonState - 1); //이전 스테이지로
         }
     }
+    public void OnClickChangeColor()
+    {
+        ChangeState(UIState.ColorChange);
+    }
 
+    public void OnClickChangeColorCancel()
+    {
+        ChangeState(UIState.Lobby);
+    }
 
     //Game 내부
 
