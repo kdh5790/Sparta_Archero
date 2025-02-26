@@ -86,7 +86,7 @@ public class Weapon_Bow : MonoBehaviour
         foreach (BasicEnemyAI obj in enemyList)
         {
             // 화살의 다음타겟을 찾을 경우 현재 자신(화살)의 타겟은 넘어가기
-            if (_enemy != null && obj.name == _enemy.name || obj.IsDead)
+            if (_enemy != null && obj.gameObject.GetInstanceID() == _enemy.GetInstanceID() || obj.IsDead)
                 continue;
 
             float distance = 0;
