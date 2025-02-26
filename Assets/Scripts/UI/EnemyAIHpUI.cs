@@ -26,6 +26,7 @@ public class EnemyAIHpUI : MonoBehaviour
         {
             cup = 0;
         }
+
         hpFront.localScale = new Vector3(cup, temp.y, temp.z);
     }
 
