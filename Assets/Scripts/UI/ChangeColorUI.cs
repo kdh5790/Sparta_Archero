@@ -22,13 +22,10 @@ public class ChangeColorUI : BaseUI
     public override void Init(UIManager uiManager)
     {
         base.Init(uiManager);
-        redSlider.value = 1;
         redSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
 
-        greenSlider.value = 1;
         greenSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
 
-        blueSlider.value = 1;
         blueSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
 
         applyBtn = transform.Find("ApplyButton").GetComponent<Button>();
@@ -39,7 +36,14 @@ public class ChangeColorUI : BaseUI
 
         noticeObj.SetActive(false);
 
+    }
+
+    private void OnEnable()
+    {
         playerImage.color = DataManager.Instance.LoadColor();
+        redSlider.value = playerImage.color.r;
+        greenSlider.value = playerImage.color.g;
+        blueSlider.value = playerImage.color.b;
     }
 
     void UpdateColor()
