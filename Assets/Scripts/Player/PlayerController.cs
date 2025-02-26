@@ -41,7 +41,8 @@ public class PlayerController : MonoBehaviour
         else
             stopTime = 0;
 
-        UIManager.Instance.UpdatePlayerUIPosition(rigidBody.position); //플레이어 HP Bar UI 추적용
+        if (UIManager.Instance != null)
+            UIManager.Instance.UpdatePlayerUIPosition(rigidBody.position); //플레이어 HP Bar UI 추적용
     }
 
     void Move()
