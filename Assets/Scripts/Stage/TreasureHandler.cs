@@ -18,16 +18,16 @@ public class AnimationHandler : MonoBehaviour
     private void Update()
     {
         //플레이어의 위치를 가져오고, 플레이어가 상자에 다가가면 OpenTreasure메서드가 실행되도록 함
-        //GameObject player = GameObject.FindWithTag("player");
+        GameObject player = GameObject.FindWithTag("player");
 
-        //if (player != null)
-        //{
-        //    float distance = Vector3.Distance(player.transform.position, transform.position);
+        if (player != null)
+        {
+            float distance = Vector3.Distance(player.transform.position, transform.position);
 
-        //    if (distance < interactionDistance && !isOpen)
-        //        OpenTreasure();
-           
-        //}
+            if (distance < interactionDistance && !isOpen)
+                OpenTreasure();
+
+        }
     }
 
     public void OpenTreasure()
