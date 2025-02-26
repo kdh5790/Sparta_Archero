@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
-    private Animator animator;
+    public Animator animator;
     private SpriteRenderer playerSprite;
 
     private Vector2 moveVelocity;
@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (PlayerManager.instance.isDead) return;
+
         Move();
 
         if (!isMove)
@@ -39,7 +41,8 @@ public class PlayerController : MonoBehaviour
         else
             stopTime = 0;
 
-        UIManager.Instance.UpdatePlayerUIPosition(rigidBody.position); //플레이어 HP Bar UI 추적용
+        if (UIManager.Instance != null)
+            UIManager.Instance.UpdatePlayerUIPosition(rigidBody.position); //플레이어 HP Bar UI 추적용
     }
 
     void Move()

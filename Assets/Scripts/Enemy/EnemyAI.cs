@@ -1,73 +1,137 @@
-// EnemyAI.cs
+ï»¿using System.Collections;
 using UnityEngine;
+using Utils;  // TargetingUtils ë„¤ì„ìŠ¤í˜ì´ìŠ¤
 
 public abstract class EnemyAI : MonoBehaviour
 {
-    public Transform player;              // ÇÃ·¹ÀÌ¾î À§Ä¡
-    public float moveSpeed = 3.0f;          // ÀÌµ¿ ¼Óµµ
-    public float chaseDistance = 10.0f;     // ÃßÀû °Å¸®
-    public float attackDistance = 2.0f;     // °ø°İ °Å¸®
-    public float attackCooldown = 1.0f;     // °ø°İ ÄğÅ¸ÀÓ
+    [Header("Enemy Settings")]
+    public float speed = 3f;
+    public Transform target;
 
-    protected float attackTimer = 0f;
+    [Header("Damage Settings")]
+    public float maxHealth = 100;
+    protected float currentHealth;
+    public int exp = 10;    //ëª¬ìŠ¤í„°ë³„ ê²½í—˜ì¹˜ ê¸°ë³¸ê°’
+    public Animator enemyAnimator;
+
+    public float CurrentHealth => currentHealth;
+    public float MaxHealth => maxHealth;
+
+    protected bool isDead = false;
+    public bool IsDead => isDead;
+
+    protected bool isHeadShot = false;
+    public bool IsHeadShot => isHeadShot;
+
+    protected Rigidbody2D rigid;
+    protected SpriteRenderer spriter;
+
+    private bool isDealingDamage = false;  // í˜„ì¬ ë°ë¯¸ì§€ë¥¼ ì£¼ê³  ìˆëŠ”ì§€ í™•ì¸
+
+    protected virtual void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        spriter = GetComponentInChildren<SpriteRenderer>();
+
+        if (target == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+                target = playerObj.transform;
+        }
+    }
 
     protected virtual void Start()
     {
-        // "Player" ÅÂ±×°¡ ºÙÀº ¿ÀºêÁ§Æ® Ã£±â
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-            player = playerObj.transform;
-
-        // EnemyManager¿¡ ÀÚ½Å µî·Ï (¾À¿¡ EnemyManager°¡ ÀÖ¾î¾ß ÇÔ)
-        EnemyManager enemyManager = FindObjectOfType<EnemyManager>();
-        if (enemyManager != null)
-            enemyManager.RegisterEnemy(this);
+        currentHealth = maxHealth;
+        if (enemyAnimator == null)
+            enemyAnimator = GetComponentInChildren<Animator>();
     }
 
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
-        if (player == null)
-            return;
-
-        float distance = Vector3.Distance(transform.position, player.position);
-        if (distance <= chaseDistance)
-            ChasePlayer(distance);
+        if (isDead || target == null) return;
+        MoveTowardsTarget();
     }
 
-    protected virtual void ChasePlayer(float distance)
+    protected virtual void LateUpdate()
     {
-        transform.LookAt(player);
-        if (distance > attackDistance)
+        if (isDead || target == null) return;
+        spriter.flipX = target.position.x < transform.position.x;
+    }
+
+    public virtual void MoveTowardsTarget()
+    {
+        Vector3 direction = TargetingUtils.GetDirection(transform, target);
+        Vector3 movement = direction * speed * Time.fixedDeltaTime;
+        rigid.MovePosition(rigid.position + (Vector2)movement);
+    }
+
+    // í”Œë ˆì´ì–´ì™€ ì¶©ëŒ ì¤‘ì¼ ë•Œ ì¼ì • ê°„ê²©ìœ¼ë¡œ ë°ë¯¸ì§€ë¥¼ ì¤Œ
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!isDead && collision.CompareTag("Player"))
         {
-            MoveTowardsPlayer();
-        }
-        else
-        {
-            if (attackTimer <= 0f)
+            PlayerStats playerStats = collision.GetComponent<PlayerStats>();
+            if (playerStats != null && !isDealingDamage)
             {
-                Attack();
-                attackTimer = attackCooldown;
+                playerStats.OnDamaged(120);
             }
         }
-
-        if (attackTimer > 0f)
-            attackTimer -= Time.deltaTime;
     }
 
-    protected virtual void MoveTowardsPlayer()
+
+    // ëª¬ìŠ¤í„°ê°€ ë°ë¯¸ì§€ë¥¼ ë°›ìŒ
+    public virtual void TakeDamage(int damage)
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+        if (isDead) return;
+
+        currentHealth -= damage;
+        Debug.Log($"{gameObject.name} took damage: {damage}. Remaining health: {currentHealth}");
+
+        if (enemyAnimator != null)
+        {
+            enemyAnimator.SetTrigger("Hit");
+        }
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
-    // °¢ Àû¸¶´Ù ´Ù¸£°Ô ±¸ÇöÇÒ °ø°İ ¹æ½Ä
-    protected abstract void Attack();
-
-
-    private void OnDestroy()
+    protected virtual void Die()
     {
-        // ÆÄ±«µÉ ¶§ EnemyManager¿¡¼­ ÀÚ½Å Á¦°Å
-        EnemyManager enemyManager = FindObjectOfType<EnemyManager>();
-        if (enemyManager != null)
-            enemyManager.UnregisterEnemy(this);
+        if (isDead) return;
+        isDead = true;
+
+        if (enemyAnimator != null)
+        {
+            enemyAnimator.SetTrigger("Die");
+        }
+
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null)
+        {
+            col.enabled = false;
+        }
+
+        GiveExpToPlayer();
+
+        Destroy(gameObject, 2f);
+    }
+
+
+    //í”Œë ˆì´ì–´ì—ê²Œ ê²½í—˜ì¹˜ ì£¼ê¸°
+    private void GiveExpToPlayer()
+    {
+        if (target != null)
+        {
+            PlayerStats playerStats = target.GetComponent<PlayerStats>();
+            if (playerStats != null)
+            {
+                playerStats.IncreaseExp(exp);
+            }
+        }
     }
 }

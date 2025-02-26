@@ -5,13 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Portal
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - EnemyObstacle
   - Water
   - UI
+  - Player
   - 
   - 
   - 
@@ -22,7 +24,6 @@ TagManager:
   - 
   - 
   - 
-  - Enemy
   - 
   - 
   - 

@@ -31,6 +31,7 @@ public class PlayerStats : MonoBehaviour
     public bool IsInvincivility { get { return isInvincivility; } set { isInvincivility = value; } }
 
     private SpriteRenderer sprite;
+    private IEnumerator invincibilityCoroutine;
 
     public void InitPlayerStats()
     {
@@ -42,7 +43,24 @@ public class PlayerStats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            OnDamaged(30);
+            OnDamaged(300);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P)) //ui 테스트용입니다
+        {
+            IncreaseExp(30);
+        }
+
+    }
+
+    private void FixedUpdate()
+    {
+        if (!PlayerManager.instance.isDead)
+        {
+            if (UIManager.Instance != null) // <-- 충돌나서 임시로 null 해뒀어요.
+                UIManager.Instance.UpdatePlayerHP(maxHealth, currentHealth); //플레이어 ui 업데이트용
+            if (UIManager.Instance != null) // <-- 충돌나서 임시로 null 해뒀어요.
+                UIManager.Instance.UpdatePlayerExp(maxExp, currentExp); //플레이어 ui 업데이트용
         }
     }
 
@@ -66,21 +84,53 @@ public class PlayerStats : MonoBehaviour
         if (currentHealth <= 0)
         {
             PlayerDead();
+            return;
         }
 
-        UIManager.Instance.UpdatePlayerHP(maxHealth,currentHealth); //플레이어 ui 업데이트용
-
         StartCoroutine(ApplyInvincibilityAfterDamage());
+    }
+
+    public void IncreaseExp(int exp)
+    {
+        currentExp += exp;
+
+        if (currentExp >= maxExp)
+        {
+            LevelUp();
+        }
+    }
+
+    private void LevelUp()
+    {
+        currentExp -= maxExp;
+        maxExp *= 1.2f;
+
+        level++;
+
+        UIManager.Instance.LevelUpUI();// 스킬 획득 UI ON
+        Debug.Log($"레벨업! Lv.{level}, MaxExp:{maxExp}");
     }
 
     public void PlayerDead()
     {
         Debug.Log("플레이어 사망");
+        PlayerManager.instance.isDead = true;
+        StartCoroutine(PlayerSpriteColorChange());
+        GetComponent<PlayerController>().animator.speed = 0;
+
+        if (invincibilityCoroutine != null)
+            StopCoroutine(invincibilityCoroutine);
+
+        PlayerManager.instance.bow.StopBowSkillCoroutine();
+
+        UIManager.Instance.GameOverUI(); //Game Over UI 호출
     }
 
     // 데미지를 입은 후 무적판정
     public IEnumerator ApplyInvincibilityAfterDamage()
     {
+        invincibilityCoroutine = ApplyInvincibilityAfterDamage();
+
         IsInvincivility = true;
 
         int count = 3; // 깜빡일 횟수
@@ -103,8 +153,6 @@ public class PlayerStats : MonoBehaviour
     {
         while (currentHealth > 0)
         {
-            IsInvincivility = false;
-
             yield return new WaitForSeconds(10f);
 
             Debug.Log("무적 적용");
@@ -117,5 +165,25 @@ public class PlayerStats : MonoBehaviour
             IsInvincivility = false;
             sprite.color = Color.white;
         }
+    }
+
+    public IEnumerator PlayerSpriteColorChange()
+    {
+        Debug.Log("asdsa");
+
+        float duration = 1f; // 색상 변경에 걸리는 시간
+        float time = 0f;
+        Color startColor = sprite.color;
+        Color targetColor = Color.black;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+            sprite.color = Color.Lerp(startColor, targetColor, t);
+            yield return null;
+        }
+
+        sprite.color = targetColor;
     }
 }
