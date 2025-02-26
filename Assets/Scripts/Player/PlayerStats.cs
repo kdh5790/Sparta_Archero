@@ -141,6 +141,8 @@ public class PlayerStats : MonoBehaviour
     // 데미지를 입은 후 무적판정
     public IEnumerator ApplyInvincibilityAfterDamage()
     {
+        Color currentColor = sprite.color;
+
         invincibilityCoroutine = ApplyInvincibilityAfterDamage();
 
         IsInvincivility = true;
@@ -152,11 +154,11 @@ public class PlayerStats : MonoBehaviour
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0.2f);
             yield return new WaitForSeconds(0.1f);
 
-            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
+            sprite.color = currentColor;
             yield return new WaitForSeconds(0.1f);
         }
 
-        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
+        sprite.color = currentColor;
         IsInvincivility = false;
     }
 
@@ -165,6 +167,8 @@ public class PlayerStats : MonoBehaviour
     {
         while (currentHealth > 0)
         {
+            Color currentColor = sprite.color;
+
             yield return new WaitForSeconds(10f);
 
             Debug.Log("무적 적용");
@@ -175,7 +179,7 @@ public class PlayerStats : MonoBehaviour
 
             Debug.Log("무적 해제");
             IsInvincivility = false;
-            sprite.color = Color.white;
+            sprite.color = currentColor;
         }
     }
 
