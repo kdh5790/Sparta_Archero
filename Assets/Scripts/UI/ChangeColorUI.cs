@@ -40,10 +40,15 @@ public class ChangeColorUI : BaseUI
 
     private void OnEnable()
     {
-        playerImage.color = DataManager.Instance.LoadColor();
-        redSlider.value = playerImage.color.r;
-        greenSlider.value = playerImage.color.g;
-        blueSlider.value = playerImage.color.b;
+        Color loadColor = DataManager.Instance.LoadColor();
+
+        redSlider.value = loadColor.r;
+
+        greenSlider.value = loadColor.g;
+
+        blueSlider.value = loadColor.b;
+
+        UpdateColor();
     }
 
     void UpdateColor()
