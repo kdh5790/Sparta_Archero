@@ -14,8 +14,6 @@ public class ChangeColorUI : BaseUI
     private Button applyBtn = null;
     private Button backBtn = null;
 
-
-
     protected override UIState GetUIState()
     {
         return UIState.ColorChange;
@@ -34,17 +32,33 @@ public class ChangeColorUI : BaseUI
         blueSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
 
         applyBtn = transform.Find("ApplyButton").GetComponent<Button>();
+        applyBtn.onClick.AddListener(OnClickApplyButton);
 
         backBtn = transform.Find("BackButton").GetComponent<Button>();
         backBtn.onClick.AddListener(OnClickCancelButton);
 
         noticeObj.SetActive(false);
+
+        playerImage.color = DataManager.Instance.LoadColor();
     }
 
     void UpdateColor()
     {
         Color newColor = new Color(redSlider.value, greenSlider.value, blueSlider.value);
         playerImage.color = newColor;
+    }
+
+    void OnClickApplyButton()
+    {
+        StartCoroutine(OnNoticeUI());
+
+        if (DataManager.Instance == null)
+        {
+            Debug.Log("DataManager를 찾지 못했습니다.");
+            return; 
+        }
+
+        DataManager.Instance.SaveColor(playerImage.color);
     }
 
     void OnClickCancelButton()
