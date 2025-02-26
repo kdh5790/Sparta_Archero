@@ -97,7 +97,7 @@ public class Arrow_Bow : MonoBehaviour
                 damage = (int)(damage * 0.9f);
 
             Debug.Log(isCritical ? $"적 충돌 | 크리티컬 데미지 : {damage}" : $"적 충돌 | 데미지 : {damage}");
-            
+
             // 적에게 데미지 주기
             if (enemy != null)
                 enemy.TakeDamage(damage);
@@ -128,6 +128,11 @@ public class Arrow_Bow : MonoBehaviour
             }
 
             isPiercing = true;
+        }
+        // 벽과 충돌 했을 시 화살 회수
+        else if (collision.name.Contains("Wall") || collision.name.Contains("BackCollision"))
+        {
+            GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
         }
     }
 
