@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Utils;  // TargetingUtils가 있는 네임스페이스
 
@@ -13,9 +12,7 @@ public abstract class EnemyAI : MonoBehaviour
     protected float currentHealth;
     public Animator enemyAnimator; // Hit, Die 애니메이션 트리거용
 
-    [Header("Item Prefab")]
-    [SerializeField] protected GameObject expCoinPrefab;
-    [SerializeField] protected GameObject potionPrefab;
+
     
     public float CurrentHealth => currentHealth;    // 체력 값 이거 가져가시면 됩니다!
     public float MaxHealth => maxHealth;    // 체력 값 이거 가져가시면 됩니다!
@@ -25,8 +22,6 @@ public abstract class EnemyAI : MonoBehaviour
 
     protected Rigidbody2D rigid;
     protected SpriteRenderer spriter;
-
-    protected List<GameObject> itemList = new List<GameObject>();
 
     protected virtual void Awake()
     {

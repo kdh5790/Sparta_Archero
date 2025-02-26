@@ -24,21 +24,6 @@ public class BasicEnemyAI : EnemyAI
         {
             ApplyDefaults();
             initialized = true;
-
-            GameObject itemBox = GameObject.Find("ItemBox");
-
-            if (itemBox == null)
-            {
-                itemBox = new GameObject("ItemBox");
-                itemBox.transform.position = Vector3.zero;
-            }
-
-            for (int i = 0; i < instanceExp; i++)
-            {
-                GameObject item = Instantiate(expCoinPrefab, itemBox.transform);
-                itemList.Add(item);
-                item.SetActive(false);
-            }
         }
     }
 
@@ -75,16 +60,5 @@ public class BasicEnemyAI : EnemyAI
         Vector3 direction = Utils.TargetingUtils.GetDirection(transform, target);
         Vector3 movement = direction * instanceSpeed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + (Vector2)movement);
-    }
-
-    protected override void Die()
-    {
-        base.Die();
-
-        for (int i = 0; i < itemList.Count; i++)
-        {
-            itemList[i].SetActive(true);
-            itemList[i].transform.position = transform.position;
-        }
     }
 }
