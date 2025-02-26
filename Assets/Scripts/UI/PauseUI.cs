@@ -19,8 +19,8 @@ public class PauseUI : BaseUI
 
         continueBtn = transform.Find("ContinueButton").GetComponent<Button>();
         continueBtn.onClick.AddListener(OnClickContinueUI);
-        optionBtn = transform.Find("OptionButton").GetComponent<Button>();
-        optionBtn.onClick.AddListener(OnClickOptionUI);
+        optionBtn = transform.Find("SettingButton").GetComponent<Button>();
+        optionBtn.onClick.AddListener(OnClickSettingUI);
         lobbyBtn = transform.Find("LobbyButton").GetComponent<Button>();
         lobbyBtn.onClick.AddListener(OnClickLobbyUI);
     }
@@ -30,9 +30,9 @@ public class PauseUI : BaseUI
         uiManager.OnClickContinue();
     }
 
-    public void OnClickOptionUI()
+    public void OnClickSettingUI()
     {
-        Debug.Log("¹Ì±¸Çö");
+        uiManager.OnClickSetting();
     }
 
     public void OnClickLobbyUI()
