@@ -202,8 +202,6 @@ public class PlayerStats : MonoBehaviour
     // 플레이어 사망 시 스프라이트 색 변경
     public IEnumerator PlayerSpriteColorChange()
     {
-        Debug.Log("asdsa");
-
         float duration = 1f; // 색상 변경에 걸리는 시간
         float time = 0f;
         Color startColor = sprite.color;
