@@ -26,7 +26,7 @@ public class AchievementUI : MonoBehaviour
             AchievementTxt.text = $"박스를 {temp}번째 열었습니다.";
             animator.SetInteger("step", 1);
 
-            coroutine = Delay(2.0f);
+            coroutine = Delay(3.0f);
             StartCoroutine(coroutine);
         }
     }
