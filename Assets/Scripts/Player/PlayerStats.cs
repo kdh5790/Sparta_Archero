@@ -33,12 +33,18 @@ public class PlayerStats : MonoBehaviour
     private float clearTime; //클리어 시간
     public float ClearTime { get { return clearTime; } set { clearTime = value; } }
 
+    private int boxOpen; //상자 연횟수
+    public int BoxOpen { get { return boxOpen; } set { boxOpen = value; } }
+
     private SpriteRenderer sprite;
     private IEnumerator invincibilityCoroutine;
 
     // 플레이어 스탯 초기화
     public void InitPlayerStats()
     {
+        boxOpen = DataManager.Instance.LoadBoxOpen();
+        Debug.Log("상자오픈횟수" + boxOpen);
+
         level = 1; currentExp = 0; maxExp = 100; currentHealth = 600; maxHealth = 600; speed = 3f;
         sprite = GetComponentInChildren<SpriteRenderer>();
 

@@ -179,7 +179,7 @@ public class UIManager : MonoBehaviour
 
         if(dungeonState == DungeonState.Dungeon1)
         {
-            SceneManager.LoadScene("Stage_1");
+            SceneManager.LoadScene("Stage_5");
         }
 
         if(dungeonState == DungeonState.Dungeon2)
@@ -217,6 +217,11 @@ public class UIManager : MonoBehaviour
     }
 
     //Game ³»ºÎ
+
+    public void UpdateStageName()
+    {
+        gameUI.ChangeStageName();
+    }
 
     public void UpdateClearTime(float time)
     {
