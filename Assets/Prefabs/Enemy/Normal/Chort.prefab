@@ -353,7 +353,7 @@ MonoBehaviour:
   instanceHealth: 500
   instanceAttack: 3
   instanceDefense: 1
-  instanceSpeed: 0.4
+  instanceSpeed: 0.3
   instanceExp: 80
 --- !u!1 &8684742332465380737
 GameObject:

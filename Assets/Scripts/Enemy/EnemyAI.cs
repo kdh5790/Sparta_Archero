@@ -11,7 +11,7 @@ public abstract class EnemyAI : MonoBehaviour
     [Header("Damage Settings")]
     public float maxHealth = 100;
     protected float currentHealth;
-    public int exp = 10;    //몬스터별 경험치 기본값
+    public int exp = 10;    // 몬스터별 경험치 기본값
     public Animator enemyAnimator;
 
     public float CurrentHealth => currentHealth;
@@ -27,6 +27,11 @@ public abstract class EnemyAI : MonoBehaviour
     protected SpriteRenderer spriter;
 
     private bool isDealingDamage = false;  // 현재 데미지를 주고 있는지 확인
+
+    [Header("Obstacle Avoidance Settings")]
+    public LayerMask obstacleLayer; // 장애물 레이어 설정
+    public float detectionDistance = 1.5f; // 장애물 감지 거리
+    public float avoidanceAngle = 30f; // 우회 각도
 
     protected virtual void Awake()
     {
@@ -62,12 +67,31 @@ public abstract class EnemyAI : MonoBehaviour
 
     public virtual void MoveTowardsTarget()
     {
+        if (target == null) return;
+
         Vector3 direction = TargetingUtils.GetDirection(transform, target);
+
+        // 장애물 감지
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectionDistance, obstacleLayer);
+        if (hit.collider != null)
+        {
+            Debug.Log("장애물 감지, 우회 시도");
+
+            // 우회 방향 결정 (왼쪽 또는 오른쪽)
+            Vector3 avoidanceDirection = Quaternion.Euler(0, 0, avoidanceAngle) * direction;
+            if (Physics2D.Raycast(transform.position, avoidanceDirection, detectionDistance, obstacleLayer))
+            {
+                // 왼쪽이 막혀있다면 오른쪽으로 회피
+                avoidanceDirection = Quaternion.Euler(0, 0, -avoidanceAngle * 2) * direction;
+            }
+
+            direction = avoidanceDirection.normalized;
+        }
+
         Vector3 movement = direction * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + (Vector2)movement);
     }
 
-    // 플레이어와 충돌 중일 때 일정 간격으로 데미지를 줌
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!isDead && collision.CompareTag("Player"))
@@ -80,8 +104,6 @@ public abstract class EnemyAI : MonoBehaviour
         }
     }
 
-
-    // 몬스터가 데미지를 받음
     public virtual void TakeDamage(int damage)
     {
         if (isDead) return;
@@ -121,8 +143,6 @@ public abstract class EnemyAI : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
-
-    //플레이어에게 경험치 주기
     private void GiveExpToPlayer()
     {
         if (target != null)
