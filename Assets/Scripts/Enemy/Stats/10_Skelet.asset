@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 10_Skelet
   m_EditorClassIdentifier: 
   enemyName: Skelet
-  health: 920
+  health: 1100
   attack: 3
   defense: 1
   speed: 0.4

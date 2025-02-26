@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 11_Slug
   m_EditorClassIdentifier: 
   enemyName: Slug
-  health: 950
+  health: 1200
   attack: 3
   defense: 1
   speed: 0.4

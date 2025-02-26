@@ -47,12 +47,12 @@ public class RangedEnemyAI : MonoBehaviour
 
         if (distanceToPlayer <= attackRange)
         {
-            enemyAI.enabled = false; // 이동 멈춤
+            enemyAI.enabled = false; 
             AttackPlayer();
         }
         else
         {
-            enemyAI.enabled = true; // 다시 이동 가능
+            enemyAI.enabled = true; 
             enemyAI.MoveTowardsTarget();
         }
     }
@@ -63,12 +63,12 @@ public class RangedEnemyAI : MonoBehaviour
         if (Time.time - lastAttackTime >= attackCooldown)
         {
             lastAttackTime = Time.time;
-            Debug.Log("원거리 공격 실행!");
+
 
             if (firePoint != null && projectilePrefab != null)
             {
                 GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-                Debug.Log($"투사체 생성됨: {projectile.name}");
+
 
                 Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
 
@@ -76,7 +76,7 @@ public class RangedEnemyAI : MonoBehaviour
                 {
                     Vector2 direction = (player.position - firePoint.position).normalized;
                     rb.velocity = direction * projectileSpeed;
-                    Debug.Log($" 투사체 방향: {direction}, 속도: {rb.velocity}");
+
                 }
                 else
                 {

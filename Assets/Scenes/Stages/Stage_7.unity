@@ -525,7 +525,8 @@ GameObject:
   - component: {fileID: 719378770}
   - component: {fileID: 719378769}
   - component: {fileID: 719378768}
-  m_Layer: 0
+  - component: {fileID: 719378771}
+  m_Layer: 7
   m_Name: BackDesign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -847,6 +848,33 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!50 &719378771
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719378766}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &752159303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,7 +1083,8 @@ GameObject:
   - component: {fileID: 1402010705}
   - component: {fileID: 1402010704}
   - component: {fileID: 1402010703}
-  m_Layer: 0
+  - component: {fileID: 1402010706}
+  m_Layer: 7
   m_Name: ForeDesign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1589,6 +1618,33 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!50 &1402010706
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402010701}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1620040328
 GameObject:
   m_ObjectHideFlags: 0

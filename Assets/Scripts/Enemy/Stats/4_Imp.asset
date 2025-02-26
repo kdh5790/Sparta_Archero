@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 4_Imp
   m_EditorClassIdentifier: 
   enemyName: Imp
-  health: 700
+  health: 160
   attack: 3
   defense: 1
   speed: 0.4

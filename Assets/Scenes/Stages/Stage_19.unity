@@ -322,7 +322,8 @@ GameObject:
   - component: {fileID: 954765851}
   - component: {fileID: 954765850}
   - component: {fileID: 954765849}
-  m_Layer: 0
+  - component: {fileID: 954765852}
+  m_Layer: 7
   m_Name: BackDesign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -644,6 +645,33 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!50 &954765852
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954765847}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1001346622
 GameObject:
   m_ObjectHideFlags: 0
@@ -2049,7 +2077,8 @@ GameObject:
   - component: {fileID: 1788050638}
   - component: {fileID: 1788050637}
   - component: {fileID: 1788050636}
-  m_Layer: 0
+  - component: {fileID: 1788050639}
+  m_Layer: 7
   m_Name: ForeDesign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2254,7 +2283,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 2
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -2539,14 +2568,14 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 217edf86e5ab8c4468a625d22a61d295, type: 3}
   - m_RefCount: 10
     m_Data: {fileID: 21300000, guid: ee03772b422a38348a424b934f4ac5df, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 4c41cff237b36aa4c85387f0bdbfed0b, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 852ce7103991a0247abaa0394c16a4e1, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: 2a950130209a06d4789b00265a737530, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 4c41cff237b36aa4c85387f0bdbfed0b, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: 21300000, guid: b4a9ca245d68ae94da82b0d6e88983ca, type: 3}
   - m_RefCount: 1
@@ -2621,6 +2650,33 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!50 &1788050639
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788050634}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1876507162
 GameObject:
   m_ObjectHideFlags: 0

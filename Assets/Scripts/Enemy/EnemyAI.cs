@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using Utils;  // TargetingUtils 네임스페이스
 
 public abstract class EnemyAI : MonoBehaviour
@@ -7,6 +8,7 @@ public abstract class EnemyAI : MonoBehaviour
     [Header("Enemy Settings")]
     public float speed = 3f;
     public Transform target;
+
 
     [Header("Damage Settings")]
     public float maxHealth = 100;
@@ -31,30 +33,65 @@ public abstract class EnemyAI : MonoBehaviour
     public bool isBoss; //유니티나 매서드에서 할당
     public bool isFinalBoss; //유니티나 매서드에서 할당
 
+    NavMeshAgent agent; // 탐색 메시 에이전트에 대한 참조가 필요
+
+
+
     protected virtual void Awake()
     {
+
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponentInChildren<SpriteRenderer>();
 
-        if (target == null)
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
+
+        if (playerObj != null)
         {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-            if (playerObj != null)
-                target = playerObj.transform;
+            target = playerObj.transform;
         }
+        else
+        {
+
+            PlayerStats playerStats = FindObjectOfType<PlayerStats>();
+            if (playerStats != null)
+            {
+                target = playerStats.GetComponent<Transform>();
+            }
+        }
+
+
     }
 
     protected virtual void Start()
     {
+
         currentHealth = maxHealth;
         if (enemyAnimator == null)
             enemyAnimator = GetComponentInChildren<Animator>();
+
+        if(gameObject.name.Contains("Chort"))
+        {
+            agent = GetComponent<NavMeshAgent>();
+            agent.updateRotation = false; // Agent 가 Target 을 향해 이동할 때 방향을 회전할지
+            agent.updateUpAxis = false; // 캐릭터의 이동을 평면으로 제한하기 위해
+        }
+    }
+
+    protected virtual void Update()
+    {
+        if (isDead || target == null) return;
+        if (agent != null && agent.isOnNavMesh && target != null && gameObject.name.Contains("Chort"))
+        {
+            agent.SetDestination(target.position);
+        }
     }
 
     protected virtual void FixedUpdate()
     {
         if (isDead || target == null) return;
-        MoveTowardsTarget();
+        if (!gameObject.name.Contains("Chort"))
+         MoveTowardsTarget();
     }
 
     protected virtual void LateUpdate()
@@ -118,18 +155,18 @@ public abstract class EnemyAI : MonoBehaviour
 
         GiveExpToPlayer();
 
-        if(isBoss) //만약 해당 몬스터가 보스 몬스터라면
+        if (isBoss) //만약 해당 몬스터가 보스 몬스터라면
         {
             UIManager.Instance.GetBossReward(); //보스 보상을 주세요
         }
 
-        if(isFinalBoss) //만약 해당 몬스터가 던전 마지막 몬스터라면
+        if (isFinalBoss) //만약 해당 몬스터가 던전 마지막 몬스터라면
         {
             UIManager.Instance.CallDungeonClear(PlayerManager.instance.stats.ClearTime,
                 PlayerManager.instance.stats.Level);//클리어 화면을 보여주세요
         }
 
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 0.3f);
     }
 
     private void GiveExpToPlayer()

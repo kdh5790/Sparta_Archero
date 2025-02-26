@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 893276696970036259}
   - component: {fileID: 8263368868368077232}
   - component: {fileID: 8397669792577857412}
+  - component: {fileID: 2474711159528225144}
   m_Layer: 3
   m_Name: Chort
   m_TagString: Enemy
@@ -344,19 +345,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfdf0f9b98c99eb46b9b19875a108384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.3
-  target: {fileID: 0}
-  maxHealth: 500
+  speed: 0.6
+  target: {fileID: 5500636531389104973, guid: b9f7fc340122d954abaa8f0283d84f6d, type: 3}
+  maxHealth: 180
   exp: 80
   enemyAnimator: {fileID: 0}
   isBoss: 0
   isFinalBoss: 0
   enemyStat: {fileID: 11400000, guid: 9032aa2b15b900040805dd0a9c000ce9, type: 2}
-  instanceHealth: 500
+  instanceHealth: 180
   instanceAttack: 3
   instanceDefense: 1
-  instanceSpeed: 0.3
+  instanceSpeed: 0.6
   instanceExp: 80
+--- !u!195 &2474711159528225144
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8543468412467932008}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 1.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &8684742332465380737
 GameObject:
   m_ObjectHideFlags: 0

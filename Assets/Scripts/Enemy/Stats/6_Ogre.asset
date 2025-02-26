@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 6_Ogre
   m_EditorClassIdentifier: 
   enemyName: Ogre
-  health: 830
+  health: 170
   attack: 3
   defense: 1
   speed: 0.4

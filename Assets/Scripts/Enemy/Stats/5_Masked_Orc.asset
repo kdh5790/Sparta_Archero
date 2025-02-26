@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5_Masked_Orc
   m_EditorClassIdentifier: 
   enemyName: Masked_Orc
-  health: 800
+  health: 220
   attack: 3
   defense: 1
   speed: 0.4

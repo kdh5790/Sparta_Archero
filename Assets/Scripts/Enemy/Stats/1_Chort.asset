@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 1_Chort
   m_EditorClassIdentifier: 
   enemyName: Chort
-  health: 500
+  health: 180
   attack: 3
   defense: 1
-  speed: 0.3
+  speed: 1.5
   exp: 80

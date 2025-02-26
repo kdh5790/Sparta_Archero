@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 9_Pumpkin
   m_EditorClassIdentifier: 
   enemyName: Pumpkin
-  health: 890
+  health: 540
   attack: 3
   defense: 1
   speed: 0.4

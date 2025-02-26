@@ -42,7 +42,7 @@ public class BasicEnemyAI : EnemyAI
     }
 #endif
 
-    
+
     void ApplyDefaults()
     {
         instanceHealth = enemyStat.health;
@@ -56,7 +56,8 @@ public class BasicEnemyAI : EnemyAI
         exp = enemyStat.exp;  // 경험치 적용
     }
 
-    // 부모의 MoveTowardsTarget 대신 instanceSpeed를 사용하여 이동
+   
+
     public override void MoveTowardsTarget()
     {
         Vector3 direction = Utils.TargetingUtils.GetDirection(transform, target);

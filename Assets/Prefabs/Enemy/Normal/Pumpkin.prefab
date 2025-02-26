@@ -540,7 +540,7 @@ MonoBehaviour:
   instanceHealth: 890
   instanceAttack: 3
   instanceDefense: 1
-  instanceSpeed: 0.9
+  instanceSpeed: 0.4
   instanceExp: 100
 --- !u!114 &835885175176541726
 MonoBehaviour:

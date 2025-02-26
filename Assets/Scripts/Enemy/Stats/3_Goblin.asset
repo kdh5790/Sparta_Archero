@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 3_Goblin
   m_EditorClassIdentifier: 
   enemyName: Goblin
-  health: 600
+  health: 140
   attack: 3
   defense: 1
   speed: 0.4
