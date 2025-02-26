@@ -20,6 +20,7 @@ public class LevelUpUI : BaseUI
     public TextMeshProUGUI skill3NameTxt;
     public TextMeshProUGUI skill3DescriptionTxt;
 
+
     protected override UIState GetUIState()
     {
         return UIState.LevelUp;
@@ -78,5 +79,7 @@ public class LevelUpUI : BaseUI
         Time.timeScale = 1;
         uiManager.OnClickSkillSelected();
     }
+
+
 
 }

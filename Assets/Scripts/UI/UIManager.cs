@@ -4,6 +4,7 @@ using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using System;
+using System.Collections;
 using static UnityEditor.PlayerSettings;
 
 public enum UIState
@@ -47,6 +48,8 @@ public class UIManager : MonoBehaviour
     GameObject Dungeon2 = null;
 
     static UIManager instance;
+
+    private IEnumerator coroutine;
     public static UIManager Instance
     {
         get
@@ -201,10 +204,10 @@ public class UIManager : MonoBehaviour
 
     //LevelUp내부
 
-    public void LevelUpUI() //레벨업 테스트용
+    public void LevelUpUI() //레벨업 기능 구현
     {
-        levelUpUI.SkillSelectOn(); //스킬 선택창에 랜덤 스킬 삽입용
-        ChangeState(UIState.LevelUp); //레벨업 ui 활성화
+        coroutine = WaitAndPrint(0.5f); //반환값 IEnumerator를 저장해둔다.
+        StartCoroutine(coroutine); //0.5초가 지난후 레벨업 시작
     }
 
     public void OnClickSkillSelected()
@@ -227,6 +230,17 @@ public class UIManager : MonoBehaviour
 
         SceneManager.LoadScene("UIScene"); 
         ChangeState(UIState.Lobby);
+    }
+
+    private IEnumerator WaitAndPrint(float waitTime)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(waitTime); //waitTime 만큼 딜레이후 다음 코드가 실행된다.
+            levelUpUI.SkillSelectOn();
+            ChangeState(UIState.LevelUp); //레벨업 ui 활성화
+            break;
+        }
     }
 
 }
