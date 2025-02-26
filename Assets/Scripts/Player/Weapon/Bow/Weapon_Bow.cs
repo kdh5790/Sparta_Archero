@@ -31,6 +31,9 @@ public class Weapon_Bow : MonoBehaviour
     private bool isRage = false;
     public bool IsRage { get { return isRage; } set { isRage = value; } }
 
+    private bool isHeadShot = false;
+    public bool IsHeadShot { get { return isHeadShot; } set { isHeadShot = value; } }
+
 
     private const float KnockBackPower = 1f;
 

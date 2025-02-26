@@ -140,6 +140,10 @@ public class SkillManager : MonoBehaviour
                 StartCoroutine(PlayerManager.instance.bow.ApplyCriticalAurora());
                 break;
 
+            case Skill.HeadShot:
+                PlayerManager.instance.bow.IsHeadShot = true;
+                break;
+
             default:
                 Debug.Log("아직 구현 X");
                 break;

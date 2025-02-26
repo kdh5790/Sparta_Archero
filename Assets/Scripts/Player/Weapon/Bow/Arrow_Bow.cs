@@ -49,6 +49,21 @@ public class Arrow_Bow : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
+            BasicEnemyAI enemy = collision.GetComponent<BasicEnemyAI>();
+
+            if (enemy != null && bow.IsHeadShot && !enemy.IsHeadShot)
+            {
+                if (Random.Range(0, 100) < 12)
+                {
+                    enemy.TakeDamage((int)enemy.maxHealth);
+                    Debug.Log("헤드샷 O");
+                }
+                else
+                    Debug.Log("헤드샷 X");
+
+                enemy.IsHeadShot = true;
+            }
+
             // 크리티컬 여부 확인
             bool isCritical = bow.CalculateCriticalChance();
 
@@ -80,8 +95,7 @@ public class Arrow_Bow : MonoBehaviour
                 damage = (int)(damage * 0.9f);
 
             Debug.Log(isCritical ? $"적 충돌 | 크리티컬 데미지 : {damage}" : $"적 충돌 | 데미지 : {damage}");
-
-            BasicEnemyAI enemy = collision.GetComponent<BasicEnemyAI>();
+            
 
             if (enemy != null)
                 enemy.TakeDamage(damage);
@@ -126,6 +140,4 @@ public class Arrow_Bow : MonoBehaviour
 
         damage = (int)(damage * percentage);
     }
-
-
 }
