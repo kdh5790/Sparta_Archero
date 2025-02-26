@@ -6,7 +6,8 @@ public class Arrow_Bow : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
     private Weapon_Bow bow;
-    public GameObject target;
+    public BasicEnemyAI target;
+    public int DamageValue { get { return damage; } }   //enemy쪽에서 데미지 값 참조하려고 넣었습니다
 
     private int damage; // 데미지
     private int bound = 0; // 반동 횟수
@@ -80,6 +81,11 @@ public class Arrow_Bow : MonoBehaviour
 
             Debug.Log(isCritical ? $"적 충돌 | 크리티컬 데미지 : {damage}" : $"적 충돌 | 데미지 : {damage}");
 
+            BasicEnemyAI enemy = collision.GetComponent<BasicEnemyAI>();
+
+            if (enemy != null)
+                enemy.TakeDamage(damage);
+
             // 반동 스킬 보유 + 현재 튕긴 횟수가 2보다 작다면 다음 타겟 찾아 이동시킴
             if (bow.IsRebound && bound < 2)
             {
@@ -88,7 +94,7 @@ public class Arrow_Bow : MonoBehaviour
                 {
                     bow.KnockBackEnemy(collision.transform, transform.position);
 
-                    float angle = PlayerManager.instance.arrowManager.LookAtTargetForArrow(target, transform);
+                    float angle = PlayerManager.instance.arrowManager.LookAtTargetForArrow(target.gameObject, transform);
                     transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
 
                     bound++;

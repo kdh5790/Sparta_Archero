@@ -9,19 +9,19 @@ public class StageMaanager : MonoBehaviour
 
     void Start()
     {
-        portal.SetActive(true); // 처음에는 포탈 비활성화 test 끝나면 false로 바꾸기
+        portal.SetActive(false); // 처음에는 포탈 비활성화
     }
 
     void Update()
     {
-        if (AreAllMonstersDead())
+        if (AreAllEnemysDead())
         {
-            portal.SetActive(false); // 몬스터가 다 죽으면 포탈 활성화 test 끝나면 true로 바꾸기
+            portal.SetActive(true); // 몬스터가 다 죽으면 포탈 활성화
         }
     }
 
-    bool AreAllMonstersDead()
+    bool AreAllEnemysDead()
     {
-        return GameObject.FindGameObjectsWithTag("Monster").Length == 0;
+        return GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
     }
 }
