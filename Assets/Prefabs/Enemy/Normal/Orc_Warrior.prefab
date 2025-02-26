@@ -320,8 +320,6 @@ MonoBehaviour:
   target: {fileID: 0}
   maxHealth: 860
   enemyAnimator: {fileID: 0}
-  expCoinPrefab: {fileID: 6592341644504880979, guid: 245dc633185cda242b8a6805102c4870, type: 3}
-  potionPrefab: {fileID: 0}
   enemyStat: {fileID: 11400000, guid: 7d98a6e44d033164ea8fc5344c5ff31f, type: 2}
   instanceHealth: 860
   instanceAttack: 3
