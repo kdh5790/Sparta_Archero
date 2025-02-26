@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,14 +7,14 @@ public delegate void ShootArrowDelegate();
 
 public class ArrowManager : MonoBehaviour
 {
-    public ShootArrowDelegate shootDelegate;
+    public ShootArrowDelegate shootDelegate; // í™”ì‚´ ë°œì‚¬ ì‹œ ì‹¤í–‰ í•  ë¸ë¦¬ê²Œì´íŠ¸
 
-    [SerializeField] private GameObject arrowPrefab; // È­»ì ÇÁ¸®ÆÕ
-    private Queue<GameObject> arrowQueue = new Queue<GameObject>(); // »ı¼ºÇÑ È­»ìµéÀ» ´ã¾ÆµÑ Å¥
+    [SerializeField] private GameObject arrowPrefab; // í™”ì‚´ í”„ë¦¬íŒ¹
+    private Queue<GameObject> arrowQueue = new Queue<GameObject>(); // ìƒì„±í•œ í™”ì‚´ë“¤ì„ ë‹´ì•„ë‘˜ í
     private GameObject target;
     private Weapon_Bow bow;
 
-    private int poolSize = 100; // ¿ÀºêÁ§Æ®Ç® »çÀÌÁî(»ı¼ºÇÒ È­»ì °¹¼ö)
+    private int poolSize = 100; // ìƒì„±í•  í™”ì‚´ ê°¯ìˆ˜
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class ArrowManager : MonoBehaviour
 
         GameObject go;
 
-        // È­»ì »ı¼º ÈÄ ºñÈ°¼ºÈ­, Å¥¿¡ ³Ö¾îÁÖ±â
+        // í™”ì‚´ ìƒì„± í›„ ë¹„í™œì„±í™”, íì— ë„£ì–´ì£¼ê¸°
         for (int i = 0; i < poolSize; i++)
         {
             go = Instantiate(arrowPrefab, transform);
@@ -30,11 +30,11 @@ public class ArrowManager : MonoBehaviour
             arrowQueue.Enqueue(go);
         }
 
-        // µ¨¸®°ÔÀÌÆ®¿¡ ±âº»°ø°İ Ãß°¡
+        // ë¸ë¦¬ê²Œì´íŠ¸ì— ê¸°ë³¸ê³µê²© ì¶”ê°€
         shootDelegate = ShootSingleArrow;
     }
 
-    // È­»ì ¹ß»ç
+    // í™”ì‚´ ë°œì‚¬
     public void StartShootDelegate(GameObject _target)
     {
         target = _target;
@@ -45,7 +45,7 @@ public class ArrowManager : MonoBehaviour
             shootDelegate();
     }
 
-    // ½ºÅ³¿¡ µû¶ó µ¨¸®°ÔÀÌÆ® Ãß°¡
+    // ìŠ¤í‚¬ì— ë”°ë¼ ë¸ë¦¬ê²Œì´íŠ¸ ì¶”ê°€
     public void AddShootDelegate(Skill skill)
     {
         switch (skill)
@@ -68,7 +68,7 @@ public class ArrowManager : MonoBehaviour
         }
     }
 
-    // ½ºÅ³¿¡ ¸Â°Ô °¢µµ º¯°æ ÈÄ ¹ß»ç
+    // ìŠ¤í‚¬ì— ë§ê²Œ ê°ë„ ë³€ê²½ í›„ ë°œì‚¬
     public void ShootArrow(float offset)
     {
         GameObject go = arrowQueue.Dequeue();
@@ -79,38 +79,39 @@ public class ArrowManager : MonoBehaviour
         go.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
     }
 
-    // ±âº» °ø°İ
+    // ê¸°ë³¸ ê³µê²©
     private void ShootSingleArrow()
     {
         ShootArrow(-90f);
     }
 
-    // ÈÄ¹æ È­»ì
+    // í›„ë°© í™”ì‚´
     private void ShootBackArrow()
     {
         ShootArrow(90f);
     }
 
-    // »ç¼± È­»ì
+    // ì‚¬ì„  í™”ì‚´
     private void ShootDiagonalArrow()
     {
         ShootArrow(-45f);
         ShootArrow(-135f);
     }
 
-    // Ãø¸é È­»ì
+    // ì¸¡ë©´ í™”ì‚´
     private void ShootSideArrow()
     {
         ShootArrow(0f);
         ShootArrow(180f);
     }
 
-    // Àü¹æ È­»ì
+    // ì „ë°© í™”ì‚´
     private void ShootFrontArrow()
     {
         ShootArrow(-85f);
     }
 
+    // ë©€í‹°ìƒ· ì½”ë£¨í‹´
     private IEnumerator ShootMultiShotCoroutine()
     {
         shootDelegate();
@@ -119,7 +120,7 @@ public class ArrowManager : MonoBehaviour
         shootDelegate();
     }
 
-    // È­»ì È¸¼ö
+    // í™”ì‚´ íšŒìˆ˜
     public void ReturnArrow(GameObject arrow)
     {
         arrow.transform.localPosition = Vector3.zero;
@@ -130,22 +131,22 @@ public class ArrowManager : MonoBehaviour
         arrow.SetActive(false);
     }
 
-    // È­»ìÀ» Å¸°Ù¹æÇâÀ¸·Î È¸Àü½ÃÄÑ¾ß ÇÒ z°ª ±¸ÇÏ±â (¹İµ¿À» À§ÇÑ ¹æÇâÀ» ±¸ÇÑ´Ù¸é ¸Å°³º¯¼ö ³Ö¾îÁÖ±â)
+    // í™”ì‚´ì„ íƒ€ê²Ÿë°©í–¥ìœ¼ë¡œ íšŒì „ì‹œì¼œì•¼ í•  zê°’ êµ¬í•˜ê¸° (ë°˜ë™ì„ ìœ„í•œ ë°©í–¥ì„ êµ¬í•œë‹¤ë©´ ë§¤ê°œë³€ìˆ˜ ë„£ì–´ì£¼ê¸°)
     public float LookAtTargetForArrow(GameObject _target = null, Transform _transform = null)
     {
         Vector2 direction;
 
-        // ¹Ù¶óº¸´Â ¹æÇâ ±¸ÇÏ±â
+        // ë°”ë¼ë³´ëŠ” ë°©í–¥ êµ¬í•˜ê¸°
         if (_target == null)
             direction = target.transform.position - transform.position;
 
         else
             direction = _target.transform.position - _transform.position;
 
-        // ¹æÇâ °¢µµ °è»ê ÈÄ ¶óµğ¾È °ªÀ» µµ ´ÜÀ§·Î º¯È¯
+        // ë°©í–¥ ê°ë„ ê³„ì‚° í›„ ë¼ë””ì•ˆ ê°’ì„ ë„ ë‹¨ìœ„ë¡œ ë³€í™˜
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // Z È¸Àü°ªÀ¸·Î Å¸°Ù ¹Ù¶óº¸±â
+        // Z íšŒì „ê°’ìœ¼ë¡œ íƒ€ê²Ÿ ë°”ë¼ë³´ê¸°
         return angle;
     }
 }

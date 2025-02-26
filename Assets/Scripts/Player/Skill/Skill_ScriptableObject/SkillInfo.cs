@@ -1,26 +1,26 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum Skill
 {
-    DamageBoost = 1,        //O  1.°ø°Ý ºÎ½ºÆ® : °ø°Ý·ÂÀÌ 30% Áõ°¡ÇÑ´Ù.
-    AttackSpeedBoost,       //O  2.°ø°Ý ¼Óµµ ºÎ½ºÆ® : °ø°Ý ¼Óµµ°¡ 25% Áõ°¡ÇÑ´Ù.
-    CriticalMaster,         //O  3.Å©¸®Æ¼ÄÃ ¸¶½ºÅÍ : Å©¸®Æ¼ÄÃ µ¥¹ÌÁö 40%, Å©¸®Æ¼ÄÃ È®·ü 10%°¡ Áõ°¡ÇÑ´Ù.
-    HealthBoost,            //O  4.HPºÎ½ºÆ® : ÃÖ´ë Ã¼·Â 20%¸¦ Áõ°¡½ÃÅ°¸ç Áõ°¡ÇÑ ¸¸Å­ Ã¼·Â È¸º¹, Áõ°¡ÇÏ´Â Ã¼·ÂÀº ±âº» ÃÖ´ë Ã¼·Â(ÇöÀç 600) ±âÁØ
-    Rage,                   //O  5.ºÐ³ë : ÀÒÀº Ã¼·Â 1% ´ç µ¥¹ÌÁö°¡ 1.2% Áõ°¡ÇÑ´Ù.
-    Invincibility,          //O  6.¹«Àû : Ä³¸¯ÅÍ¸¦ 10ÃÊ¸¶´Ù 2ÃÊ °£ ¹«Àû»óÅÂ·Î ¸¸µç´Ù.
-    Rebound,                //O  7.¹Ýµ¿ : Àû¿¡°Ô ¸ÂÀº È­»ìÀÌ ±ÙÃ³ÀÇ Àû¿¡°Ô ÃÖ´ë 2È¸ Æ¨°Ü ³ª°¡¸ç ÀûÀ» °ø°ÝÇÑ´Ù. Æ¨±æ ¶§ ¸¶´Ù µ¥¹ÌÁö°¡ 30%¾¿ °¨¼ÒµÈ´Ù.
-    PiercingShot,           //O  8.°üÅë¼¦ : È­»ìÀÌ ÀûÀ» °üÅëÇÏ¸ç °üÅë ÈÄÀÇ È­»ìÀº ÇÇÇØ·®ÀÌ 67%·Î °¨¼ÒÇÑ´Ù.
-    MultiShot,              //O  9.¸ÖÆ¼¼¦ : ¸ðµç °ø°ÝÀ» ÇÑ¹ø ´õ ¹ß»çÇÏÁö¸¸ °ø°Ý¼Óµµ 15% ÇÏ¶ô, ÃÖÁ¾°ø°Ý·Â 10% ÇÏ¶ô
-    FrontArrowPlus,         //O 10.Àü¹æ È­»ì +1 : Àü¹æÀ¸·Î ¹ß»çÇÏ´Â È­»ì Ãß°¡
-    DiagonalArrowPlus,      //O 11.»ç¼± È­»ì +1 : ´ë°¢¼±À¸·Î ³ª°¡´Â È­»ì Ãß°¡, 2È¸ ¾òÀ¸¸é 30µµ, 60µµ·Î È­»ìÀÌ ³ª°£´Ù.
-    SideArrowPlus,          //O 12.Ãø¸é È­»ì +1 : ÁÂ¿ì 90µµ·Î ¹ß»çÇÏ´Â È­»ì Ãß°¡
-    BackArrowPlus,          //O 13.ÈÄ¹æ È­»ì +1 : µî µÚ·Î È­»ìÀ» Ãß°¡
-    HeadShot,               //X 14.Çìµå¼¦ : Àâ¸÷À» °ø°Ý ½Ã 12.5%ÀÇ È®·ü·Î ÀûÀ» Áï»ç½ÃÅ²´Ù. Çìµå¼¦ÀÌ ¹ßµ¿ÇÒ ±âÈ¸´Â ÇÑ¹ø»ÓÀÌ¹Ç·Î, Ã³À½ ¸íÁßÇÑ È­»ìÀÌ Áï»ç°¡ ¾Æ´Ï¶ó¸é Çìµå¼¦ ¹ßµ¿X
-    DodgeMastery,           //O 15.È¸ÇÇ ¸¶½ºÅÍ : È¸ÇÇ È®·üÀÌ 20% ´Ã¾î³­´Ù.
-    AttackSpeedAurora,      //O 16.°ø°Ý ¼Óµµ ¿À·Î¶ó : 9ÃÊ¸¶´Ù 2ÃÊµ¿¾È °ø°Ý¼Óµµ°¡ 62.5% Áõ°¡ÇÑ´Ù.
-    CriticalAurora          //O 17.Å©¸®Æ¼ÄÃ ¿À·Î¶ó : 8ÃÊ¸¶´Ù 2ÃÊ µ¿¾È Å©¸®Æ¼ÄÃ È®·üÀÌ 47.5% Áõ°¡ÇÑ´Ù.
+    DamageBoost = 1,        //O  1.ê³µê²© ë¶€ìŠ¤íŠ¸ : ê³µê²©ë ¥ì´ 30% ì¦ê°€í•œë‹¤.
+    AttackSpeedBoost,       //O  2.ê³µê²© ì†ë„ ë¶€ìŠ¤íŠ¸ : ê³µê²© ì†ë„ê°€ 25% ì¦ê°€í•œë‹¤.
+    CriticalMaster,         //O  3.í¬ë¦¬í‹°ì»¬ ë§ˆìŠ¤í„° : í¬ë¦¬í‹°ì»¬ ë°ë¯¸ì§€ 40%, í¬ë¦¬í‹°ì»¬ í™•ë¥  10%ê°€ ì¦ê°€í•œë‹¤.
+    HealthBoost,            //O  4.HPë¶€ìŠ¤íŠ¸ : ìµœëŒ€ ì²´ë ¥ 20%ë¥¼ ì¦ê°€ì‹œí‚¤ë©° ì¦ê°€í•œ ë§Œí¼ ì²´ë ¥ íšŒë³µ, ì¦ê°€í•˜ëŠ” ì²´ë ¥ì€ ê¸°ë³¸ ìµœëŒ€ ì²´ë ¥(í˜„ìž¬ 600) ê¸°ì¤€
+    Rage,                   //O  5.ë¶„ë…¸ : ìžƒì€ ì²´ë ¥ 1% ë‹¹ ë°ë¯¸ì§€ê°€ 1.2% ì¦ê°€í•œë‹¤.
+    Invincibility,          //O  6.ë¬´ì  : ìºë¦­í„°ë¥¼ 10ì´ˆë§ˆë‹¤ 2ì´ˆ ê°„ ë¬´ì ìƒíƒœë¡œ ë§Œë“ ë‹¤.
+    Rebound,                //O  7.ë°˜ë™ : ì ì—ê²Œ ë§žì€ í™”ì‚´ì´ ê·¼ì²˜ì˜ ì ì—ê²Œ ìµœëŒ€ 2íšŒ íŠ•ê²¨ ë‚˜ê°€ë©° ì ì„ ê³µê²©í•œë‹¤. íŠ•ê¸¸ ë•Œ ë§ˆë‹¤ ë°ë¯¸ì§€ê°€ 30%ì”© ê°ì†Œëœë‹¤.
+    PiercingShot,           //O  8.ê´€í†µìƒ· : í™”ì‚´ì´ ì ì„ ê´€í†µí•˜ë©° ê´€í†µ í›„ì˜ í™”ì‚´ì€ í”¼í•´ëŸ‰ì´ 67%ë¡œ ê°ì†Œí•œë‹¤.
+    MultiShot,              //O  9.ë©€í‹°ìƒ· : ëª¨ë“  ê³µê²©ì„ í•œë²ˆ ë” ë°œì‚¬í•˜ì§€ë§Œ ê³µê²©ì†ë„ 15% í•˜ë½, ìµœì¢…ê³µê²©ë ¥ 10% í•˜ë½
+    FrontArrowPlus,         //O 10.ì „ë°© í™”ì‚´ +1 : ì „ë°©ìœ¼ë¡œ ë°œì‚¬í•˜ëŠ” í™”ì‚´ ì¶”ê°€
+    DiagonalArrowPlus,      //O 11.ì‚¬ì„  í™”ì‚´ +1 : ëŒ€ê°ì„ ìœ¼ë¡œ ë‚˜ê°€ëŠ” í™”ì‚´ ì¶”ê°€, 2íšŒ ì–»ìœ¼ë©´ 30ë„, 60ë„ë¡œ í™”ì‚´ì´ ë‚˜ê°„ë‹¤.
+    SideArrowPlus,          //O 12.ì¸¡ë©´ í™”ì‚´ +1 : ì¢Œìš° 90ë„ë¡œ ë°œì‚¬í•˜ëŠ” í™”ì‚´ ì¶”ê°€
+    BackArrowPlus,          //O 13.í›„ë°© í™”ì‚´ +1 : ë“± ë’¤ë¡œ í™”ì‚´ì„ ì¶”ê°€
+    HeadShot,               //X 14.í—¤ë“œìƒ· : ìž¡ëª¹ì„ ê³µê²© ì‹œ 12.5%ì˜ í™•ë¥ ë¡œ ì ì„ ì¦‰ì‚¬ì‹œí‚¨ë‹¤. í—¤ë“œìƒ·ì´ ë°œë™í•  ê¸°íšŒëŠ” í•œë²ˆë¿ì´ë¯€ë¡œ, ì²˜ìŒ ëª…ì¤‘í•œ í™”ì‚´ì´ ì¦‰ì‚¬ê°€ ì•„ë‹ˆë¼ë©´ í—¤ë“œìƒ· ë°œë™X
+    DodgeMastery,           //O 15.íšŒí”¼ ë§ˆìŠ¤í„° : íšŒí”¼ í™•ë¥ ì´ 20% ëŠ˜ì–´ë‚œë‹¤.
+    AttackSpeedAurora,      //O 16.ê³µê²© ì†ë„ ì˜¤ë¡œë¼ : 9ì´ˆë§ˆë‹¤ 2ì´ˆë™ì•ˆ ê³µê²©ì†ë„ê°€ 62.5% ì¦ê°€í•œë‹¤.
+    CriticalAurora          //O 17.í¬ë¦¬í‹°ì»¬ ì˜¤ë¡œë¼ : 8ì´ˆë§ˆë‹¤ 2ì´ˆ ë™ì•ˆ í¬ë¦¬í‹°ì»¬ í™•ë¥ ì´ 47.5% ì¦ê°€í•œë‹¤.
 }
 
 [CreateAssetMenu(fileName = "SkillInfo", menuName = "Scriptable Object/SkillInfo", order = int.MaxValue)]

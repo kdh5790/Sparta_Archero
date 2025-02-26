@@ -21,7 +21,7 @@ public abstract class EnemyAI : MonoBehaviour
     public bool IsDead => isDead;
 
     protected bool isHeadShot = false;
-    public bool IsHeadShot => isHeadShot;
+    public bool IsHeadShot { get { return isHeadShot; } set { isHeadShot = value; } }
 
     protected Rigidbody2D rigid;
     protected SpriteRenderer spriter;
