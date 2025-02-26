@@ -16,5 +16,5 @@ MonoBehaviour:
   health: 1100
   attack: 9
   defense: 2
-  speed: 3
-  exp: 24
+  speed: 1
+  exp: 110

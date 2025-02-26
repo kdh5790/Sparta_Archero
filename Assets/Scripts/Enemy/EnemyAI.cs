@@ -1,27 +1,29 @@
+ï»¿using System.Collections;
 using UnityEngine;
-using Utils;  // TargetingUtils°¡ ÀÖ´Â ³×ÀÓ½ºÆäÀÌ½º
+using Utils;  // TargetingUtils ë„¤ì„ìŠ¤í˜ì´ìŠ¤
 
 public abstract class EnemyAI : MonoBehaviour
 {
     [Header("Enemy Settings")]
     public float speed = 3f;
-    public Transform target; // ±âº» Å¸°Ù (º¸Åë ÇÃ·¹ÀÌ¾î)
+    public Transform target;
 
     [Header("Damage Settings")]
     public float maxHealth = 100;
     protected float currentHealth;
-    public Animator enemyAnimator; // Hit, Die ¾Ö´Ï¸ŞÀÌ¼Ç Æ®¸®°Å¿ë
+    public int exp = 10;    //ëª¬ìŠ¤í„°ë³„ ê²½í—˜ì¹˜ ê¸°ë³¸ê°’
+    public Animator enemyAnimator;
 
-
-    
-    public float CurrentHealth => currentHealth;    // Ã¼·Â °ª ÀÌ°Å °¡Á®°¡½Ã¸é µË´Ï´Ù!
-    public float MaxHealth => maxHealth;    // Ã¼·Â °ª ÀÌ°Å °¡Á®°¡½Ã¸é µË´Ï´Ù!
+    public float CurrentHealth => currentHealth;
+    public float MaxHealth => maxHealth;
 
     protected bool isDead = false;
-    public bool IsDead { get { return isDead; } }
+    public bool IsDead => isDead;
 
     protected Rigidbody2D rigid;
     protected SpriteRenderer spriter;
+
+    private bool isDealingDamage = false;  // í˜„ì¬ ë°ë¯¸ì§€ë¥¼ ì£¼ê³  ìˆëŠ”ì§€ í™•ì¸
 
     protected virtual void Awake()
     {
@@ -62,7 +64,21 @@ public abstract class EnemyAI : MonoBehaviour
         rigid.MovePosition(rigid.position + (Vector2)movement);
     }
 
-    // ÇÇ°İ ½Ã È£ÃâµÇ´Â ¸Ş¼­µå
+    // í”Œë ˆì´ì–´ì™€ ì¶©ëŒ ì¤‘ì¼ ë•Œ ì¼ì • ê°„ê²©ìœ¼ë¡œ ë°ë¯¸ì§€ë¥¼ ì¤Œ
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!isDead && collision.CompareTag("Player"))
+        {
+            PlayerStats playerStats = collision.GetComponent<PlayerStats>();
+            if (playerStats != null && !isDealingDamage)
+            {
+                playerStats.OnDamaged(120);
+            }
+        }
+    }
+
+
+    // ëª¬ìŠ¤í„°ê°€ ë°ë¯¸ì§€ë¥¼ ë°›ìŒ
     public virtual void TakeDamage(int damage)
     {
         if (isDead) return;
@@ -70,7 +86,6 @@ public abstract class EnemyAI : MonoBehaviour
         currentHealth -= damage;
         Debug.Log($"{gameObject.name} took damage: {damage}. Remaining health: {currentHealth}");
 
-        // »¡°£ ÇÃ·¡½Ã ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı (ÇÇ°İ È¿°ú)
         if (enemyAnimator != null)
         {
             enemyAnimator.SetTrigger("Hit");
@@ -82,28 +97,38 @@ public abstract class EnemyAI : MonoBehaviour
         }
     }
 
-    // »ç¸Á Ã³¸® ¸Ş¼­µå
     protected virtual void Die()
     {
         if (isDead) return;
         isDead = true;
 
-        // Åõ¸íÇØÁö´Â »ç¸Á ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
         if (enemyAnimator != null)
         {
             enemyAnimator.SetTrigger("Die");
         }
 
-        // Ãß°İ ¸ØÃß±â: FixedUpdate¿¡¼­ isDead Ã¼Å©·Î Ã³¸®µÊ
-
-        // Ãß°¡ Ãæµ¹¿¡ ÀÇÇØ µ¥¹ÌÁö°¡ ´õ µé¾î°¡Áö ¾Êµµ·Ï Collider ºñÈ°¼ºÈ­
         Collider2D col = GetComponent<Collider2D>();
         if (col != null)
         {
             col.enabled = false;
         }
 
-        // »ç¸Á ÈÄ ÀÏÁ¤ ½Ã°£ ÈÄ ¿ÀºêÁ§Æ® Á¦°Å (¼±ÅÃ »çÇ×)
+        GiveExpToPlayer();
+
         Destroy(gameObject, 2f);
+    }
+
+
+    //í”Œë ˆì´ì–´ì—ê²Œ ê²½í—˜ì¹˜ ì£¼ê¸°
+    private void GiveExpToPlayer()
+    {
+        if (target != null)
+        {
+            PlayerStats playerStats = target.GetComponent<PlayerStats>();
+            if (playerStats != null)
+            {
+                playerStats.IncreaseExp(exp);
+            }
+        }
     }
 }

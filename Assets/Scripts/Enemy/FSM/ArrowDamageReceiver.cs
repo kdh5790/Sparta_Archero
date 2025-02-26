@@ -37,9 +37,11 @@ public class ArrowDamageReceiver : MonoBehaviour
         {
             if (!enemy.IsDead)
             {
+                /*
                 int damage = arrow.DamageValue;
                 Debug.Log($"데미지값 받아옴 (딜레이): {damage}");
                 enemy.TakeDamage(damage);
+                */
 
                 ArrowManager arrowManager = arrow.GetComponentInParent<ArrowManager>();
                 if (arrowManager != null)

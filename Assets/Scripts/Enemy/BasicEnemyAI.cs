@@ -14,6 +14,7 @@ public class BasicEnemyAI : EnemyAI
     [SerializeField] public float instanceSpeed;
     [SerializeField] public int instanceExp;
 
+
     // 인스턴스 초기화 여부 (한 번만 기본값 적용)
     private bool initialized = false;
 
@@ -41,17 +42,18 @@ public class BasicEnemyAI : EnemyAI
     }
 #endif
 
-    // ScriptableObject의 기본값을 인스턴스 변수에 적용하고, 부모 체력도 설정
+    
     void ApplyDefaults()
     {
         instanceHealth = enemyStat.health;
         instanceAttack = enemyStat.attack;
         instanceDefense = enemyStat.defense;
         instanceSpeed = enemyStat.speed;
-        instanceExp = enemyStat.exp;
+        instanceExp = enemyStat.exp;  // 경험치 값 추가
 
         maxHealth = enemyStat.health;
         currentHealth = enemyStat.health;
+        exp = enemyStat.exp;  // 경험치 적용
     }
 
     // 부모의 MoveTowardsTarget 대신 instanceSpeed를 사용하여 이동
