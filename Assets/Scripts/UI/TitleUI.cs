@@ -20,11 +20,11 @@ public class TitleUI : BaseUI
 
         startBtn = transform.Find("StartButton").GetComponent<Button>();
         exitBtn = transform.Find("ExitButton").GetComponent<Button>();
-        optionBtn = transform.Find("OptionButton").GetComponent<Button>();
+        optionBtn = transform.Find("SettingButton").GetComponent<Button>();
 
         startBtn.onClick.AddListener(OnClickStartButton);
         exitBtn.onClick.AddListener(OnClickExitButton);
-        optionBtn.onClick.AddListener(OnClickOptionButton);
+        optionBtn.onClick.AddListener(OnClickSettingButton);
 
     }
 
@@ -39,8 +39,8 @@ public class TitleUI : BaseUI
         uiManager.OnClickExit();
     }
 
-    public void OnClickOptionButton()
+    public void OnClickSettingButton()
     {
-        Debug.Log("¹Ì±¸Çö");
+        uiManager.OnClickSetting();
     }
 }

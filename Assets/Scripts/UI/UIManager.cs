@@ -17,7 +17,9 @@ public enum UIState
     DungeonClear, //5
     ChestReward, //6
     BossReward, //7
-    Pause
+    Pause, //8
+    Setting, //9
+    ColorChange //10
 }
 
 public enum DungeonState
@@ -33,6 +35,7 @@ public enum DungeonState
 public class UIManager : MonoBehaviour
 {
     UIState currentState = UIState.Title;
+    UIState prevState = UIState.Title;
     DungeonState dungeonState = DungeonState.Dungeon1;
 
     TitleUI titleUI = null;
@@ -44,6 +47,8 @@ public class UIManager : MonoBehaviour
     ChestRewardUI chestRewardUI = null;
     BossRewardUI bossRewardUI = null;
     PauseUI pauseUI = null;
+    SettingUI settingUI = null;
+    ChangeColorUI changeColorUI = null;
 
     GameObject Dungeon1 = null;
 
@@ -100,6 +105,10 @@ public class UIManager : MonoBehaviour
         bossRewardUI?.Init(this);
         pauseUI = GetComponentInChildren<PauseUI>(true);
         pauseUI?.Init(this);
+        settingUI = GetComponentInChildren<SettingUI>(true);
+        settingUI?.Init(this);
+        changeColorUI = GetComponentInChildren<ChangeColorUI>(true);
+        changeColorUI?.Init(this);
 
         Dungeon1 = transform.Find("LobbyUI").transform.Find("Dungeon1").gameObject; //stage1과 stage2 ui 오브젝트를 찾아줘서 할당
         Dungeon2 = transform.Find("LobbyUI").transform.Find("Dungeon2").gameObject; //transform.Find로 찾아 들어가 주는 게 포인트
@@ -120,6 +129,8 @@ public class UIManager : MonoBehaviour
         chestRewardUI?.SetActive(currentState);
         bossRewardUI?.SetActive(currentState);
         pauseUI?.SetActive(currentState);
+        settingUI?.SetActive(currentState);
+        changeColorUI.SetActive(currentState);
     }
 
     public void ChangeDungeonState(DungeonState state) //아래에서 해당하는 stage를 찾아서 on off 해줌
@@ -185,7 +196,15 @@ public class UIManager : MonoBehaviour
             ChangeDungeonState(dungeonState - 1); //이전 스테이지로
         }
     }
+    public void OnClickChangeColor()
+    {
+        ChangeState(UIState.ColorChange);
+    }
 
+    public void OnClickChangeColorCancel()
+    {
+        ChangeState(UIState.Lobby);
+    }
 
     //Game 내부
 
@@ -225,8 +244,8 @@ public class UIManager : MonoBehaviour
     public void LevelUpUI() //레벨업 기능 구현
     {
         isComplete = false;
-        coroutine = WaitAndPrint(0.5f); //반환값 IEnumerator를 저장해둔다.
-        StartCoroutine(coroutine); //0.5초가 지난후 레벨업 시작
+        coroutine = LevelUpDelay(1.0f); //반환값 IEnumerator를 저장해둔다.
+        StartCoroutine(coroutine); //1초가 지난후 레벨업 시작
     }
 
     public void OnClickSkillSelected()
@@ -234,6 +253,17 @@ public class UIManager : MonoBehaviour
         isComplete = true;
         Debug.Log("스킬선택완료");
         ChangeState(UIState.Game); //레벨업시 스킬 얻는 과정을 거친 후 다시 인게임 ui on
+    }
+
+    private IEnumerator LevelUpDelay(float waitTime)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(waitTime); //waitTime 만큼 딜레이후 다음 코드가 실행된다.
+            levelUpUI.SkillSelectOn();
+            ChangeState(UIState.LevelUp);
+            break;
+        }
     }
 
     //GameOver내부
@@ -250,17 +280,6 @@ public class UIManager : MonoBehaviour
 
         SceneManager.LoadScene("UIScene"); 
         ChangeState(UIState.Lobby);
-    }
-
-    private IEnumerator WaitAndPrint(float waitTime)
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(waitTime); //waitTime 만큼 딜레이후 다음 코드가 실행된다.
-            levelUpUI.SkillSelectOn();
-            ChangeState(UIState.LevelUp); //레벨업 ui 활성화
-            break;
-        }
     }
 
 
@@ -281,6 +300,46 @@ public class UIManager : MonoBehaviour
 
         SceneManager.LoadScene("UIScene");
         ChangeState(UIState.Lobby);
+    }
+
+    //ChestReward 내부
+
+    public void ChestTriggered()
+    {
+        isComplete = false;
+        coroutine = ChestRewardDelay(1.0f);
+        StartCoroutine(coroutine);
+    }
+
+    public void OnClickChestSelected()
+    {
+        isComplete = true;
+        ChangeState(UIState.Game);
+        Debug.Log("스킬선택완료");
+    }
+
+    private IEnumerator ChestRewardDelay(float waitTime)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(waitTime); //waitTime 만큼 딜레이후 다음 코드가 실행된다.
+            ChangeState(UIState.ChestReward);
+            chestRewardUI.SkillSelectOn();
+            break;
+        }
+    }
+    
+    //Setting 내부
+
+    public void OnClickSetting()
+    {
+        prevState = currentState; //Setiing에서 Back 버튼을 누르면 이전 ui로 돌아가게 하기 위함
+        ChangeState(UIState.Setting);
+    }
+
+    public void OnClickBackSetting()
+    {
+        ChangeState(prevState);
     }
 
 }
