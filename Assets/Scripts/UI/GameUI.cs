@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameUI : BaseUI
 {
     public TextMeshProUGUI dungeonTxt;
     public GameObject playerBar;
+    public Button pauseBtn = null;
 
     public RectTransform hpFront; //해당 변수는 유니티에서 할당해줌
     public RectTransform expFront; //해당 변수는 유니티에서 할당해줌 스크립트 컴포넌트 참고
@@ -22,6 +24,9 @@ public class GameUI : BaseUI
 
         dungeonTxt = transform.Find("DungeonTxt").GetComponent<TextMeshProUGUI>();
         playerBar = transform.Find("PlayerBar").gameObject;
+        pauseBtn = transform.Find("PauseButton").GetComponent<Button>();
+        pauseBtn.onClick.AddListener(OnClickPauseUI);
+        
     }
 
     public void SetDungeonUI(DungeonState state)
@@ -53,6 +58,11 @@ public class GameUI : BaseUI
         {
             expFront.localScale = new Vector3(current / max, 1.0f, 1.0f);
         }
+    }
+
+    public void OnClickPauseUI()
+    {
+        uiManager.OnClickPause();
     }
 
 }

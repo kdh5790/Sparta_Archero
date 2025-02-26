@@ -16,7 +16,8 @@ public enum UIState
     GameOver, //4
     DungeonClear, //5
     ChestReward, //6
-    BossReward //7
+    BossReward, //7
+    Pause
 }
 
 public enum DungeonState
@@ -42,6 +43,7 @@ public class UIManager : MonoBehaviour
     DungeonClearUI dungeonClearUI = null;
     ChestRewardUI chestRewardUI = null;
     BossRewardUI bossRewardUI = null;
+    PauseUI pauseUI = null;
 
     GameObject Dungeon1 = null;
 
@@ -94,6 +96,8 @@ public class UIManager : MonoBehaviour
         chestRewardUI?.Init(this);
         bossRewardUI = GetComponentInChildren<BossRewardUI>(true);
         bossRewardUI?.Init(this);
+        pauseUI = GetComponentInChildren<PauseUI>(true);
+        pauseUI?.Init(this);
 
         Dungeon1 = transform.Find("LobbyUI").transform.Find("Dungeon1").gameObject; //stage1과 stage2 ui 오브젝트를 찾아줘서 할당
         Dungeon2 = transform.Find("LobbyUI").transform.Find("Dungeon2").gameObject; //transform.Find로 찾아 들어가 주는 게 포인트
@@ -113,6 +117,7 @@ public class UIManager : MonoBehaviour
         dungeonClearUI?.SetActive(currentState);
         chestRewardUI?.SetActive(currentState);
         bossRewardUI?.SetActive(currentState);
+        pauseUI?.SetActive(currentState);
     }
 
     public void ChangeDungeonState(DungeonState state) //아래에서 해당하는 stage를 찾아서 on off 해줌
@@ -202,6 +207,12 @@ public class UIManager : MonoBehaviour
         gameUI.SetPlayerExpUI(maxExp,currentExp);
     }
 
+    public void OnClickPause() //pause 버튼을 누른 경우
+    {
+        Time.timeScale = 0.0f;
+        ChangeState(UIState.Pause);
+    }
+
     //LevelUp내부
 
     public void LevelUpUI() //레벨업 기능 구현
@@ -241,6 +252,26 @@ public class UIManager : MonoBehaviour
             ChangeState(UIState.LevelUp); //레벨업 ui 활성화
             break;
         }
+    }
+
+
+    //Pause 내부
+
+    public void OnClickContinue() //계속해서 게임
+    {
+        Time.timeScale = 1.0f;
+        ChangeState(UIState.Game);
+    }
+
+    public void OnClickLobby() //게임 종료후 로비로 이동
+    {
+        Time.timeScale = 1.0f;
+
+        Destroy(GameManager.Instance.player);
+        Destroy(GameManager.Instance.playerManager);
+
+        SceneManager.LoadScene("UIScene");
+        ChangeState(UIState.Lobby);
     }
 
 }
