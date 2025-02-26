@@ -21,7 +21,12 @@ public class EnemyAIHpUI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        hpFront.localScale = new Vector3(enemy.CurrentHealth / enemy.MaxHealth, temp.y, temp.z);
+        float cup = enemy.CurrentHealth / enemy.MaxHealth * temp.x;
+        if(cup < 0)
+        {
+            cup = 0;
+        }
+        hpFront.localScale = new Vector3(cup, temp.y, temp.z);
     }
 
 }

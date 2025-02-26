@@ -319,10 +319,11 @@ MonoBehaviour:
   speed: 3
   target: {fileID: 0}
   maxHealth: 920
+  exp: 110
   enemyAnimator: {fileID: 0}
   enemyStat: {fileID: 11400000, guid: 0a12a8eb1b3b3bb488668258039e21c2, type: 2}
   instanceHealth: 920
   instanceAttack: 3
   instanceDefense: 1
-  instanceSpeed: 3
-  instanceExp: 3
+  instanceSpeed: 0.9
+  instanceExp: 110
