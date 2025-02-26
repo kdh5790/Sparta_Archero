@@ -213,6 +213,11 @@ public class UIManager : MonoBehaviour
         ChangeState(UIState.Pause);
     }
 
+    public void StageShift() //스테이지가 변경되면 스테이지 이름을 바꾸시오
+    {
+        gameUI.ChangeStageName();
+    }
+
     //LevelUp내부
 
     public void LevelUpUI() //레벨업 기능 구현

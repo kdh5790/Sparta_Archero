@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameUI : BaseUI
 {
     public TextMeshProUGUI dungeonTxt;
+    public TextMeshProUGUI stageTxt;
     public GameObject playerBar;
     public Button pauseBtn = null;
 
@@ -18,11 +20,20 @@ public class GameUI : BaseUI
         return UIState.Game;
     }
 
+    // 테스트용 나중에 파기할 것!!!!!!!!!!!!!!!!!
+    private void FixedUpdate() 
+    {
+        ChangeStageName();
+    }
+
+    // 테스트용 나중에 파기할 것!!!!!!!!!!!!!!!!!
+
     public override void Init(UIManager uiManager)
     {
         base.Init(uiManager); //ui manager 실행
 
         dungeonTxt = transform.Find("DungeonTxt").GetComponent<TextMeshProUGUI>();
+        stageTxt = transform.Find("StageTxt").GetComponent<TextMeshProUGUI>();
         playerBar = transform.Find("PlayerBar").gameObject;
         pauseBtn = transform.Find("PauseButton").GetComponent<Button>();
         pauseBtn.onClick.AddListener(OnClickPauseUI);
@@ -63,6 +74,11 @@ public class GameUI : BaseUI
     public void OnClickPauseUI()
     {
         uiManager.OnClickPause();
+    }
+
+    public void ChangeStageName()
+    {
+        stageTxt.text = SceneManager.GetActiveScene().name;
     }
 
 }
