@@ -179,7 +179,7 @@ public class UIManager : MonoBehaviour
 
         if(dungeonState == DungeonState.Dungeon1)
         {
-            SceneManager.LoadScene("Stage_5");
+            SceneManager.LoadScene("Stage_1");
         }
 
         if(dungeonState == DungeonState.Dungeon2)
