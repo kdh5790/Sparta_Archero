@@ -218,6 +218,11 @@ public class UIManager : MonoBehaviour
 
     //Game ³»ºÎ
 
+    public void UpdateStageName()
+    {
+        gameUI.ChangeStageName();
+    }
+
     public void UpdateClearTime(float time)
     {
         gameUI.UpdateClearTimeText(time);

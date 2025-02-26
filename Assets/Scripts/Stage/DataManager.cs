@@ -7,6 +7,7 @@ public class DataManager : MonoBehaviour
     public static DataManager Instance;
 
     public readonly string ColorKey = "SaveColor";
+    public readonly string BoxOpenKey = "SaveBoxOpen";
 
     private void Awake()
     {
@@ -53,5 +54,38 @@ public class DataManager : MonoBehaviour
         }
 
         return loadedColor;
+    }
+
+    public void SaveBoxOpen(int count)
+    {
+        try
+        {
+            PlayerPrefs.SetInt(BoxOpenKey, count);
+            PlayerPrefs.Save();
+        }
+        catch
+        {
+            Debug.Log("박스 열람 횟수 저장 실패.");
+            return;
+        }
+    }
+
+    public int LoadBoxOpen()
+    {
+        int count = 0;
+
+        try
+        {
+            if (PlayerPrefs.GetInt(BoxOpenKey) != null)
+                count = PlayerPrefs.GetInt(BoxOpenKey);
+            else
+                count = 0;
+        }catch
+        {
+            Debug.Log("박스 열람 횟수 불러오기 실패.");
+            return 0;
+        }
+
+        return count;
     }
 }
