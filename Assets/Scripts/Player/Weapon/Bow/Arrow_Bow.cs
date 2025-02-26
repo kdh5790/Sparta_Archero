@@ -58,8 +58,6 @@ public class Arrow_Bow : MonoBehaviour
                 {
                     enemy.TakeDamage((int)enemy.maxHealth);
                     Debug.Log("헤드샷 O");
-                    GetComponentInParent<ArrowManager>().ReturnArrow(gameObject);
-                    return;
                 }
                 else
                     Debug.Log("헤드샷 X");
@@ -97,6 +95,8 @@ public class Arrow_Bow : MonoBehaviour
             // 멀티샷 스킬을 보유중이라면 최종 데미지 10% 감소
             if (bow.IsMultiShot)
                 damage = (int)(damage * 0.9f);
+
+            Debug.Log(isCritical ? $"적 충돌 | 크리티컬 데미지 : {damage}" : $"적 충돌 | 데미지 : {damage}");
 
             // 적에게 데미지 주기
             if (enemy != null)
