@@ -165,7 +165,7 @@ public class UIManager : MonoBehaviour
     {
         UpdatePlayerDungeon();  //어떤 스테이지를 눌렀는지 보여줄 것
         ChangeState(UIState.Game); //게임이 시작됐으니 게임 UI로 변경
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Stage_6-Box");
         GameManager.Instance.GameStart();
         //스테이지가 추가 된다면 이부분을 수정할 것
     }
