@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,38 +7,38 @@ using UnityEngine;
 
 public class Weapon_Bow : MonoBehaviour
 {
-    private int damage = 200;
+    private int damage = 200; // ë°ë¯¸ì§€
     public int Damage { get { return damage; } set { damage = value; } }
 
-    private float attackSpeed = 1f;
+    private float attackSpeed = 1f; // ê³µê²©ì†ë„(ì• ë‹ˆë©”ì´ì…˜ ì†ë„ë¡œ ì¡°ì ˆ)
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
 
-    private float criticalDamage = 2f;
+    private float criticalDamage = 2f; // í¬ë¦¬í‹°ì»¬ ë°ë¯¸ì§€
     public float CriticalDamage { get { return criticalDamage; } set { criticalDamage = value; } }
 
-    private int criticalChance = 10;
+    private int criticalChance = 10; // í¬ë¦¬í‹°ì»¬ í™•ë¥ 
     public int CriticalChance { get { return criticalChance; } set { criticalChance = value; } }
 
-    private bool isPiercingShot = false;
+    private bool isPiercingShot = false; // ê´€í†µ ìŠ¤í‚¬ ë³´ìœ  ì—¬ë¶€
     public bool IsPiercingShot { get { return isPiercingShot; } set { isPiercingShot = value; } }
 
-    private bool isRebound = false;
+    private bool isRebound = false; // ë°˜ë™ ìŠ¤í‚¬ ë³´ìœ  ì—¬ë¶€
     public bool IsRebound { get { return isRebound; } set { isRebound = value; } }
 
-    private bool isMultiShot = false;
+    private bool isMultiShot = false; // ë©€í‹°ìƒ· ìŠ¤í‚¬ ë³´ìœ  ì—¬ë¶€
     public bool IsMultiShot { get { return isMultiShot; } set { isMultiShot = value; } }
 
-    private bool isRage = false;
+    private bool isRage = false; // ë¶„ë…¸ ìŠ¤í‚¬ ë³´ìœ  ì—¬ë¶€
     public bool IsRage { get { return isRage; } set { isRage = value; } }
 
-    private bool isHeadShot = false;
+    private bool isHeadShot = false; // í—¤ë“œìƒ· ìŠ¤í‚¬ ë³´ìœ  ì—¬ë¶€
     public bool IsHeadShot { get { return isHeadShot; } set { isHeadShot = value; } }
 
 
-    private const float KnockBackPower = 1f;
+    private const float KnockBackPower = 1f; // ë„‰ë°± ì‹œ ê°€í•  í˜
 
-    public List<BasicEnemyAI> enemyList = new List<BasicEnemyAI>(); // ÇÊµåÀÇ ÀûµéÀ» ´ãÀ» ¸®½ºÆ®
-    public BasicEnemyAI target; // °ø°İÇØ¾ß ÇÒ Å¸°Ù
+    public List<BasicEnemyAI> enemyList = new List<BasicEnemyAI>(); // í•„ë“œì˜ ì ë“¤ì„ ë‹´ì„ ë¦¬ìŠ¤íŠ¸
+    public BasicEnemyAI target; // ê³µê²©í•´ì•¼ í•  íƒ€ê²Ÿ
 
     [SerializeField] private SpriteRenderer attakSpeedAuroraSprite;
     [SerializeField] private SpriteRenderer criticalAuroraSprite;
@@ -63,18 +63,18 @@ public class Weapon_Bow : MonoBehaviour
 
         LookAtTarget();
 
-        // ÇÃ·¹ÀÌ¾î°¡ ¸ØÃçÀÖÀ½ + Å¸°ÙÀÌ ÀÖÀ½ + ¸ØÃß°í ÀÏÁ¤½Ã°£ÀÌ Áö³²
+        // í”Œë ˆì´ì–´ê°€ ë©ˆì¶°ìˆìŒ + íƒ€ê²Ÿì´ ìˆìŒ + ë©ˆì¶”ê³  ì¼ì •ì‹œê°„ì´ ì§€ë‚¨
         if (!playerController.isMove && target != null && playerController.stopTime > 0.2f && !PlayerManager.instance.isDead)
             animator.SetBool("IsAttack", true);
         else
             animator.SetBool("IsAttack", false);
     }
 
-    // ÇöÀç È°¼ºÈ­ µÈ Àûµé Ã£¾Æ¿À±â
+    // í˜„ì¬ í™œì„±í™” ëœ ì ë“¤ ì°¾ì•„ì˜¤ê¸°
     public void UpdateEnemyList() => enemyList = FindObjectsOfType<BasicEnemyAI>().Where(x => x.CompareTag("Enemy") && !x.IsDead).ToList();
 
 
-    // °¡Àå °¡±î¿î Àû Ã£±â
+    // ê°€ì¥ ê°€ê¹Œìš´ ì  ì°¾ê¸°
     public BasicEnemyAI FindTarget(Transform _transform = null, GameObject _enemy = null)
     {
         UpdateEnemyList();
@@ -85,17 +85,17 @@ public class Weapon_Bow : MonoBehaviour
 
         foreach (BasicEnemyAI obj in enemyList)
         {
-            // È­»ìÀÇ ´ÙÀ½Å¸°ÙÀ» Ã£À» °æ¿ì ÇöÀç ÀÚ½Å(È­»ì)ÀÇ Å¸°ÙÀº ³Ñ¾î°¡±â
+            // í™”ì‚´ì˜ ë‹¤ìŒíƒ€ê²Ÿì„ ì°¾ì„ ê²½ìš° í˜„ì¬ ìì‹ (í™”ì‚´)ì˜ íƒ€ê²Ÿì€ ë„˜ì–´ê°€ê¸°
             if (_enemy != null && obj.name == _enemy.name || obj.IsDead)
                 continue;
 
             float distance = 0;
 
-            // ÇÃ·¹ÀÌ¾î¿Í °¡Àå °¡±î¿î Àû Ã£±â
+            // í”Œë ˆì´ì–´ì™€ ê°€ì¥ ê°€ê¹Œìš´ ì  ì°¾ê¸°
             if (_transform == null)
                 distance = Vector3.Distance(obj.transform.position, transform.position);
 
-            // ¹İµ¿ ½ºÅ³ º¸À¯ ½Ã È­»ìÀÇ ´ÙÀ½ Å¸°Ù Ã£±â
+            // ë°˜ë™ ìŠ¤í‚¬ ë³´ìœ  ì‹œ í™”ì‚´ì˜ ë‹¤ìŒ íƒ€ê²Ÿ ì°¾ê¸°
             else
                 distance = Vector3.Distance(obj.transform.position, _transform.position);
 
@@ -109,35 +109,35 @@ public class Weapon_Bow : MonoBehaviour
         return go;
     }
 
-    // Å¸°Ù ¹Ù¶óº¸±â
+    // íƒ€ê²Ÿ ë°”ë¼ë³´ê¸°
     private void LookAtTarget()
     {
         if (target == null) return;
-        // ¹Ù¶óº¸´Â ¹æÇâ ±¸ÇÏ±â
+        // ë°”ë¼ë³´ëŠ” ë°©í–¥ êµ¬í•˜ê¸°
         Vector2 direction = target.transform.position - transform.position;
 
-        // ¹æÇâ °¢µµ °è»ê ÈÄ ¶óµğ¾È °ªÀ» µµ ´ÜÀ§·Î º¯È¯
+        // ë°©í–¥ ê°ë„ ê³„ì‚° í›„ ë¼ë””ì•ˆ ê°’ì„ ë„ ë‹¨ìœ„ë¡œ ë³€í™˜
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // Z È¸Àü°ªÀ¸·Î Å¸°Ù ¹Ù¶óº¸±â
+        // Z íšŒì „ê°’ìœ¼ë¡œ íƒ€ê²Ÿ ë°”ë¼ë³´ê¸°
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    // °ø°İ(¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®·Î È£Ãâ)
+    // ê³µê²©(ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ë¡œ í˜¸ì¶œ)
     private void Attack()
     {
         if (target != null)
             PlayerManager.instance.arrowManager.StartShootDelegate(target.gameObject);
     }
 
-    // °ø°İ¼Óµµ Áõ°¡
+    // ê³µê²©ì†ë„ ì¦ê°€
     public void IncreasedAttackSpeed(float speed)
     {
         AttackSpeed += speed;
         animator.speed = AttackSpeed;
     }
 
-    // Å©¸®Æ¼ÄÃ È®ÀÎ
+    // í¬ë¦¬í‹°ì»¬ í™•ì¸
     public bool CalculateCriticalChance()
     {
         int randNum = UnityEngine.Random.Range(0, 100);
@@ -145,11 +145,13 @@ public class Weapon_Bow : MonoBehaviour
         return randNum < criticalChance;
     }
 
+    // ë„‰ë°± ì½”ë£¨í‹´ ì‹œì‘(í™”ì‚´ ìŠ¤í¬ë¦½íŠ¸ì—ì„œ í˜¸ì¶œ)
     public void KnockBackEnemy(Transform enemy, Vector3 arrowPos)
     {
         StartCoroutine(ApplyKnockBackCoroutine(enemy, arrowPos));
     }
 
+    // í™”ì‚´ì— ì ì¤‘í•œ ì  ë„‰ë°±
     public IEnumerator ApplyKnockBackCoroutine(Transform enemy, Vector3 arrowPos)
     {
         Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
@@ -167,6 +169,7 @@ public class Weapon_Bow : MonoBehaviour
         enemyRb.bodyType = RigidbodyType2D.Kinematic;
     }
 
+    // ê³µê²© ì†ë„ ì˜¤ë¡œë¼ ìŠ¤í‚¬ ì ìš© ì½”ë£¨í‹´
     public IEnumerator ApplyAttackSpeedAurora()
     {
         skillCoroutineArr[0] = ApplyAttackSpeedAurora();
@@ -185,6 +188,7 @@ public class Weapon_Bow : MonoBehaviour
         }
     }
 
+    // í¬ë¦¬í‹°ì»¬ ì˜¤ë¡œë¼ ìŠ¤í‚¬ ì ìš© ì½”ë£¨í‹´
     public IEnumerator ApplyCriticalAurora()
     {
         skillCoroutineArr[1] = ApplyCriticalAurora();
@@ -203,7 +207,7 @@ public class Weapon_Bow : MonoBehaviour
         }
     }
 
-    // ½ºÅ³ ÄÚ·çÆ¾ Áß´Ü(»ç¸Á ½Ã È£Ãâ)
+    // ìŠ¤í‚¬ ì½”ë£¨í‹´ ì¤‘ë‹¨(ì‚¬ë§ ì‹œ í˜¸ì¶œ)
     public void StopBowSkillCoroutine()
     {
         foreach (var skillCoroutine in skillCoroutineArr)
@@ -213,6 +217,7 @@ public class Weapon_Bow : MonoBehaviour
         }
     }
 
+    // ì²« íƒ€ê²Ÿì„ ì°¾ì„ ë•Œ ìƒëª…ì£¼ê¸° ë•Œë¬¸ì— íƒ€ê²Ÿì„ ì°¾ì§€ ëª»í•˜ëŠ” ë²„ê·¸ í•´ê²°ìš©
     private IEnumerator FindFirstTarget()
     {
         yield return new WaitForSeconds(0.5f);

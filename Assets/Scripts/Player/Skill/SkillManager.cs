@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -7,8 +7,8 @@ public class SkillManager : MonoBehaviour
 {
     public static SkillManager instance;
 
-    public List<SkillInfo> skillTable;
-    public List<SkillInfo> playerSkillList = new List<SkillInfo>();
+    public List<SkillInfo> skillTable; // ìŠ¤í‚¬ ë½‘ê¸° ì‹œ ë“±ì¥ í•  ìŠ¤í‚¬ ë¦¬ìŠ¤íŠ¸
+    public List<SkillInfo> playerSkillList = new List<SkillInfo>(); // í”Œë ˆì´ì–´ê°€ ë³´ìœ í•œ ìŠ¤í‚¬ í™•ì¸ìš© ë¦¬ìŠ¤íŠ¸
 
     private const int maxHP = 600;
 
@@ -20,7 +20,7 @@ public class SkillManager : MonoBehaviour
 
     private void Update()
     {
-        // Å×½ºÆ®¿ë
+        // í…ŒìŠ¤íŠ¸ìš©
         if (Input.GetKeyDown(KeyCode.Space))
         {
             List<SkillInfo> skills = SkillGacha();
@@ -32,7 +32,7 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    // ·£´ıÇÑ ½ºÅ³ 3°³¸¦ ¸®½ºÆ®·Î ¹İÈ¯
+    // ëœë¤í•œ ìŠ¤í‚¬ 3ê°œë¥¼ ë¦¬ìŠ¤íŠ¸ë¡œ ë°˜í™˜
     public List<SkillInfo> SkillGacha()
     {
         List<SkillInfo> rndSkillList = new List<SkillInfo>();
@@ -64,7 +64,7 @@ public class SkillManager : MonoBehaviour
         return rndSkillList;
     }
 
-    // ½ºÅ³ Àû¿ëÇÏ±â
+    // ìŠ¤í‚¬ ì ìš©í•˜ê¸°
     public void ApplySkill(SkillInfo info)
     {
         switch (info.SkillID)
@@ -145,7 +145,7 @@ public class SkillManager : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("¾ÆÁ÷ ±¸Çö X");
+                Debug.Log("ì•„ì§ êµ¬í˜„ X");
                 break;
         }
 
@@ -155,18 +155,18 @@ public class SkillManager : MonoBehaviour
         playerSkillList.Add(info);
     }
 }
-    //// Å×½ºÆ® ¿ë
+    //// í…ŒìŠ¤íŠ¸ ìš©
     //public SkillInfo GetRandomSkill()
     //{
     //    int randomNum = Random.Range(0, skillTable.Count);
 
     //    SkillInfo skill = skillTable[randomNum];
 
-    //    // ÀçÈ¹µæ ºÒ°¡´É ½ºÅ³ÀÌ¶ó¸é ½ºÅ³Å×ÀÌºí¿¡¼­ »èÁ¦
+    //    // ì¬íšë“ ë¶ˆê°€ëŠ¥ ìŠ¤í‚¬ì´ë¼ë©´ ìŠ¤í‚¬í…Œì´ë¸”ì—ì„œ ì‚­ì œ
     //    if (!skill.IsReacquirable)
     //        skillTable.RemoveAt(randomNum);
 
-    //    // ½ºÅ³ Ã¼Å©¿ë ÀÓ½Ã
+    //    // ìŠ¤í‚¬ ì²´í¬ìš© ì„ì‹œ
     //    playerSkillList.Add(skill);
     //    ApplySkill(skill);
 

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -21,18 +21,19 @@ public class PlayerStats : MonoBehaviour
     private int maxHealth;
     public int MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
 
-    private float speed;
+    private float speed; // ì´ë™ì†ë„
     public float Speed { get { return speed; } set { speed = value; } }
 
-    private int dodgeChance;
+    private int dodgeChance; // íšŒí”¼ í™•ë¥ 
     public int DodgeChance { get { return dodgeChance; } set { dodgeChance = value; } }
 
-    private bool isInvincivility;
+    private bool isInvincivility; // ë¬´ì  íŒì • ì—¬ë¶€
     public bool IsInvincivility { get { return isInvincivility; } set { isInvincivility = value; } }
 
     private SpriteRenderer sprite;
     private IEnumerator invincibilityCoroutine;
 
+    // í”Œë ˆì´ì–´ ìŠ¤íƒ¯ ì´ˆê¸°í™”
     public void InitPlayerStats()
     {
         level = 1; currentExp = 0; maxExp = 100; currentHealth = 600; maxHealth = 600; speed = 3f;
@@ -46,7 +47,7 @@ public class PlayerStats : MonoBehaviour
             OnDamaged(300);
         }
 
-        if (Input.GetKeyDown(KeyCode.P)) //ui Å×½ºÆ®¿ëÀÔ´Ï´Ù
+        if (Input.GetKeyDown(KeyCode.P)) //ui í…ŒìŠ¤íŠ¸ìš©ì…ë‹ˆë‹¤
         {
             IncreaseExp(30);
         }
@@ -57,24 +58,25 @@ public class PlayerStats : MonoBehaviour
     {
         if (!PlayerManager.instance.isDead)
         {
-            if (UIManager.Instance != null) // <-- Ãæµ¹³ª¼­ ÀÓ½Ã·Î null ÇØµ×¾î¿ä.
-                UIManager.Instance.UpdatePlayerHP(maxHealth, currentHealth); //ÇÃ·¹ÀÌ¾î ui ¾÷µ¥ÀÌÆ®¿ë
-            if (UIManager.Instance != null) // <-- Ãæµ¹³ª¼­ ÀÓ½Ã·Î null ÇØµ×¾î¿ä.
-                UIManager.Instance.UpdatePlayerExp(maxExp, currentExp); //ÇÃ·¹ÀÌ¾î ui ¾÷µ¥ÀÌÆ®¿ë
+            if (UIManager.Instance != null) // <-- ì¶©ëŒë‚˜ì„œ ì„ì‹œë¡œ null í•´ë’€ì–´ìš”.
+                UIManager.Instance.UpdatePlayerHP(maxHealth, currentHealth); //í”Œë ˆì´ì–´ ui ì—…ë°ì´íŠ¸ìš©
+            if (UIManager.Instance != null) // <-- ì¶©ëŒë‚˜ì„œ ì„ì‹œë¡œ null í•´ë’€ì–´ìš”.
+                UIManager.Instance.UpdatePlayerExp(maxExp, currentExp); //í”Œë ˆì´ì–´ ui ì—…ë°ì´íŠ¸ìš©
         }
     }
 
+    // ë°ë¯¸ì§€ ì…ì—ˆì„ ì‹œ í˜¸ì¶œ
     public void OnDamaged(int damage)
     {
         if (IsInvincivility)
         {
-            Debug.Log($"¹«Àû »óÅÂÀÌ¹Ç·Î {damage}ÀÇ µ¥¹ÌÁö¸¦ ÀÔÁö ¾Ê½À´Ï´Ù.");
+            Debug.Log($"ë¬´ì  ìƒíƒœì´ë¯€ë¡œ {damage}ì˜ ë°ë¯¸ì§€ë¥¼ ì…ì§€ ì•ŠìŠµë‹ˆë‹¤.");
             return;
         }
 
         if (Random.Range(0, 100) < DodgeChance)
         {
-            Debug.Log("È¸ÇÇ¿¡ ¼º°øÇß½À´Ï´Ù.");
+            Debug.Log("íšŒí”¼ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.");
             return;
         }
 
@@ -90,6 +92,7 @@ public class PlayerStats : MonoBehaviour
         StartCoroutine(ApplyInvincibilityAfterDamage());
     }
 
+    // ê²½í—˜ì¹˜ ì¦ê°€
     public void IncreaseExp(int exp)
     {
         currentExp += exp;
@@ -100,6 +103,7 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    // ë ˆë²¨ì—…
     private void LevelUp()
     {
         currentExp -= maxExp;
@@ -107,13 +111,14 @@ public class PlayerStats : MonoBehaviour
 
         level++;
 
-        UIManager.Instance.LevelUpUI();// ½ºÅ³ È¹µæ UI ON
-        Debug.Log($"·¹º§¾÷! Lv.{level}, MaxExp:{maxExp}");
+        UIManager.Instance.LevelUpUI();// ìŠ¤í‚¬ íšë“ UI ON
+        Debug.Log($"ë ˆë²¨ì—…! Lv.{level}, MaxExp:{maxExp}");
     }
 
+    // í”Œë ˆì´ì–´ ì‚¬ë§ ì‹œ í˜¸ì¶œ
     public void PlayerDead()
     {
-        Debug.Log("ÇÃ·¹ÀÌ¾î »ç¸Á");
+        Debug.Log("í”Œë ˆì´ì–´ ì‚¬ë§");
         PlayerManager.instance.isDead = true;
         StartCoroutine(PlayerSpriteColorChange());
         GetComponent<PlayerController>().animator.speed = 0;
@@ -123,17 +128,17 @@ public class PlayerStats : MonoBehaviour
 
         PlayerManager.instance.bow.StopBowSkillCoroutine();
 
-        UIManager.Instance.GameOverUI(); //Game Over UI È£Ãâ
+        UIManager.Instance.GameOverUI(); //Game Over UI í˜¸ì¶œ
     }
 
-    // µ¥¹ÌÁö¸¦ ÀÔÀº ÈÄ ¹«ÀûÆÇÁ¤
+    // ë°ë¯¸ì§€ë¥¼ ì…ì€ í›„ ë¬´ì íŒì •
     public IEnumerator ApplyInvincibilityAfterDamage()
     {
         invincibilityCoroutine = ApplyInvincibilityAfterDamage();
 
         IsInvincivility = true;
 
-        int count = 3; // ±ôºıÀÏ È½¼ö
+        int count = 3; // ê¹œë¹¡ì¼ íšŸìˆ˜
 
         for (int i = 0; i < count; i++)
         {
@@ -148,30 +153,31 @@ public class PlayerStats : MonoBehaviour
         IsInvincivility = false;
     }
 
-    // ¹«Àû ½ºÅ³ º¸À¯ ½Ã 10ÃÊ ¸¶´Ù 2ÃÊ°£ ¹«Àû
+    // ë¬´ì  ìŠ¤í‚¬ ë³´ìœ  ì‹œ 10ì´ˆ ë§ˆë‹¤ 2ì´ˆê°„ ë¬´ì 
     public IEnumerator ApplyInvincibilitySkill()
     {
         while (currentHealth > 0)
         {
             yield return new WaitForSeconds(10f);
 
-            Debug.Log("¹«Àû Àû¿ë");
+            Debug.Log("ë¬´ì  ì ìš©");
             IsInvincivility = true;
             sprite.color = new Color(0.25f, 0.35f, 1);
 
             yield return new WaitForSeconds(2f);
 
-            Debug.Log("¹«Àû ÇØÁ¦");
+            Debug.Log("ë¬´ì  í•´ì œ");
             IsInvincivility = false;
             sprite.color = Color.white;
         }
     }
 
+    // í”Œë ˆì´ì–´ ì‚¬ë§ ì‹œ ìŠ¤í”„ë¼ì´íŠ¸ ìƒ‰ ë³€ê²½
     public IEnumerator PlayerSpriteColorChange()
     {
         Debug.Log("asdsa");
 
-        float duration = 1f; // »ö»ó º¯°æ¿¡ °É¸®´Â ½Ã°£
+        float duration = 1f; // ìƒ‰ìƒ ë³€ê²½ì— ê±¸ë¦¬ëŠ” ì‹œê°„
         float time = 0f;
         Color startColor = sprite.color;
         Color targetColor = Color.black;

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     private float moveSpeed = 3f;
 
-    public float stopTime; // ÇÃ·¹ÀÌ¾î°¡ ¸ØÃçÀÖ´ø ½Ã°£(°ø°İ Ã¼Å© ¿ë)
+    public float stopTime; // í”Œë ˆì´ì–´ê°€ ë©ˆì¶°ìˆë˜ ì‹œê°„(ê³µê²© ì²´í¬ ìš©)
     public bool isMove;
 
     private void Awake()
@@ -42,27 +42,29 @@ public class PlayerController : MonoBehaviour
             stopTime = 0;
 
         if (UIManager.Instance != null)
-            UIManager.Instance.UpdatePlayerUIPosition(rigidBody.position); //ÇÃ·¹ÀÌ¾î HP Bar UI ÃßÀû¿ë
+            UIManager.Instance.UpdatePlayerUIPosition(rigidBody.position); //í”Œë ˆì´ì–´ HP Bar UI ì¶”ì ìš©
     }
 
+    // í”Œë ˆì´ì–´ ì´ë™
     void Move()
     {
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        // ÀÌµ¿ ÁßÀÎÁö ¾Æ´ÑÁö Ã¼Å© ÇÏ¿© ¾Ö´Ï¸ŞÀÌ¼Ç º¯°æ
+        // ì´ë™ ì¤‘ì¸ì§€ ì•„ë‹Œì§€ ì²´í¬ í•˜ì—¬ ì• ë‹ˆë©”ì´ì…˜ ë³€ê²½
         if (animator != null)
         {
             animator.SetBool("IsMove", moveInput.magnitude == 0 ? false : true);
             isMove = animator.GetBool("IsMove");
         }
 
-        moveVelocity = moveInput.normalized * moveSpeed; // ÀÌµ¿ ¼Óµµ ±¸ÇÏ±â
-        rigidBody.MovePosition(rigidBody.position + moveVelocity * Time.fixedDeltaTime); // ÀÌµ¿
-        moveDirection = moveVelocity.normalized; // ÀÌµ¿ÁßÀÎ ¹æÇâ ±¸ÇÏ±â
+        moveVelocity = moveInput.normalized * moveSpeed; // ì´ë™ ì†ë„ êµ¬í•˜ê¸°
+        rigidBody.MovePosition(rigidBody.position + moveVelocity * Time.fixedDeltaTime); // ì´ë™
+        moveDirection = moveVelocity.normalized; // ì´ë™ì¤‘ì¸ ë°©í–¥ êµ¬í•˜ê¸°
 
-        FlipSprite(moveDirection.x); // ÀÌµ¿ ¹æÇâ¿¡ µû¶ó ½ºÇÁ¶óÀÌÆ® Á¶Àı
+        FlipSprite(moveDirection.x); // ì´ë™ ë°©í–¥ì— ë”°ë¼ ìŠ¤í”„ë¼ì´íŠ¸ ì¡°ì ˆ
     }
 
+    // ìŠ¤í”„ë¼ì´íŠ¸ ë°©í–¥ ë³€ê²½
     void FlipSprite(float directionX)
     {
         if (directionX != 0)
