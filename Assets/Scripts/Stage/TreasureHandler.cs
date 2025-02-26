@@ -37,6 +37,8 @@ public class AnimationHandler : MonoBehaviour
     {
         if(isOpen == false)
         {
+            PlayerManager.instance.stats.BoxOpen += 1; //도전 과제용
+            DataManager.Instance.SaveBoxOpen(PlayerManager.instance.stats.BoxOpen); //도전과제용
             UIManager.Instance.ChestTriggered();
         }
 

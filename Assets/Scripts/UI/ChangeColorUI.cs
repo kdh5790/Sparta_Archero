@@ -14,8 +14,6 @@ public class ChangeColorUI : BaseUI
     private Button applyBtn = null;
     private Button backBtn = null;
 
-
-
     protected override UIState GetUIState()
     {
         return UIState.ColorChange;
@@ -24,27 +22,52 @@ public class ChangeColorUI : BaseUI
     public override void Init(UIManager uiManager)
     {
         base.Init(uiManager);
-        redSlider.value = 1;
         redSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
 
-        greenSlider.value = 1;
         greenSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
 
-        blueSlider.value = 1;
         blueSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
 
         applyBtn = transform.Find("ApplyButton").GetComponent<Button>();
+        applyBtn.onClick.AddListener(OnClickApplyButton);
 
         backBtn = transform.Find("BackButton").GetComponent<Button>();
         backBtn.onClick.AddListener(OnClickCancelButton);
 
         noticeObj.SetActive(false);
+
+    }
+
+    private void OnEnable()
+    {
+        Color loadColor = DataManager.Instance.LoadColor();
+
+        redSlider.value = loadColor.r;
+
+        greenSlider.value = loadColor.g;
+
+        blueSlider.value = loadColor.b;
+
+        UpdateColor();
     }
 
     void UpdateColor()
     {
         Color newColor = new Color(redSlider.value, greenSlider.value, blueSlider.value);
         playerImage.color = newColor;
+    }
+
+    void OnClickApplyButton()
+    {
+        StartCoroutine(OnNoticeUI());
+
+        if (DataManager.Instance == null)
+        {
+            Debug.Log("DataManager를 찾지 못했습니다.");
+            return; 
+        }
+
+        DataManager.Instance.SaveColor(playerImage.color);
     }
 
     void OnClickCancelButton()

@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
         player = Instantiate(playerPrefab);
         playerManager = Instantiate(playerManagerPrefab);
 
+        player.GetComponentInChildren<SpriteRenderer>().color = DataManager.Instance.LoadColor();
+
         playerPrefab.GetComponent<PlayerStats>().InitPlayerStats();
     }
 }

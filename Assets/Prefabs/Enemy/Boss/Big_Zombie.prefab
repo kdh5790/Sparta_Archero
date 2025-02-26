@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 6841084649873136026}
   - component: {fileID: 9024460473990916013}
   m_Layer: 0
-  m_Name: ArrowDamageReceiver
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -441,6 +441,8 @@ MonoBehaviour:
   maxHealth: 2000
   exp: 150
   enemyAnimator: {fileID: 0}
+  isBoss: 1
+  isFinalBoss: 0
   enemyStat: {fileID: 11400000, guid: 05ce6be38216c2841a87e27441d70718, type: 2}
   instanceHealth: 2000
   instanceAttack: 9

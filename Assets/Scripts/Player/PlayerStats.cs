@@ -30,14 +30,25 @@ public class PlayerStats : MonoBehaviour
     private bool isInvincivility; // 무적 판정 여부
     public bool IsInvincivility { get { return isInvincivility; } set { isInvincivility = value; } }
 
+    private float clearTime; //클리어 시간
+    public float ClearTime { get { return clearTime; } set { clearTime = value; } }
+
+    private int boxOpen; //상자 연횟수
+    public int BoxOpen { get { return boxOpen; } set { boxOpen = value; } }
+
     private SpriteRenderer sprite;
     private IEnumerator invincibilityCoroutine;
 
     // 플레이어 스탯 초기화
     public void InitPlayerStats()
     {
+        boxOpen = DataManager.Instance.LoadBoxOpen();
+        Debug.Log("상자오픈횟수" + boxOpen);
+
         level = 1; currentExp = 0; maxExp = 100; currentHealth = 600; maxHealth = 600; speed = 3f;
         sprite = GetComponentInChildren<SpriteRenderer>();
+
+        clearTime = 0.0f;
     }
 
     private void Update()
@@ -56,8 +67,13 @@ public class PlayerStats : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         if (!PlayerManager.instance.isDead)
         {
+            clearTime += Time.deltaTime;
+
+            if (UIManager.Instance != null)
+                UIManager.Instance.UpdateClearTime(clearTime);
             if (UIManager.Instance != null) // <-- 충돌나서 임시로 null 해뒀어요.
                 UIManager.Instance.UpdatePlayerHP(maxHealth, currentHealth); //플레이어 ui 업데이트용
             if (UIManager.Instance != null) // <-- 충돌나서 임시로 null 해뒀어요.
@@ -141,6 +157,8 @@ public class PlayerStats : MonoBehaviour
     // 데미지를 입은 후 무적판정
     public IEnumerator ApplyInvincibilityAfterDamage()
     {
+        Color currentColor = sprite.color;
+
         invincibilityCoroutine = ApplyInvincibilityAfterDamage();
 
         IsInvincivility = true;
@@ -152,11 +170,11 @@ public class PlayerStats : MonoBehaviour
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0.2f);
             yield return new WaitForSeconds(0.1f);
 
-            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
+            sprite.color = currentColor;
             yield return new WaitForSeconds(0.1f);
         }
 
-        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
+        sprite.color = currentColor;
         IsInvincivility = false;
     }
 
@@ -165,6 +183,8 @@ public class PlayerStats : MonoBehaviour
     {
         while (currentHealth > 0)
         {
+            Color currentColor = sprite.color;
+
             yield return new WaitForSeconds(10f);
 
             Debug.Log("무적 적용");
@@ -175,15 +195,13 @@ public class PlayerStats : MonoBehaviour
 
             Debug.Log("무적 해제");
             IsInvincivility = false;
-            sprite.color = Color.white;
+            sprite.color = currentColor;
         }
     }
 
     // 플레이어 사망 시 스프라이트 색 변경
     public IEnumerator PlayerSpriteColorChange()
     {
-        Debug.Log("asdsa");
-
         float duration = 1f; // 색상 변경에 걸리는 시간
         float time = 0f;
         Color startColor = sprite.color;

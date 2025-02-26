@@ -349,6 +349,8 @@ MonoBehaviour:
   maxHealth: 500
   exp: 80
   enemyAnimator: {fileID: 0}
+  isBoss: 0
+  isFinalBoss: 0
   enemyStat: {fileID: 11400000, guid: 9032aa2b15b900040805dd0a9c000ce9, type: 2}
   instanceHealth: 500
   instanceAttack: 3
@@ -367,7 +369,7 @@ GameObject:
   - component: {fileID: 307987727985130258}
   - component: {fileID: 5224457167401754849}
   m_Layer: 0
-  m_Name: ArrowDamageReceiver
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

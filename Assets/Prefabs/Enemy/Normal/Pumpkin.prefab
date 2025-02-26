@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2182026359057446051}
-  - component: {fileID: 8756911713850864573}
   - component: {fileID: 2266539525018529681}
   m_Layer: 0
-  m_Name: ArrowDamageReceiver
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,18 +32,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2544545731519880293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8756911713850864573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2909032843144328980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 477f8859293843f4986bfddc07e5a284, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &2266539525018529681
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -547,6 +534,8 @@ MonoBehaviour:
   maxHealth: 890
   exp: 100
   enemyAnimator: {fileID: 0}
+  isBoss: 0
+  isFinalBoss: 0
   enemyStat: {fileID: 11400000, guid: 5241d6f53904a7a429ec0760a95b0c97, type: 2}
   instanceHealth: 890
   instanceAttack: 3

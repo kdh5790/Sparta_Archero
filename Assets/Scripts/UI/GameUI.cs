@@ -9,6 +9,7 @@ public class GameUI : BaseUI
 {
     public TextMeshProUGUI dungeonTxt;
     public TextMeshProUGUI stageTxt;
+    public TextMeshProUGUI clearTimeTxt;
     public GameObject playerBar;
     public Button pauseBtn = null;
 
@@ -34,6 +35,7 @@ public class GameUI : BaseUI
 
         dungeonTxt = transform.Find("DungeonTxt").GetComponent<TextMeshProUGUI>();
         stageTxt = transform.Find("StageTxt").GetComponent<TextMeshProUGUI>();
+        clearTimeTxt = transform.Find("ClearTimeTxt").GetComponent<TextMeshProUGUI>();
         playerBar = transform.Find("PlayerBar").gameObject;
         pauseBtn = transform.Find("PauseButton").GetComponent<Button>();
         pauseBtn.onClick.AddListener(OnClickPauseUI);
@@ -79,6 +81,12 @@ public class GameUI : BaseUI
     public void ChangeStageName()
     {
         stageTxt.text = SceneManager.GetActiveScene().name;
+    }
+
+    public void UpdateClearTimeText(float time)
+    {
+        string temp = time.ToString("F1");
+        clearTimeTxt.text = $"Clear Time : {temp}";
     }
 
 }

@@ -176,7 +176,17 @@ public class UIManager : MonoBehaviour
     {
         UpdatePlayerDungeon();  //어떤 스테이지를 눌렀는지 보여줄 것
         ChangeState(UIState.Game); //게임이 시작됐으니 게임 UI로 변경
-        SceneManager.LoadScene("Stage_1");
+
+        if(dungeonState == DungeonState.Dungeon1)
+        {
+            SceneManager.LoadScene("Stage_1");
+        }
+
+        if(dungeonState == DungeonState.Dungeon2)
+        {
+            SceneManager.LoadScene("Stage_11");
+        }
+
         GameManager.Instance.GameStart();
         //스테이지가 추가 된다면 이부분을 수정할 것
     }
@@ -207,6 +217,16 @@ public class UIManager : MonoBehaviour
     }
 
     //Game 내부
+
+    public void UpdateStageName()
+    {
+        gameUI.ChangeStageName();
+    }
+
+    public void UpdateClearTime(float time)
+    {
+        gameUI.UpdateClearTimeText(time);
+    }
 
     public void UpdatePlayerDungeon() //플레이어가 몇 스테이지에서 활동하는 지 확인용
     {
@@ -342,4 +362,54 @@ public class UIManager : MonoBehaviour
         ChangeState(prevState);
     }
 
+    //BossReward 내부
+    public void GetBossReward()
+    {
+        isComplete = false;
+        coroutine = BossRewardDelay(0.8f);
+        StartCoroutine(coroutine);
+    }
+    public void OnClickBossSelected()
+    {
+        isComplete = true;
+        ChangeState(UIState.Game);
+    }
+    private IEnumerator BossRewardDelay(float waitTime)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(waitTime); //waitTime 만큼 딜레이후 다음 코드가 실행된다.
+            ChangeState(UIState.BossReward);
+            bossRewardUI.SkillSelectOn();
+            break;
+        }
+    }
+
+    //DungeonClear 내부
+
+    public void CallDungeonClear(float time, int level)
+    {
+        coroutine = DungeonClearDelay(0.8f, time, level);
+        StartCoroutine(coroutine);
+    }
+
+    public void BackToLobby()
+    {
+        Destroy(GameManager.Instance.player);
+        Destroy(GameManager.Instance.playerManager);
+
+        SceneManager.LoadScene("UIScene");
+        ChangeState(UIState.Lobby);
+    }
+
+    private IEnumerator DungeonClearDelay(float waitTime, float time, int level)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(waitTime); //waitTime 만큼 딜레이후 다음 코드가 실행된다.
+            ChangeState(UIState.DungeonClear);
+            dungeonClearUI.UpdateScoreBoard(time,level);
+            break;
+        }
+    }
 }

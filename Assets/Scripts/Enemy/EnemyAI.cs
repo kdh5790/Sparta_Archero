@@ -28,10 +28,8 @@ public abstract class EnemyAI : MonoBehaviour
 
     private bool isDealingDamage = false;  // 현재 데미지를 주고 있는지 확인
 
-    [Header("Obstacle Avoidance Settings")]
-    public LayerMask obstacleLayer; // 장애물 레이어 설정
-    public float detectionDistance = 1.5f; // 장애물 감지 거리
-    public float avoidanceAngle = 30f; // 우회 각도
+    public bool isBoss; //유니티나 매서드에서 할당
+    public bool isFinalBoss; //유니티나 매서드에서 할당
 
     protected virtual void Awake()
     {
@@ -67,27 +65,7 @@ public abstract class EnemyAI : MonoBehaviour
 
     public virtual void MoveTowardsTarget()
     {
-        if (target == null) return;
-
         Vector3 direction = TargetingUtils.GetDirection(transform, target);
-
-        // 장애물 감지
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectionDistance, obstacleLayer);
-        if (hit.collider != null)
-        {
-            Debug.Log("장애물 감지, 우회 시도");
-
-            // 우회 방향 결정 (왼쪽 또는 오른쪽)
-            Vector3 avoidanceDirection = Quaternion.Euler(0, 0, avoidanceAngle) * direction;
-            if (Physics2D.Raycast(transform.position, avoidanceDirection, detectionDistance, obstacleLayer))
-            {
-                // 왼쪽이 막혀있다면 오른쪽으로 회피
-                avoidanceDirection = Quaternion.Euler(0, 0, -avoidanceAngle * 2) * direction;
-            }
-
-            direction = avoidanceDirection.normalized;
-        }
-
         Vector3 movement = direction * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + (Vector2)movement);
     }
@@ -139,6 +117,17 @@ public abstract class EnemyAI : MonoBehaviour
         }
 
         GiveExpToPlayer();
+
+        if(isBoss) //만약 해당 몬스터가 보스 몬스터라면
+        {
+            UIManager.Instance.GetBossReward(); //보스 보상을 주세요
+        }
+
+        if(isFinalBoss) //만약 해당 몬스터가 던전 마지막 몬스터라면
+        {
+            UIManager.Instance.CallDungeonClear(PlayerManager.instance.stats.ClearTime,
+                PlayerManager.instance.stats.Level);//클리어 화면을 보여주세요
+        }
 
         Destroy(gameObject, 2f);
     }
