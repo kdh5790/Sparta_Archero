@@ -35,6 +35,11 @@ public class AnimationHandler : MonoBehaviour
 
     public void OpenTreasure()
     {
+        if(isOpen == false)
+        {
+            UIManager.Instance.ChestTriggered();
+        }
+
         //Debug.Log("½ÇÇà");
         animator.SetBool(openTreasure, true);
         isOpen = true;
