@@ -128,7 +128,8 @@ public abstract class EnemyAI : MonoBehaviour
 
         if(isFinalBoss) //만약 해당 몬스터가 던전 마지막 몬스터라면
         {
-            //클리어 화면을 보여주세요
+            UIManager.Instance.CallDungeonClear(PlayerManager.instance.stats.ClearTime,
+                PlayerManager.instance.stats.Level);//클리어 화면을 보여주세요
         }
 
         Destroy(gameObject, 2f);
