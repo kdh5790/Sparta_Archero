@@ -156,7 +156,13 @@ public class UIManager : MonoBehaviour
 
     public void OnClickStart()
     {
+        if (DataManager.Instance.LoadBoxOpen() >= 1) //이미 상자 도전 과제를 달성했다면, 항상 열어둬라
+        {
+            lobbyUI.changeColorObject.SetActive(true);
+        }
+
         ChangeState(UIState.Lobby); // Start 버튼을 누르면 로비로 이동
+
     }
 
     public void OnClickExit()
@@ -211,6 +217,12 @@ public class UIManager : MonoBehaviour
             ChangeDungeonState(dungeonState - 1); //이전 스테이지로
         }
     }
+
+    public void BoxAchievementReward()
+    {
+        lobbyUI.BoxAchievementCheck();
+    }
+
     public void OnClickChangeColor()
     {
         ChangeState(UIState.ColorChange);

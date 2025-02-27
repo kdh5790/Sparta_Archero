@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class AchievementUI : MonoBehaviour
 {
-    private int temp = 0;
     public TextMeshProUGUI AchievementTxt;
     public Animator animator;
     private IEnumerator coroutine;
+
+    private bool isBoxAchievementClear = false;
     // Start is called before the first frame update
     void Start()
     {
-        temp = DataManager.Instance.LoadBoxOpen();
         AchievementTxt = transform.Find("AchievementDescription").GetComponent<TextMeshProUGUI>();
         animator = GetComponent<Animator>();
     }
@@ -20,10 +20,11 @@ public class AchievementUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(temp != DataManager.Instance.LoadBoxOpen())
+        if(DataManager.Instance.LoadBoxOpen() >= 1 && !isBoxAchievementClear)
         {
-            temp = DataManager.Instance.LoadBoxOpen();
-            AchievementTxt.text = $"박스를 {temp}번째 열었습니다.";
+            isBoxAchievementClear = true;
+            UIManager.Instance.BoxAchievementReward(); //도전과제 달성 보상
+            AchievementTxt.text = $"첫 상자 개봉 - 캐릭터 커스텀 해제";
             animator.SetInteger("step", 1);
 
             coroutine = Delay(3.0f);

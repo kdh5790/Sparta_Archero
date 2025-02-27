@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Utils;  // TargetingUtils 네임스페이스
 
-public abstract class EnemyAI : MonoBehaviour
+public abstract class EnemyAI : MonoBehaviour   //몬스터AI 메인 스크립트
 {
     [Header("Enemy Settings")]
     public float speed = 3f;
@@ -33,7 +33,7 @@ public abstract class EnemyAI : MonoBehaviour
     public bool isBoss; //유니티나 매서드에서 할당
     public bool isFinalBoss; //유니티나 매서드에서 할당
 
-    NavMeshAgent agent; // 탐색 메시 에이전트에 대한 참조가 필요
+    NavMeshAgent agent; // 장애물 피해 길찾기
 
 
 
@@ -70,11 +70,11 @@ public abstract class EnemyAI : MonoBehaviour
         if (enemyAnimator == null)
             enemyAnimator = GetComponentInChildren<Animator>();
 
-        if(gameObject.name.Contains("Chort"))
+        if(gameObject.name.Contains("Chort"))           //이 몬스터의 이름이 "Chort" 일경우 길찾기 수행
         {
             agent = GetComponent<NavMeshAgent>();
-            agent.updateRotation = false; // Agent 가 Target 을 향해 이동할 때 방향을 회전할지
-            agent.updateUpAxis = false; // 캐릭터의 이동을 평면으로 제한하기 위해
+            agent.updateRotation = false; // 길찾기 수행시 캐릭터 회전 금지
+            agent.updateUpAxis = false; // 길찾기 수행환경을 2D로 제한
         }
     }
 
@@ -100,26 +100,26 @@ public abstract class EnemyAI : MonoBehaviour
         spriter.flipX = target.position.x < transform.position.x;
     }
 
-    public virtual void MoveTowardsTarget()
+    public virtual void MoveTowardsTarget()         //우회없는 기본 추적
     {
         Vector3 direction = TargetingUtils.GetDirection(transform, target);
         Vector3 movement = direction * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + (Vector2)movement);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)  //몬스터와 플레이어가 충돌하면
     {
         if (!isDead && collision.CompareTag("Player"))
         {
             PlayerStats playerStats = collision.GetComponent<PlayerStats>();
             if (playerStats != null && !isDealingDamage)
             {
-                playerStats.OnDamaged(120);
+                playerStats.OnDamaged(120);                 //플레이어에게 데미지
             }
         }
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)              //몬스터가 데미지를 받음
     {
         if (isDead) return;
 
@@ -128,10 +128,10 @@ public abstract class EnemyAI : MonoBehaviour
 
         if (enemyAnimator != null)
         {
-            enemyAnimator.SetTrigger("Hit");
+            enemyAnimator.SetTrigger("Hit");            //피격 애니메이션 실행
         }
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0)         //체력이 0이하면 사망처리
         {
             Die();
         }
@@ -144,7 +144,7 @@ public abstract class EnemyAI : MonoBehaviour
 
         if (enemyAnimator != null)
         {
-            enemyAnimator.SetTrigger("Die");
+            enemyAnimator.SetTrigger("Die");            //사망 애니메이션 실행
         }
 
         Collider2D col = GetComponent<Collider2D>();
@@ -169,7 +169,7 @@ public abstract class EnemyAI : MonoBehaviour
         Destroy(gameObject, 0.3f);
     }
 
-    private void GiveExpToPlayer()
+    private void GiveExpToPlayer()  //플레이어에게 경험치 지급
     {
         if (target != null)
         {
