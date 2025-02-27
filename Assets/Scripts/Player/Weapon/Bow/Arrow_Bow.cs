@@ -109,6 +109,14 @@ public class Arrow_Bow : MonoBehaviour
             if (enemy != null)
                 enemy.TakeDamage(damage);
 
+
+            if (enemy.CurrentHealth < 0 && bossCheck != null)
+                SoundManager.instance.PlaySound(SFX.BossDeath);
+
+            else
+                SoundManager.instance.PlaySound(SFX.EnemyOnDamaged);
+
+
             // 반동 스킬 보유 + 현재 튕긴 횟수가 2보다 작다면 다음 타겟 찾아 이동시킴
             if (bow.IsRebound && bound < 2)
             {
