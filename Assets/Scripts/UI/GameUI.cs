@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameUI : BaseUI
+public class GameUI : BaseUI //»ó¼Ó
 {
     public TextMeshProUGUI dungeonTxt;
     public TextMeshProUGUI stageTxt;
