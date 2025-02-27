@@ -75,6 +75,7 @@ public class GameUI : BaseUI //»ó¼Ó
 
     public void OnClickPauseUI()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         uiManager.OnClickPause();
     }
 

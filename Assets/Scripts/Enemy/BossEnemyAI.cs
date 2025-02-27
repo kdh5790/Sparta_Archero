@@ -64,7 +64,7 @@ public class BossEnemyAI : MonoBehaviour    //보스 패턴
     {
         Debug.Log("보스가 충격파를 사용");
         shockwaveAnimator.SetTrigger("Shockwave"); // 애니메이션 트리거
-
+        SoundManager.instance.PlaySound(SFX.BossSkill);
 
 
         yield return new WaitForSeconds(0.5f); // 충격파 애니메이션이 끝날 시간

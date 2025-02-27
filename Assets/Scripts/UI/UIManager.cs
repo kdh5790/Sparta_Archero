@@ -183,7 +183,9 @@ public class UIManager : MonoBehaviour
         UpdatePlayerDungeon();  //어떤 스테이지를 눌렀는지 보여줄 것
         ChangeState(UIState.Game); //게임이 시작됐으니 게임 UI로 변경
 
-        if(dungeonState == DungeonState.Dungeon1)
+        SoundManager.instance.PlayMusic(BGM.Dungeon);
+
+        if (dungeonState == DungeonState.Dungeon1)
         {
             SceneManager.LoadScene("Stage_1");
         }

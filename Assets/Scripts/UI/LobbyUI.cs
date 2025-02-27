@@ -47,26 +47,31 @@ public class LobbyUI : BaseUI
 
     public void OnClickDungeonStartButton()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         uiManager.OnClickDungeonStart();
     }
 
     public void OnClickTitleButton()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         uiManager.OnClickTitle();
     }
 
     public void OnClickNextDungeonButton()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         uiManager.OnClickNextDungeon();
     }
 
     public void OnClickPrevDungeonButton()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         uiManager.OnClickPrevDungeon();
     }
 
     public void OnClickChangeColorButton()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         uiManager.OnClickChangeColor();
     }
 }

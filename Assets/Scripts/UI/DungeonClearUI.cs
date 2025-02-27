@@ -36,6 +36,8 @@ public class DungeonClearUI : BaseUI
 
     public void OnClickBack()
     {
+        SoundManager.instance.PlayMusic(BGM.Lobby);
+        SoundManager.instance.PlaySound(SFX.UIClick);
         Time.timeScale = 1;
         uiManager.BackToLobby();
     }

@@ -58,6 +58,7 @@ public class LevelUpUI : BaseUI
 
     public void OnClickSkill1()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         SkillManager.instance.ApplySkill(skillInfos[0]); //스킬 적용
 
         Time.timeScale = 1;
@@ -66,6 +67,7 @@ public class LevelUpUI : BaseUI
 
     public void OnClickSkill2()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         SkillManager.instance.ApplySkill(skillInfos[1]); //스킬 적용
 
         Time.timeScale = 1;
@@ -74,6 +76,7 @@ public class LevelUpUI : BaseUI
 
     public void OnClickSkill3()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         SkillManager.instance.ApplySkill(skillInfos[2]); //스킬 적용
 
         Time.timeScale = 1;

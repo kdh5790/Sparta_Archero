@@ -27,16 +27,20 @@ public class PauseUI : BaseUI
 
     public void OnClickContinueUI()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         uiManager.OnClickContinue();
     }
 
     public void OnClickSettingUI()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         uiManager.OnClickSetting();
     }
 
     public void OnClickLobbyUI()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
+        SoundManager.instance.PlayMusic(BGM.Lobby);
         uiManager.OnClickLobby();
     }
 

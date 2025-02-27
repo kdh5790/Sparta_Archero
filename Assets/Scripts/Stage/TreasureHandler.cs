@@ -41,6 +41,7 @@ public class AnimationHandler : MonoBehaviour
             DataManager.Instance.SaveBoxOpen(PlayerManager.instance.stats.BoxOpen); //도전과제용
             UIManager.Instance.ChestTriggered();
         }
+        SoundManager.instance.PlaySound(SFX.ChestOpen);
 
         //Debug.Log("실행");
         animator.SetBool(openTreasure, true);

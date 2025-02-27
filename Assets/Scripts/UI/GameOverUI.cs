@@ -22,6 +22,9 @@ public class GameOverUI : BaseUI
 
     public void OnClickBack()
     {
+        SoundManager.instance.PlayMusic(BGM.Lobby);
+        SoundManager.instance.PlaySound(SFX.UIClick);
+
         uiManager.OnClickBackButton();
     }
 

@@ -22,6 +22,7 @@ public class AchievementUI : MonoBehaviour
     {
         if(DataManager.Instance.LoadBoxOpen() >= 1 && !isBoxAchievementClear)
         {
+            SoundManager.instance.PlaySound(SFX.LevelUp);
             isBoxAchievementClear = true;
             UIManager.Instance.BoxAchievementReward(); //도전과제 달성 보상
             AchievementTxt.text = $"첫 상자 개봉 - 캐릭터 커스텀 해제";

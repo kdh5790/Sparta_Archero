@@ -31,16 +31,19 @@ public class TitleUI : BaseUI
 
     public void OnClickStartButton()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         uiManager.OnClickStart();
     }
 
     public void OnClickExitButton()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         uiManager.OnClickExit();
     }
 
     public void OnClickSettingButton()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         uiManager.OnClickSetting();
     }
 }

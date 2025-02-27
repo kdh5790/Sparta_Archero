@@ -67,6 +67,8 @@ public class RangedEnemyAI : MonoBehaviour              //원거리 적 AI
 
             if (firePoint != null && projectilePrefab != null)
             {
+                SoundManager.instance.PlaySound(SFX.RangeEnemyAttack);
+
                 GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
 
 

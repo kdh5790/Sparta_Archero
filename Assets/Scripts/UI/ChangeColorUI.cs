@@ -61,6 +61,7 @@ public class ChangeColorUI : BaseUI
 
     void OnClickApplyButton()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         StartCoroutine(OnNoticeUI());
 
         if (DataManager.Instance == null)
@@ -75,6 +76,7 @@ public class ChangeColorUI : BaseUI
 
     void OnClickCancelButton()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         uiManager.OnClickChangeColorCancel();
     }
 

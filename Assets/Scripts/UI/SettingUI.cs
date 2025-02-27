@@ -21,6 +21,7 @@ public class SettingUI : BaseUI
 
     public void OnClickBackSettingUI()
     {
+        SoundManager.instance.PlaySound(SFX.UIClick);
         uiManager.OnClickBackSetting();
     }
 

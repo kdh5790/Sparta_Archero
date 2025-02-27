@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class StageMaanager : MonoBehaviour
 {
     public GameObject portal; // 포탈 오브젝트 (Inspector에서 연결)
+    private bool isPlay; // 사운드 재생 확인용
 
     void Start()
     {
@@ -16,6 +17,11 @@ public class StageMaanager : MonoBehaviour
     {
         if (AreAllEnemysDead())
         {
+            if (!isPlay)
+            {
+                isPlay = true;
+                SoundManager.instance.PlaySound(SFX.StageClear);
+            }
             portal.SetActive(true); // 몬스터가 다 죽으면 포탈 활성화
         }
     }
