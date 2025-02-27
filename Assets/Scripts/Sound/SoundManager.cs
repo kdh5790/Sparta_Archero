@@ -29,7 +29,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioClip[] bgmClipPrefab;
     [SerializeField] private AudioClip[] sfxClipPrefab;
-    [SerializeField] private int sfxSourceCount = 10;
+    [SerializeField] private int sfxSourceCount = 20;
     private List<AudioSource> sfxSources;
 
     private AudioSource bgmSource;
