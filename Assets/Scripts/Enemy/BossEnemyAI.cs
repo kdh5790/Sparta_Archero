@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BossEnemyAI : MonoBehaviour
+public class BossEnemyAI : MonoBehaviour    //보스 패턴
 {
     private BasicEnemyAI enemyAI;
     private Transform player;

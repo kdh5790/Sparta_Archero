@@ -15,7 +15,7 @@ public class BasicEnemyAI : EnemyAI
     [SerializeField] public int instanceExp;
 
 
-    // 인스턴스 초기화 여부 (한 번만 기본값 적용)
+
     private bool initialized = false;
 
     protected override void Awake()
@@ -49,15 +49,15 @@ public class BasicEnemyAI : EnemyAI
         instanceAttack = enemyStat.attack;
         instanceDefense = enemyStat.defense;
         instanceSpeed = enemyStat.speed;
-        instanceExp = enemyStat.exp;  // 경험치 값 추가
+        instanceExp = enemyStat.exp;  
 
         maxHealth = enemyStat.health;
         currentHealth = enemyStat.health;
-        exp = enemyStat.exp;  // 경험치 적용
+        exp = enemyStat.exp;
     }
 
    
-
+    //플레이어를 향해 추적
     public override void MoveTowardsTarget()
     {
         Vector3 direction = Utils.TargetingUtils.GetDirection(transform, target);
