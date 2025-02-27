@@ -1,4 +1,8 @@
-# Sparta_Archero 게임소개
+# Sparta_Archero 
+
+
+유니티 2022.3.17f1
+
 
 # 12조 팀원 및 맡은 역할
 
