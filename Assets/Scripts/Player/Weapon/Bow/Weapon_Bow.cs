@@ -127,6 +127,8 @@ public class Weapon_Bow : MonoBehaviour
     // 공격(애니메이션 이벤트로 호출)
     private void Attack()
     {
+        SoundManager.instance.PlaySound(SFX.PlayerAttack);
+
         if (target != null)
             PlayerManager.instance.arrowManager.StartShootDelegate(target.gameObject);
     }

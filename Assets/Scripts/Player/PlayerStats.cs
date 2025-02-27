@@ -98,6 +98,7 @@ public class PlayerStats : MonoBehaviour
             return;
         }
 
+        SoundManager.instance.PlaySound(SFX.PlayerOnDamaged);
         currentHealth -= damage;
 
         // 체력이 0보다 낮아지지 않도록 최대값 0으로 설정
@@ -142,6 +143,7 @@ public class PlayerStats : MonoBehaviour
         // 레벨업 횟수만큼 스킬 UI 출력
         for (int i = 0; i < levelUps; i++)
         {
+            SoundManager.instance.PlaySound(SFX.LevelUp);
             UIManager.Instance.LevelUpUI();
 
             // UIManager.Instance.isComplete가 true가 될 때 까지 대기 후 true가 됐다면 다음 줄로 이동
@@ -154,6 +156,7 @@ public class PlayerStats : MonoBehaviour
     {
         Debug.Log("플레이어 사망");
         PlayerManager.instance.isDead = true;
+        SoundManager.instance.PlaySound(SFX.PlayerDeath);
 
         // 플레이어 스프라이트를 서서히 검은색으로 변경하는 코루틴
         StartCoroutine(PlayerSpriteColorChange());

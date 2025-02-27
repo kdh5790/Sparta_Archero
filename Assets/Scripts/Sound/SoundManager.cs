@@ -25,7 +25,7 @@ public enum SFX
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance;
+    public static SoundManager instance;
 
     [SerializeField] private AudioClip[] bgmClipPrefab;
     [SerializeField] private AudioClip[] sfxClipPrefab;
@@ -36,9 +36,9 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
             InitializeAudioSources();
             PlayMusic(BGM.Lobby);
@@ -76,6 +76,7 @@ public class SoundManager : MonoBehaviour
     public void PlayMusic(BGM clip)
     {
         bgmSource.clip = bgmClipPrefab[(int)clip];
+        bgmSource.loop = true;
         bgmSource.Play();
     }
 
