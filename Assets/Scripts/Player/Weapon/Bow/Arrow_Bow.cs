@@ -33,6 +33,7 @@ public class Arrow_Bow : MonoBehaviour
 
     private void OnEnable()
     {
+        // 발사 될 때 마다 반동 횟수, 관통 여부 초기화
         bound = 0;
         isPiercing = false;
 
@@ -51,18 +52,24 @@ public class Arrow_Bow : MonoBehaviour
         {
             BasicEnemyAI enemy = collision.GetComponent<BasicEnemyAI>();
 
-            // 헤드샷 여부 확인
-            if (enemy != null && bow.IsHeadShot && !enemy.IsHeadShot)
-            {
-                if (Random.Range(0, 100) < 12)
-                {
-                    enemy.TakeDamage((int)enemy.maxHealth);
-                    Debug.Log("헤드샷 O");
-                }
-                else
-                    Debug.Log("헤드샷 X");
+            BossEnemyAI bossCheck = collision.GetComponent<BossEnemyAI>();
 
-                enemy.IsHeadShot = true;
+            // 보스가 아니라면 헤드샷 여부 확인
+            if (bossCheck == null)
+            {
+                if (enemy != null && bow.IsHeadShot && !enemy.IsHeadShot)
+                {
+                    if (Random.Range(0, 100) < 12)
+                    {
+                        // 헤드샷 발동 시 적의 최대체력만큼 데미지를 입힘
+                        enemy.TakeDamage((int)enemy.maxHealth);
+                        Debug.Log("헤드샷 O");
+                    }
+                    else
+                        Debug.Log("헤드샷 X");
+
+                    enemy.IsHeadShot = true;
+                }
             }
 
             // 크리티컬 여부 확인
