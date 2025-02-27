@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,10 +49,13 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // 오디오소스 컴포넌트 추가
     private void InitializeAudioSources()
     {
         bgmSource = GetComponent<AudioSource>();
         sfxSources = new List<AudioSource>();
+
+        // 설정한 숫자만큼 오디오 소스 생성 후 리스트에 넣어주기
         for (int i = 0; i < sfxSourceCount; i++)
         {
             AudioSource source = gameObject.AddComponent<AudioSource>();
@@ -61,18 +64,23 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // 효과음 재생
     public void PlaySound(SFX clip)
     {
+        // 현재 재생중이지 않은 오디오소스 찾기
         AudioSource availableSource = sfxSources.Find(source => !source.isPlaying);
+
         if (availableSource == null)
         {
-            Debug.Log("���� ����ִ� ����� �ҽ��� ã�� ���߽��ϴ�.");
+            Debug.Log("현재 비어있는 오디오 소스를 찾지 못했습니다.");
             return;
         }
+
         availableSource.clip = sfxClipPrefab[(int)clip];
         availableSource.Play();
     }
 
+    // BGM 재생
     public void PlayMusic(BGM clip)
     {
         bgmSource.clip = bgmClipPrefab[(int)clip];
@@ -80,12 +88,14 @@ public class SoundManager : MonoBehaviour
         bgmSource.Play();
     }
 
+    // BGM 볼륨 조절
     public void SetBGMVolume(float volume)
     {
         float bgmVolume = Mathf.Clamp01(volume);
         bgmSource.volume = bgmVolume;
     }
 
+    // SFX 볼륨 조절
     public void SetSFXVolume(float volume)
     {
         float sfxVolume = Mathf.Clamp01(volume);
