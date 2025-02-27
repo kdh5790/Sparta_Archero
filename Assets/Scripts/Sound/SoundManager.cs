@@ -80,4 +80,18 @@ public class SoundManager : MonoBehaviour
         bgmSource.Play();
     }
 
+    public void SetBGMVolume(float volume)
+    {
+        float bgmVolume = Mathf.Clamp01(volume);
+        bgmSource.volume = bgmVolume;
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        float sfxVolume = Mathf.Clamp01(volume);
+        foreach (var source in sfxSources)
+        {
+            source.volume = sfxVolume;
+        }
+    }
 }

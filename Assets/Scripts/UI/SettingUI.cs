@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class SettingUI : BaseUI
 {
+    public Slider bgmSlider;
+    public Slider sfxSlider;
     public Button backBtn;
     protected override UIState GetUIState()
     {
@@ -17,6 +19,9 @@ public class SettingUI : BaseUI
 
         backBtn = transform.Find("BackButton").GetComponent<Button>();
         backBtn.onClick.AddListener(OnClickBackSettingUI);
+
+        bgmSlider.onValueChanged.AddListener(delegate { UpdateBGMVolume(); });
+        sfxSlider.onValueChanged.AddListener(delegate { UpdateSFXVolume(); });
     }
 
     public void OnClickBackSettingUI()
@@ -25,4 +30,13 @@ public class SettingUI : BaseUI
         uiManager.OnClickBackSetting();
     }
 
+    private void UpdateBGMVolume()
+    {
+        SoundManager.instance.SetBGMVolume(bgmSlider.value);
+    }   
+
+    private void UpdateSFXVolume()
+    {
+        SoundManager.instance.SetSFXVolume(sfxSlider.value);
+    }
 }
