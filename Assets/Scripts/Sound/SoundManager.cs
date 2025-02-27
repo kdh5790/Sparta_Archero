@@ -34,6 +34,9 @@ public class SoundManager : MonoBehaviour
 
     private AudioSource bgmSource;
 
+    private float bgmVolume;
+    private float sfxVolume;
+
     private void Awake()
     {
         if (instance == null)
@@ -75,6 +78,7 @@ public class SoundManager : MonoBehaviour
         {
             availableSource = gameObject.AddComponent<AudioSource>();
             availableSource.playOnAwake = false;
+            availableSource.volume = sfxVolume;
             Destroy(availableSource, 1.5f);
         }
 
@@ -93,14 +97,14 @@ public class SoundManager : MonoBehaviour
     // BGM 볼륨 조절
     public void SetBGMVolume(float volume)
     {
-        float bgmVolume = Mathf.Clamp01(volume);
+        bgmVolume = Mathf.Clamp01(volume);
         bgmSource.volume = bgmVolume;
     }
 
     // SFX 볼륨 조절
     public void SetSFXVolume(float volume)
     {
-        float sfxVolume = Mathf.Clamp01(volume);
+        sfxVolume = Mathf.Clamp01(volume);
         foreach (var source in sfxSources)
         {
             source.volume = sfxVolume;
