@@ -39,8 +39,10 @@ public class ArrowManager : MonoBehaviour
     {
         target = _target;
 
+        // 멀티샷을 보유했다면 멀티샷 코루틴 실행
         if (bow.IsMultiShot)
             StartCoroutine(ShootMultiShotCoroutine());
+        // 보유하지 않았다면 델리게이트 실행
         else
             shootDelegate();
     }
@@ -68,7 +70,7 @@ public class ArrowManager : MonoBehaviour
         }
     }
 
-    // 스킬에 맞게 각도 변경 후 발사
+    // 스킬에 맞게 각도 변경 후(매개변수에 각도) 발사
     public void ShootArrow(float offset)
     {
         GameObject go = arrowQueue.Dequeue();
@@ -131,7 +133,7 @@ public class ArrowManager : MonoBehaviour
         arrow.SetActive(false);
     }
 
-    // 화살을 타겟방향으로 회전시켜야 할 z값 구하기 (반동을 위한 방향을 구한다면 매개변수 넣어주기)
+    // 화살을 타겟방향으로 회전시켜야 할 z값 구하기 (반동을 위한 방향을 구한다면 매개변수에 적의 GameObject와 화살의 Transform 넣어주기)
     public float LookAtTargetForArrow(GameObject _target = null, Transform _transform = null)
     {
         Vector2 direction;
@@ -143,7 +145,7 @@ public class ArrowManager : MonoBehaviour
         else
             direction = _target.transform.position - _transform.position;
 
-        // 방향 각도 계산 후 라디안 값을 도 단위로 변환
+        // 방향 각도 계산 후 라디안 값을 각도 단위로 변환
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         // Z 회전값으로 타겟 바라보기

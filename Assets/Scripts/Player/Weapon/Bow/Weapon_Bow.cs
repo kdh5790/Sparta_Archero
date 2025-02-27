@@ -58,6 +58,7 @@ public class Weapon_Bow : MonoBehaviour
 
     void Update()
     {
+        // 플레이어가 이동하거나 타겟이 죽었다면 타겟 찾기
         if (playerController.isMove || (target != null && target.IsDead))
             target = FindTarget();
 
@@ -70,7 +71,7 @@ public class Weapon_Bow : MonoBehaviour
             animator.SetBool("IsAttack", false);
     }
 
-    // 현재 활성화 된 적들 찾아오기
+    // 현재 사망하지 않은 적들 찾아오기
     public void UpdateEnemyList() => enemyList = FindObjectsOfType<BasicEnemyAI>().Where(x => x.CompareTag("Enemy") && !x.IsDead).ToList();
 
 
@@ -154,6 +155,7 @@ public class Weapon_Bow : MonoBehaviour
     // 화살에 적중한 적 넉백
     public IEnumerator ApplyKnockBackCoroutine(Transform enemy, Vector3 arrowPos)
     {
+        // 적의 RigidBody의 BodyType을 Dynamic으로 변경 후 화살의 반대 방향으로 힘을 가함
         Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
         enemyRb.bodyType = RigidbodyType2D.Dynamic;
         enemyRb.gravityScale = 0;
@@ -163,6 +165,7 @@ public class Weapon_Bow : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
+        // 넉백 시킨 후 속도를 0으로 만든 후 Body 타입을 Kinematic으로 변경
         enemyRb.velocity = Vector2.zero;
         enemyRb.angularVelocity = 0f;
 

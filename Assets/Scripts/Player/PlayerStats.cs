@@ -67,7 +67,7 @@ public class PlayerStats : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        // UI 업데이트 + 클리어 시간 측정
         if (!PlayerManager.instance.isDead)
         {
             clearTime += Time.deltaTime;
@@ -84,12 +84,14 @@ public class PlayerStats : MonoBehaviour
     // 데미지 입었을 시 호출
     public void OnDamaged(int damage)
     {
+        // 무적상태라면 데미지를 입지 않고 return
         if (IsInvincivility)
         {
             Debug.Log($"무적 상태이므로 {damage}의 데미지를 입지 않습니다.");
             return;
         }
 
+        // 회피에 성공했다면 데미지를 입지 않고 return
         if (Random.Range(0, 100) < DodgeChance)
         {
             Debug.Log("회피에 성공했습니다.");
@@ -97,14 +99,18 @@ public class PlayerStats : MonoBehaviour
         }
 
         currentHealth -= damage;
+
+        // 체력이 0보다 낮아지지 않도록 최대값 0으로 설정
         currentHealth = Mathf.Max(0, currentHealth);
 
+        // 체력이 0이라면 사망 함수 호출
         if (currentHealth <= 0)
         {
             PlayerDead();
             return;
         }
 
+        // 데미지를 입은 후 사망하지 않았다면 일정시간 무적상태가 되도록 코루틴 실행
         StartCoroutine(ApplyInvincibilityAfterDamage());
     }
 
@@ -121,7 +127,9 @@ public class PlayerStats : MonoBehaviour
 
     private IEnumerator LevelUpCoroutine()
     {
+        // 레벨업 횟수를 확인할 변수
         int levelUps = 0;
+
         while (currentExp >= maxExp)
         {
             currentExp -= maxExp;
@@ -131,9 +139,12 @@ public class PlayerStats : MonoBehaviour
             Debug.Log($"레벨업! Lv.{level}, MaxExp:{maxExp}");
         }
 
+        // 레벨업 횟수만큼 스킬 UI 출력
         for (int i = 0; i < levelUps; i++)
         {
             UIManager.Instance.LevelUpUI();
+
+            // UIManager.Instance.isComplete가 true가 될 때 까지 대기 후 true가 됐다면 다음 줄로 이동
             yield return new WaitUntil(() => UIManager.Instance.isComplete);
         }
     }
@@ -143,12 +154,17 @@ public class PlayerStats : MonoBehaviour
     {
         Debug.Log("플레이어 사망");
         PlayerManager.instance.isDead = true;
+
+        // 플레이어 스프라이트를 서서히 검은색으로 변경하는 코루틴
         StartCoroutine(PlayerSpriteColorChange());
+
         GetComponent<PlayerController>().animator.speed = 0;
 
+        // 무적 코루틴이 실행중이라면 중단
         if (invincibilityCoroutine != null)
             StopCoroutine(invincibilityCoroutine);
 
+        // 활에서 실행중인 스킬 코루틴 모두 중단
         PlayerManager.instance.bow.StopBowSkillCoroutine();
 
         UIManager.Instance.GameOverUI(); //Game Over UI 호출
@@ -163,7 +179,7 @@ public class PlayerStats : MonoBehaviour
 
         IsInvincivility = true;
 
-        int count = 3; // 깜빡일 횟수
+        int count = 3; // 스프라이트가 깜빡일 횟수
 
         for (int i = 0; i < count; i++)
         {
@@ -207,6 +223,7 @@ public class PlayerStats : MonoBehaviour
         Color startColor = sprite.color;
         Color targetColor = Color.black;
 
+        // startColor에서 targetColor로 자연스럽게 변경
         while (time < duration)
         {
             time += Time.deltaTime;

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,6 +40,7 @@ public class ChangeColorUI : BaseUI
 
     private void OnEnable()
     {
+        // UI 활성화 시 저장된 Color 값을 불러온 후 슬라이드 값, 플레이어 이미지에 반영
         Color loadColor = DataManager.Instance.LoadColor();
 
         redSlider.value = loadColor.r;
@@ -51,6 +52,7 @@ public class ChangeColorUI : BaseUI
         UpdateColor();
     }
 
+    // 슬라이드 값 변경 마다 실행
     void UpdateColor()
     {
         Color newColor = new Color(redSlider.value, greenSlider.value, blueSlider.value);
@@ -63,10 +65,11 @@ public class ChangeColorUI : BaseUI
 
         if (DataManager.Instance == null)
         {
-            Debug.Log("DataManager�� ã�� ���߽��ϴ�.");
+            Debug.Log("DataManager를 찾지 못했습니다.");
             return; 
         }
 
+        // 저장 버튼 클릭 시 PlayerPrefs에 현재 Color값 저장
         DataManager.Instance.SaveColor(playerImage.color);
     }
 
@@ -75,6 +78,7 @@ public class ChangeColorUI : BaseUI
         uiManager.OnClickChangeColorCancel();
     }
 
+    // 색상 저장 성공 여부 확인 알림 UI
     private IEnumerator OnNoticeUI()
     {
         noticeObj.SetActive(true);

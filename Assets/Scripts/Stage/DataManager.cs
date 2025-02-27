@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +6,8 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
 
-    public readonly string ColorKey = "SaveColor";
-    public readonly string BoxOpenKey = "SaveBoxOpen";
+    private readonly string ColorKey = "SaveColor"; // Color ê°’ì„ ì €ì¥í•˜ê³  ë¶ˆëŸ¬ì˜¬ í‚¤
+    private readonly string BoxOpenKey = "SaveBoxOpen"; // ë°•ìŠ¤ ì—´ëŒ íšŸìˆ˜ë¥¼ ì €ì¥í•˜ê³  ë¶ˆëŸ¬ì˜¬ í‚¤
 
     private void Awake()
     {
@@ -18,44 +18,51 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    // Colorê°’ ì €ì¥
     public void SaveColor(Color color)
     {
         try
         {
+            // Colorê°’ì„ Hex ì½”ë“œ ë¬¸ìì—´ë¡œ ë³€í™˜í•´ ì €ì¥
             PlayerPrefs.SetString(ColorKey, ColorUtility.ToHtmlStringRGBA(color));
             PlayerPrefs.Save();
         }
         catch 
         {
-            Debug.Log("»ö»ó Á¤º¸¸¦ ÀúÀåÇÏ´Â Áß ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù."); 
+            Debug.Log("ìƒ‰ìƒ ì •ë³´ë¥¼ ì €ì¥í•˜ëŠ” ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤."); 
             return;
         }
 
-        Debug.Log($"{color.r}, {color.g}, {color.b} »ö»óÀ» ÀúÀåÇß½À´Ï´Ù.");
+        Debug.Log($"{color.r}, {color.g}, {color.b} ìƒ‰ìƒì„ ì €ì¥í–ˆìŠµë‹ˆë‹¤.");
     }
 
+    // Colorê°’ ë¶ˆëŸ¬ì˜¤ê¸°
     public Color LoadColor()
     {
         Color loadedColor = Color.white;
 
         try
         {
+            if(!PlayerPrefs.HasKey(ColorKey)) return Color.white;
+
             string loadedColorStirng = PlayerPrefs.GetString(ColorKey, string.Empty);
 
+            // í‚¤ë¥¼ ì‚¬ìš©í•´ ë¶ˆëŸ¬ì˜¨ Hex ì½”ë“œ ë¬¸ìì—´ê°’ì„ Color ê°’ìœ¼ë¡œ ë³€í™˜ì— ì„±ê³µí•œë‹¤ë©´ trueë¥¼ ë°˜í™˜í•˜ë©° loadedColorì— ê°’ì„ ë„£ì–´ì¤Œ
             if (ColorUtility.TryParseHtmlString("#" + loadedColorStirng, out loadedColor))
             {
-                Debug.Log($"{loadedColor.r}, {loadedColor.g}, {loadedColor.b} »ö»óÀ» ºÒ·¯¿Ô½À´Ï´Ù.");
+                Debug.Log($"{loadedColor.r}, {loadedColor.g}, {loadedColor.b} ìƒ‰ìƒì„ ë¶ˆëŸ¬ì™”ìŠµë‹ˆë‹¤.");
                 return loadedColor;
             }
         }
         catch
         {
-            Debug.LogError("»ö»ó Á¤º¸¸¦ ºÒ·¯¿À´Â Áß ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù."); return Color.white;
+            Debug.LogError("ìƒ‰ìƒ ì •ë³´ë¥¼ ë¶ˆëŸ¬ì˜¤ëŠ” ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤."); return Color.white;
         }
 
         return loadedColor;
     }
 
+    // ë°•ìŠ¤ ì—´ëŒ íšŸìˆ˜ ì €ì¥
     public void SaveBoxOpen(int count)
     {
         try
@@ -65,24 +72,25 @@ public class DataManager : MonoBehaviour
         }
         catch
         {
-            Debug.Log("¹Ú½º ¿­¶÷ È½¼ö ÀúÀå ½ÇÆĞ.");
+            Debug.Log("ë°•ìŠ¤ ì—´ëŒ íšŸìˆ˜ ì €ì¥ ì‹¤íŒ¨.");
             return;
         }
     }
 
+    // ë°•ìŠ¤ ì—´ëŒ íšŸìˆ˜ ë¶ˆëŸ¬ì˜¤ê¸°
     public int LoadBoxOpen()
     {
         int count = 0;
 
         try
         {
-            if (PlayerPrefs.GetInt(BoxOpenKey) != null)
+            if (PlayerPrefs.HasKey(BoxOpenKey)) // í‚¤ê°€ ì¡´ì¬í•˜ë©´ true ë°˜í™˜
                 count = PlayerPrefs.GetInt(BoxOpenKey);
             else
                 count = 0;
         }catch
         {
-            Debug.Log("¹Ú½º ¿­¶÷ È½¼ö ºÒ·¯¿À±â ½ÇÆĞ.");
+            Debug.Log("ë°•ìŠ¤ ì—´ëŒ íšŸìˆ˜ ë¶ˆëŸ¬ì˜¤ê¸° ì‹¤íŒ¨.");
             return 0;
         }
 
