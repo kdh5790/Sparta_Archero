@@ -23,7 +23,8 @@ public class AchievementUI : MonoBehaviour
         if(temp != DataManager.Instance.LoadBoxOpen())
         {
             temp = DataManager.Instance.LoadBoxOpen();
-            AchievementTxt.text = $"박스를 {temp}번째 열었습니다.";
+            UIManager.Instance.BoxAchievementReward(); //도전과제 달성 보상
+            AchievementTxt.text = $"첫 상자 개봉 - 캐릭터 커스텀 해제";
             animator.SetInteger("step", 1);
 
             coroutine = Delay(3.0f);
