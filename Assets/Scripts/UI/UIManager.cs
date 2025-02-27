@@ -191,6 +191,11 @@ public class UIManager : MonoBehaviour
         //스테이지가 추가 된다면 이부분을 수정할 것
     }
 
+    public void OnClickTitle()
+    {
+        ChangeState(UIState.Title);
+    }
+
     public void OnClickNextDungeon()
     {
         if(dungeonState < DungeonState.Max - 1) //현재스테이지가 최대 스테이지 개수보다 적은 경우에만

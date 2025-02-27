@@ -9,6 +9,7 @@ public class LobbyUI : BaseUI
     Button nextDungeonBtn;
     Button prevDungeonBtn;
     Button changeColorBtn;
+    Button titleBtn;
     protected override UIState GetUIState()
     {
         return UIState.Lobby;
@@ -18,7 +19,10 @@ public class LobbyUI : BaseUI
     {
         dungeonStartBtn = transform.Find("DungeonStartButton").GetComponent<Button>(); //스테이지 스타트 버튼 할당
         dungeonStartBtn.onClick.AddListener(OnClickDungeonStartButton); //스테이지 스타트 버튼을 누른 경우
-        
+
+        titleBtn = transform.Find("TitleButton").GetComponent<Button>();
+        titleBtn.onClick.AddListener(OnClickTitleButton);
+
         nextDungeonBtn = transform.Find("NextDungeonButton").GetComponent<Button>(); //다음 스테이지  버튼 할당
         nextDungeonBtn.onClick.AddListener(OnClickNextDungeonButton);
 
@@ -35,6 +39,11 @@ public class LobbyUI : BaseUI
     public void OnClickDungeonStartButton()
     {
         uiManager.OnClickDungeonStart();
+    }
+
+    public void OnClickTitleButton()
+    {
+        uiManager.OnClickTitle();
     }
 
     public void OnClickNextDungeonButton()
