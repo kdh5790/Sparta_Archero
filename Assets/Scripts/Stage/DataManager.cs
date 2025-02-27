@@ -11,6 +11,8 @@ public class DataManager : MonoBehaviour
 
     private void Awake()
     {
+        SaveBoxOpen(0);//테스트용, 나중에 제거할것
+
         if (Instance == null)
         {
             Instance = this;

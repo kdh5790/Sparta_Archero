@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class LobbyUI : BaseUI
 {
+    public GameObject changeColorObject;
+
     Button dungeonStartBtn;
     Button nextDungeonBtn;
     Button prevDungeonBtn;
@@ -29,11 +31,18 @@ public class LobbyUI : BaseUI
         prevDungeonBtn = transform.Find("PrevDungeonButton").GetComponent<Button>(); //이전 스테이지 버튼 할당
         prevDungeonBtn.onClick.AddListener(OnClickPrevDungeonButton);
 
+        changeColorObject = transform.Find("ChangeColorButton").gameObject;
+
         changeColorBtn = transform.Find("ChangeColorButton").GetComponent<Button>();
         changeColorBtn.onClick.AddListener(OnClickChangeColorButton);
 
         base.Init(uiManager);
 
+    }
+
+    public void BoxAchievementCheck() //상자 업적 달성한 경우
+    {
+        changeColorObject.SetActive(true);
     }
 
     public void OnClickDungeonStartButton()

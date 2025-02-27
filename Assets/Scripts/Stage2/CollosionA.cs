@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollosionA : MonoBehaviour
 {
-    public int damage = 10; // 장애물이 주는 데미지
+    public int damage = 20; // 장애물이 주는 데미지
     public float damageInterval = 1.0f; // 데미지를 주는 간격 (초)
     private bool isDamaging = false; // 데미지 코루틴 실행 여부
 
