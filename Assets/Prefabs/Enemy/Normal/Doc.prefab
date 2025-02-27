@@ -97,7 +97,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5648497540262808296}
-  - component: {fileID: 1978388390871673937}
   - component: {fileID: 2660469762006229592}
   m_Layer: 0
   m_Name: Collider
@@ -121,18 +120,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2544545731519880293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1978388390871673937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5437354407741996352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 477f8859293843f4986bfddc07e5a284, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &2660469762006229592
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -436,13 +423,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   target: {fileID: 0}
-  maxHealth: 550
+  maxHealth: 220
   exp: 80
   enemyAnimator: {fileID: 0}
   isBoss: 0
   isFinalBoss: 0
   enemyStat: {fileID: 11400000, guid: bbb5e8a105345304c9b1b5f6259ac8f9, type: 2}
-  instanceHealth: 550
+  instanceHealth: 220
   instanceAttack: 3
   instanceDefense: 1
   instanceSpeed: 0.4

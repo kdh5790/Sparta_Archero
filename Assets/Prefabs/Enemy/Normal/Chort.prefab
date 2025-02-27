@@ -356,7 +356,7 @@ MonoBehaviour:
   instanceHealth: 180
   instanceAttack: 3
   instanceDefense: 1
-  instanceSpeed: 0.6
+  instanceSpeed: 1.5
   instanceExp: 80
 --- !u!195 &2474711159528225144
 NavMeshAgent:
@@ -389,7 +389,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5244750071168740700}
-  - component: {fileID: 307987727985130258}
   - component: {fileID: 5224457167401754849}
   m_Layer: 0
   m_Name: Collider
@@ -413,18 +412,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2544545731519880293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &307987727985130258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8684742332465380737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 477f8859293843f4986bfddc07e5a284, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &5224457167401754849
 BoxCollider2D:
   m_ObjectHideFlags: 0
