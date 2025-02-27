@@ -1,11 +1,9 @@
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using System;
 using System.Collections;
-using static UnityEditor.PlayerSettings;
 
 public enum UIState
 {
