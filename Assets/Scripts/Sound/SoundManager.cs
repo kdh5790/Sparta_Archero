@@ -70,10 +70,12 @@ public class SoundManager : MonoBehaviour
         // 현재 재생중이지 않은 오디오소스 찾기
         AudioSource availableSource = sfxSources.Find(source => !source.isPlaying);
 
+        // 현재 재생 가능한 오디오소스가 없다면 추가로 생성 후 재생
         if (availableSource == null)
         {
-            Debug.Log("현재 비어있는 오디오 소스를 찾지 못했습니다.");
-            return;
+            availableSource = gameObject.AddComponent<AudioSource>();
+            availableSource.playOnAwake = false;
+            sfxSources.Add(availableSource);
         }
 
         availableSource.clip = sfxClipPrefab[(int)clip];
