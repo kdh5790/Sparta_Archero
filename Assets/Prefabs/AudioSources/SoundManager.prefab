@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1794426611174732477}
   - component: {fileID: 5633016981154644775}
-  - component: {fileID: 5736432892156633606}
   - component: {fileID: 2568617990209569115}
   m_Layer: 0
   m_Name: SoundManager
@@ -62,14 +61,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5765f81f7c3735b4495c589bf0e1bce0, type: 3}
   - {fileID: 8300000, guid: 3aeacdd5828b2f24aa17eb10acf45e86, type: 3}
   sfxSourceCount: 10
---- !u!81 &5736432892156633606
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4225855636103233316}
-  m_Enabled: 1
 --- !u!82 &2568617990209569115
 AudioSource:
   m_ObjectHideFlags: 0
