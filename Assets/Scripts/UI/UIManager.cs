@@ -280,9 +280,12 @@ public class UIManager : MonoBehaviour
 
     public void LevelUpUI() //레벨업 기능 구현
     {
-        isComplete = false;
-        coroutine = LevelUpDelay(1.0f); //반환값 IEnumerator를 저장해둔다.
-        StartCoroutine(coroutine); //1초가 지난후 레벨업 시작
+        if (PlayerManager.instance.isDead != true) //플레이어가 죽은 경우 레벨업 ui 호출 불가
+        {
+            isComplete = false;
+            coroutine = LevelUpDelay(1.0f); //반환값 IEnumerator를 저장해둔다.
+            StartCoroutine(coroutine); //1초가 지난후 레벨업 시작
+        }
     }
 
     public void OnClickSkillSelected()
