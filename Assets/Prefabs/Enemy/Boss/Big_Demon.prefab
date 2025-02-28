@@ -425,13 +425,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   target: {fileID: 0}
-  maxHealth: 1700
+  maxHealth: 8000
   exp: 150
   enemyAnimator: {fileID: 0}
   isBoss: 1
   isFinalBoss: 0
   enemyStat: {fileID: 11400000, guid: 9276c13a29dd40b4bbdc5e5972ee13de, type: 2}
-  instanceHealth: 1700
+  instanceHealth: 8000
   instanceAttack: 6
   instanceDefense: 2
   instanceSpeed: 0.6
