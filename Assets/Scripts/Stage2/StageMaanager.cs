@@ -21,6 +21,7 @@ public class StageMaanager : MonoBehaviour
             {
                 isPlay = true; //사운드 재생중으로 변경
                 SoundManager.instance.PlaySound(SFX.StageClear); //스테이지 클리어 사운드 재생
+                PlayerManager.instance.bow.target = null;
             }
             portal.SetActive(true); // 몬스터가 다 죽으면 포탈 활성화
         }
